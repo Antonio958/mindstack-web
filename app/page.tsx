@@ -66,13 +66,37 @@ const services = [
   },
 ];
 
-const sectors = [
-  "Restaurantes y gastronomía",
-  "Retail y comercios locales",
-  "Servicios profesionales",
-  "Negocios con varias sucursales",
-  "Educación y capacitación",
-  "Ecommerce y ventas digitales",
+const restaurantSignals = [
+  {
+    num: "01",
+    title: "Varias sucursales",
+    desc: "La operación empieza a diferir entre unidades y aumenta la dificultad para mantener visibilidad y control.",
+  },
+  {
+    num: "02",
+    title: "Crecimiento con poca visibilidad",
+    desc: "El negocio vende y crece, pero no siempre puede explicar con claridad qué está impulsando ese crecimiento.",
+  },
+  {
+    num: "03",
+    title: "Márgenes difíciles de leer",
+    desc: "Costos, merma, tiempos, descuentos y diferencias operativas pueden ocultar dónde se está deteriorando la rentabilidad.",
+  },
+  {
+    num: "04",
+    title: "Procesos dependientes de personas",
+    desc: "Parte importante de la operación depende del dueño, gerente o conocimiento informal que todavía no está institucionalizado.",
+  },
+  {
+    num: "05",
+    title: "Datos fragmentados",
+    desc: "Ventas, inventario, clientes, reseñas, costos y operación existen en distintos sistemas sin convertirse en una lectura integrada.",
+  },
+  {
+    num: "06",
+    title: "Decisiones bajo incertidumbre",
+    desc: "Existen señales de problemas u oportunidades, pero no suficiente evidencia para saber qué intervenir primero.",
+  },
 ];
 
 const steps = [
@@ -513,56 +537,72 @@ export default function Home() {
   </div>
 </section>
 
-      <section id="sectores" className="section">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Industrias</span>
-              <h2 className="section-title">
-                Negocios donde operación, ventas y datos pueden cambiar el margen
-              </h2>
-            </div>
+      <section id="sectores" className="section restaurant-section">
+  <div className="container">
+    <div className="section-head">
+      <div>
+        <span className="eyebrow">Industria foco</span>
+
+        <h2 className="section-title">
+          Inteligencia empresarial aplicada al{" "}
+          <span className="gold">sector restaurantero.</span>
+        </h2>
+      </div>
+
+      <p className="section-desc">
+        La metodología de Mindstack es transversal, pero actualmente
+        concentramos nuestro desarrollo comercial y aprendizaje sectorial en
+        restaurantes, grupos gastronómicos y operaciones con múltiples
+        sucursales.
+      </p>
+    </div>
+
+    <div className="restaurant-intro">
+      <div>
+        <span className="restaurant-kicker">Por qué restaurantes</span>
+
+        <h3>
+          Operaciones donde pequeñas diferencias pueden convertirse en grandes
+          diferencias de margen.
+        </h3>
+      </div>
+
+      <p>
+        Un restaurante combina demanda, inventario, personal, tiempos,
+        experiencia del cliente, costos, procesos y datos en una misma
+        operación. Cuando el negocio crece, comprender cómo interactúan esas
+        variables se vuelve cada vez más importante.
+      </p>
+    </div>
+
+    <div className="restaurant-signals">
+      {restaurantSignals.map((signal) => (
+        <article className="restaurant-signal" key={signal.title}>
+          <span>{signal.num}</span>
+
+          <div>
+            <h3>{signal.title}</h3>
+            <p>{signal.desc}</p>
           </div>
-<div className="industry-layout">
-  <div className="sectors-grid">
-    {sectors.map((sector, index) => (
-      <div className="sector-item" key={sector}>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <strong>{sector}</strong>
-      </div>
-    ))}
-  </div>
+        </article>
+      ))}
+    </div>
 
-  <div className="industry-panel">
-    <span className="industry-kicker">Análisis transversal</span>
-    <h3>Una misma lógica aplicada a distintos negocios</h3>
-    <p>
-      Mindstack no depende de una sola industria. La metodología analiza
-      demanda, procesos, seguimiento comercial, costos visibles y puntos de fuga
-      para detectar dónde el negocio puede crecer con más control.
-    </p>
+    <div className="transversal-note">
+      <div>
+        <span>Capacidad transversal</span>
+        <strong>El método no depende de una sola industria.</strong>
+      </div>
 
-    <div className="industry-matrix">
-      <div>
-        <span>01</span>
-        <strong>Ventas</strong>
-        <p>Origen, comportamiento y estabilidad de la demanda.</p>
-      </div>
-      <div>
-        <span>02</span>
-        <strong>Operación</strong>
-        <p>Procesos, tiempos, fricción y costos ocultos.</p>
-      </div>
-      <div>
-        <span>03</span>
-        <strong>Datos</strong>
-        <p>Lectura ejecutiva para decidir con mayor claridad.</p>
-      </div>
+      <p>
+        Mindstack puede estudiar organizaciones de otros sectores cuando el
+        problema requiere comprender sistemas empresariales, procesos, datos y
+        decisiones. El foco restaurantero representa nuestra especialización
+        comercial actual, no un límite metodológico.
+      </p>
     </div>
   </div>
-</div>
-        </div>
-      </section>
+</section>
 
       <section id="metodologia" className="section section-alt">
   <div className="container method-grid">

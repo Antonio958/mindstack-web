@@ -2547,3 +2547,159 @@ body {
   line-height: 1.65;
   font-weight: 550;
 }
+
+
+
+/* ── Restaurant focus section ───────────────────────── */
+
+.restaurant-section {
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(201, 162, 39, 0.055),
+      transparent 30rem
+    ),
+    var(--black);
+}
+
+.restaurant-intro {
+  margin-bottom: 18px;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(201, 162, 39, 0.08),
+      transparent 55%
+    ),
+    #090909;
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.restaurant-kicker {
+  display: block;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.restaurant-intro h3 {
+  margin: 0;
+  color: var(--white);
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.restaurant-intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.restaurant-signals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.restaurant-signal {
+  background: #080808;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  min-height: 180px;
+}
+
+.restaurant-signal > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.restaurant-signal h3 {
+  margin: 0 0 10px;
+  color: var(--white);
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.restaurant-signal p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.transversal-note {
+  margin-top: 18px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  background: #0a0a0a;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.transversal-note span {
+  display: block;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.transversal-note strong {
+  display: block;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.transversal-note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+@media (max-width: 980px) {
+  .restaurant-intro,
+  .transversal-note {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .restaurant-signals {
+    grid-template-columns: 1fr;
+  }
+
+  .restaurant-intro,
+  .transversal-note {
+    padding: 26px;
+  }
+
+  .restaurant-intro h3 {
+    font-size: 25px;
+  }
+
+  .restaurant-signal {
+    padding: 26px;
+  }
+}
