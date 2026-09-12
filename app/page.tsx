@@ -127,13 +127,7 @@ const steps = [
   },
 ];
 
-const bullets = [
-  "Revisión de situación actual",
-  "Detección de fugas visibles",
-  "Hipótesis de problemas operativos y comerciales",
-  "Recomendaciones iniciales",
-  "Siguiente paso sugerido",
-];
+
 
 const focus = [
   {
@@ -753,34 +747,41 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="diagnostico" className="section">
-        <div className="container">
-          <div className="diagnostic-box">
-            <div className="diagnostic-main">
-              <span className="eyebrow">Producto principal</span>
-              <h2>
-                Diagnóstico Express de{" "}
-                <span className="gold">60 minutos</span>
-              </h2>
-              <p>
-                Una sesión ejecutiva para identificar señales de fuga, puntos de
-                desorden comercial y oportunidades de mejora antes de invertir
-                en soluciones más grandes.
-              </p>
-              <ButtonGold href={WA}>Solicitar revisión por WhatsApp</ButtonGold>
-            </div>
+      <section id="contacto" className="section">
+  <div className="container">
+    <div className="diagnostic-box">
+      <div className="diagnostic-main">
+        <span className="eyebrow">Cómo empezar</span>
 
-            <div className="diagnostic-list">
-              <span className="eyebrow">Qué incluye</span>
-              <ul>
-                {bullets.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        <h2>
+          Antes de definir una solución,{" "}
+          <span className="gold">entendamos el problema.</span>
+        </h2>
+
+        <p>
+          Si existe una situación que necesita mayor claridad, compártenos el
+          contexto. La primera conversación sirve para comprender qué está
+          ocurriendo, qué necesita investigarse y si Mindstack puede aportar
+          valor antes de proponer cualquier intervención.
+        </p>
+
+        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+      </div>
+
+      <div className="diagnostic-list">
+        <span className="eyebrow">Primera conversación</span>
+
+        <ul>
+          <li>Contexto del negocio y situación actual</li>
+          <li>Qué está ocurriendo y por qué importa</li>
+          <li>Qué evidencia existe y qué falta comprender</li>
+          <li>Si Mindstack puede aportar valor</li>
+          <li>Siguiente paso proporcional al problema</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section className="section section-alt">
         <div className="container">
