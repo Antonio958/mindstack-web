@@ -687,65 +687,76 @@ export default function Home() {
   </div>
 </section>
             <section id="nosotros" className="section">
-        <div className="container about-grid">
-          <div className="about-content">
-            <span className="eyebrow">Quiénes somos</span>
+  <div className="container about-grid">
+    <div className="about-content">
+      <span className="eyebrow">La firma</span>
 
-            <h2 className="section-title">
-              Consultoría estratégica para entender dónde se pierde control, margen y crecimiento
-            </h2>
+      <h2 className="section-title">
+        Mindstack es una{" "}
+        <span className="gold">Firma de Inteligencia Empresarial.</span>
+      </h2>
 
-            <p className="about-lead">
-               Grupo Mindstack integra estrategia, análisis operativo, datos e inteligencia
-               aplicada para ayudar a negocios a identificar fugas, ordenar procesos y tomar
-               decisiones con mayor claridad. El enfoque parte de una premisa simple: antes de
-               invertir más, es necesario entender dónde está el verdadero problema.
-            </p>
+      <p className="about-lead">
+        Ayudamos a organizaciones a comprender mejor cómo funcionan antes de
+        decidir qué transformar. Integramos investigación, análisis empresarial,
+        datos, procesos y tecnología para convertir información dispersa en
+        comprensión, decisiones e intervenciones con sentido.
+      </p>
 
-            <div className="about-principles">
-              <div>
-                <strong>01</strong>
-                <span>Primero entender, después intervenir</span>
-              </div>
+      <p className="about-lead">
+        Nuestro trabajo no comienza con una herramienta ni con una solución
+        predeterminada. Comienza construyendo una lectura suficientemente
+        rigurosa del problema, contrastando evidencia y distinguiendo hechos,
+        inferencias e hipótesis antes de actuar.
+      </p>
 
-              <div>
-                <strong>02</strong>
-                <span>Datos convertidos en decisiones accionables</span>
-              </div>
-
-              <div>
-                <strong>03</strong>
-                <span>Visión comercial, operativa y financiera</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="leadership-card">
-            <div className="leadership-photo">
-              <img src="/foto-luis-palma.jpg" alt="Luis Antonio Palma" />
-            </div>
-
-            <div className="leadership-info">
-              <span className="leadership-kicker">Dirección general</span>
-              <h3>Antonio Hernández</h3>
-              <p>
-                 Lidera la visión estratégica de Grupo Mindstack, con enfoque en análisis de
-                 negocio, procesos comerciales, operación, datos e inteligencia aplicada. Su
-                 trabajo se centra en traducir información dispersa en decisiones claras y
-                 acciones con impacto.
-              </p>
-
-              <div className="leadership-tags">
-                <span>Estrategia</span>
-                <span>Operación</span>
-                <span>Datos</span>
-                <span>IA aplicada</span>
-                 <span>Procesos comerciales</span>
-              </div>
-            </div>
-          </div>
+      <div className="about-principles">
+        <div>
+          <strong>01</strong>
+          <span>Comprender antes de transformar</span>
         </div>
-      </section>
+
+        <div>
+          <strong>02</strong>
+          <span>Evidencia antes de prescripción</span>
+        </div>
+
+        <div>
+          <strong>03</strong>
+          <span>Tecnología al servicio del problema</span>
+        </div>
+      </div>
+    </div>
+
+    <div className="leadership-card">
+      <div className="leadership-photo">
+        <img src="/foto-luis-palma.jpg" alt="Dirección General de Mindstack" />
+      </div>
+
+      <div className="leadership-info">
+        <span className="leadership-kicker">Dirección General</span>
+
+        <h3>Antonio Hernández</h3>
+
+        <p>
+          Lidera la dirección estratégica de Mindstack y el desarrollo de su
+          sistema de inteligencia empresarial. Su trabajo se concentra en
+          comprender problemas de negocio, estructurar investigación y traducir
+          evidencia, datos y contexto en decisiones e intervenciones
+          empresariales.
+        </p>
+
+        <div className="leadership-tags">
+          <span>Inteligencia empresarial</span>
+          <span>Estrategia</span>
+          <span>Datos</span>
+          <span>Procesos</span>
+          <span>IA aplicada</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section id="contacto" className="section">
   <div className="container">
