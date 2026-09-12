@@ -131,19 +131,19 @@ const steps = [
 
 const focus = [
   {
-    tag: "Ventas y demanda",
-    title: "Entender qué genera crecimiento",
-    desc: "Observamos de dónde vienen las ventas, qué las impulsa y qué impide que sean más predecibles.",
+    tag: "Comprensión",
+    title: "El problema antes que la herramienta",
+    desc: "No comenzamos recomendando software, automatización o inteligencia artificial. Primero buscamos comprender qué está ocurriendo y qué necesita realmente la organización.",
   },
   {
-    tag: "Operación y costos",
-    title: "Detectar fugas invisibles",
-    desc: "Revisamos procesos, costos visibles, tiempos, merma, retrabajo y puntos donde la operación puede estar drenando margen.",
+    tag: "Evidencia",
+    title: "Distinguir hechos de explicaciones",
+    desc: "Separamos señales, hechos, inferencias e hipótesis para evitar convertir una observación inicial en una conclusión prematura.",
   },
   {
-    tag: "Procesos comerciales",
-    title: "Convertir interés en seguimiento",
-    desc: "Analizamos cómo el negocio capta oportunidades, da seguimiento, retiene clientes y convierte información en acciones comerciales.",
+    tag: "Intervención",
+    title: "Actuar de forma proporcional",
+    desc: "La solución debe corresponder al problema, su impacto, la evidencia disponible y los recursos de la organización. No toda situación requiere una transformación compleja.",
   },
 ];
 
@@ -795,30 +795,37 @@ export default function Home() {
 </section>
 
       <section className="section section-alt">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Nuestro enfoque</span>
-              <h2 className="section-title">
-                No vendemos marketing genérico.{" "}
-                <span className="gold">
-                  Analizamos cómo se comporta el negocio.
-                </span>
-              </h2>
-            </div>
-          </div>
+  <div className="container">
+    <div className="section-head">
+      <div>
+        <span className="eyebrow">Nuestro enfoque</span>
 
-          <div className="focus-grid">
-            {focus.map((item) => (
-              <article className="card" key={item.title}>
-                <span className="tag">{item.tag}</span>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+        <h2 className="section-title">
+          No empezamos por la solución.{" "}
+          <span className="gold">
+            Empezamos por comprender.
+          </span>
+        </h2>
+      </div>
+
+      <p className="section-desc">
+        La calidad de una intervención depende de la calidad de la comprensión
+        que existe antes de ejecutarla. Por eso Mindstack trabaja primero sobre
+        evidencia, contexto y explicación.
+      </p>
+    </div>
+
+    <div className="focus-grid">
+      {focus.map((item) => (
+        <article className="card" key={item.title}>
+          <span className="tag">{item.tag}</span>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
 
       <section className="cta">
         <div className="container">
