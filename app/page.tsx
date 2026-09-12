@@ -1,14 +1,15 @@
 const WA =
-  "https://wa.me/5552138786?text=Hola%20Grupo%20Mindstack%2C%20quiero%20solicitar%20una%20revisi%C3%B3n%20ejecutiva";
+  "https://wa.me/5552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
+
 const navItems = [
   ["Inicio", "#inicio"],
-  ["Servicios", "#servicios"],
+  ["Inteligencia", "#inteligencia"],
+  ["Capacidades", "#capacidades"],
+  ["Método", "#metodologia"],
   ["Industrias", "#sectores"],
-  ["Metodología", "#metodologia"],
-  ["Nosotros", "#nosotros"],
-  ["Diagnóstico", "#diagnostico"],
-  ["Insights", "#insights"],
+  ["Firma", "#nosotros"],
 ];
+
 const insights = [
   {
     tag: "Crecimiento",
@@ -35,33 +36,33 @@ const insights = [
 const services = [
   {
     num: "01",
-    title: "Revisión Ejecutiva Express",
-    desc: "Sesión enfocada en detectar señales de fuga, desorden comercial y oportunidades de mejora antes de invertir en soluciones más grandes.",
+    title: "Diagnóstico",
+    desc: "Comprendemos la situación actual de la organización, investigamos señales, problemas y posibles causas, y construimos una lectura estructurada antes de recomendar una intervención.",
+    tag: "Comprender",
   },
   {
     num: "02",
-    title: "Diagnóstico Estratégico Inicial",
-    desc: "Análisis estructurado de operación, ventas, rentabilidad y procesos para construir un mapa claro de problemas reales.",
+    title: "Inteligencia de Negocio",
+    desc: "Convertimos datos e información empresarial en indicadores, análisis y sistemas de lectura que permitan comprender el desempeño y tomar mejores decisiones.",
+    tag: "Explicar",
   },
   {
     num: "03",
-    title: "Sistema Comercial y Seguimiento",
-    desc: "Diseño de procesos para captar, dar seguimiento, retener y recuperar oportunidades comerciales con mayor control.",
+    title: "Automatización",
+    desc: "Diseñamos flujos y sistemas que reducen trabajo manual, errores y fricción operativa cuando la automatización representa una mejora real para el proceso.",
+    tag: "Transformar",
   },
   {
     num: "04",
-    title: "Análisis de Rentabilidad y Fugas",
-    desc: "Revisión de costos visibles, procesos, precios, tiempos y puntos donde el negocio puede estar perdiendo dinero.",
+    title: "Inteligencia Artificial",
+    desc: "Aplicamos inteligencia artificial cuando aporta capacidad analítica, operativa o de decisión, evitando introducirla donde no resuelve un problema relevante.",
+    tag: "Potenciar",
   },
   {
     num: "05",
-    title: "IA y Automatización Operativa",
-    desc: "Uso de inteligencia artificial para automatizar reportes, detectar patrones y reducir trabajo manual en procesos clave.",
-  },
-  {
-    num: "06",
-    title: "Reportes Ejecutivos y Tableros",
-    desc: "Sistemas de medición para que los responsables del negocio tomen decisiones con información clara, accionable y ordenada.",
+    title: "Soluciones a medida",
+    desc: "Diseñamos intervenciones específicas cuando el problema requiere combinar estrategia, procesos, datos, tecnología o desarrollo bajo una arquitectura propia.",
+    tag: "Integrar",
   },
 ];
 
@@ -77,28 +78,28 @@ const sectors = [
 const steps = [
   {
     num: "01",
-    title: "Detectar",
-    desc: "Observamos cómo opera realmente el negocio. Antes de proponer soluciones, identificamos dónde está el problema.",
+    title: "Comprender",
+    desc: "Partimos del contexto real de la organización. Observamos cómo funciona, qué quiere lograr, qué restricciones existen y qué problema necesita realmente ser entendido antes de intervenir.",
   },
   {
     num: "02",
-    title: "Medir",
-    desc: "Cuantificamos el impacto de cada fuga, desorden o punto débil para distinguir síntomas de problemas importantes.",
+    title: "Investigar",
+    desc: "Reunimos y contrastamos evidencia. Analizamos datos, procesos, señales, comportamientos y contexto para separar hechos de inferencias y reducir conclusiones prematuras.",
   },
   {
     num: "03",
-    title: "Priorizar",
-    desc: "Definimos qué resolver primero según impacto, urgencia y recursos disponibles.",
+    title: "Explicar",
+    desc: "Construimos una lectura estructurada de lo encontrado: qué está ocurriendo, qué puede estar causándolo, qué incertidumbre permanece y qué merece atención prioritaria.",
   },
   {
     num: "04",
-    title: "Ejecutar",
-    desc: "Acompañamos acciones concretas para que las recomendaciones no se queden flotando.",
+    title: "Transformar",
+    desc: "Diseñamos e implementamos la intervención que tenga mayor sentido para el problema, ya sea operativa, analítica, tecnológica, automatizada o construida a medida.",
   },
   {
     num: "05",
-    title: "Dar seguimiento",
-    desc: "Medimos resultados, ajustamos el rumbo y aseguramos que los cambios puedan sostenerse.",
+    title: "Aprender",
+    desc: "Medimos lo ocurrido después de intervenir, incorporamos nueva evidencia y convertimos los resultados del proyecto en conocimiento reutilizable para la organización.",
   },
 ];
 
@@ -172,26 +173,29 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-top">
-        <span className="dashboard-title">Panel operativo</span>
-        <span className="live">En vivo</span>
+        <span className="dashboard-title">Inteligencia empresarial</span>
+        <span className="live">Mindstack</span>
       </div>
 
       <div className="dashboard-grid">
         <div className="dash-card">
-          <span>Demanda construida</span>
-          <strong>84%</strong>
+          <span>Señales</span>
+          <strong>Observadas</strong>
         </div>
+
         <div className="dash-card">
-          <span>Fugas detectadas</span>
-          <strong>3 activas</strong>
+          <span>Evidencia</span>
+          <strong>Contrastada</strong>
         </div>
+
         <div className="dash-card">
-          <span>Diagnóstico operativo</span>
-          <strong>Completo</strong>
+          <span>Hipótesis</span>
+          <strong>Explicadas</strong>
         </div>
+
         <div className="dash-card">
-          <span>IA y datos</span>
-          <strong>Activo</strong>
+          <span>Decisiones</span>
+          <strong>Priorizadas</strong>
         </div>
       </div>
 
@@ -278,54 +282,157 @@ export default function Home() {
             ))}
           </nav>
 
-          <ButtonGold href={WA}>Solicitar diagnóstico</ButtonGold>
+          <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
         </div>
       </header>
 
       <section id="inicio" className="hero">
-        <div className="container hero-grid">
-          <div>
-            <span className="eyebrow">Grupo Mindstack</span>
+  <div className="container hero-grid">
+    <div>
+      <span className="eyebrow">Firma de Inteligencia Empresarial</span>
 
-            <h1>
-              Demanda más estable. <span className="gold">Menos fugas.</span>{" "}
-              Decisiones con datos.
-            </h1>
+      <h1>
+        Comprender mejor.{" "}
+        <span className="gold">Decidir mejor.</span>{" "}
+        Transformar con inteligencia.
+      </h1>
 
-            <p className="hero-copy">
-              Ayudamos a negocios a detectar dónde se escapa el dinero, ordenar
-              sus procesos comerciales y convertir datos operativos en decisiones
-              de crecimiento.
-            </p>
+      <p className="hero-copy">
+        Mindstack investiga cómo funciona realmente una empresa, conecta
+        operación, procesos, datos y contexto, y convierte esa comprensión
+        en decisiones e intervenciones con sentido.
+      </p>
 
-            <div className="hero-actions">
-              <ButtonGold href={WA}>Agendar diagnóstico express</ButtonGold>
-              <ButtonOutline href="#metodologia">Ver metodología</ButtonOutline>
-            </div>
+      <div className="hero-actions">
+        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+        <ButtonOutline href="#metodologia">
+          Conocer nuestro método
+        </ButtonOutline>
+      </div>
 
-            <div className="metrics-row">
-              <div className="metric">
-                <span>Demanda construida</span>
-                <strong>Medible</strong>
-              </div>
-              <div className="metric">
-                <span>Fugas de dinero</span>
-                <strong>Detectables</strong>
-              </div>
-              <div className="metric">
-                <span>Diagnóstico</span>
-                <strong>60 minutos</strong>
-              </div>
-              <div className="metric">
-                <span>Datos e IA</span>
-                <strong>Aplicados</strong>
-              </div>
-            </div>
-          </div>
-
-          <Dashboard />
+      <div className="metrics-row">
+        <div className="metric">
+          <span>Comprensión</span>
+          <strong>Antes de intervenir</strong>
         </div>
-      </section>
+
+        <div className="metric">
+          <span>Evidencia</span>
+          <strong>Antes de concluir</strong>
+        </div>
+
+        <div className="metric">
+          <span>Decisión</span>
+          <strong>Antes de ejecutar</strong>
+        </div>
+
+        <div className="metric">
+          <span>Tecnología</span>
+          <strong>Cuando tiene sentido</strong>
+        </div>
+      </div>
+    </div>
+
+    <Dashboard />
+  </div>
+</section>
+
+
+<section id="inteligencia" className="section intelligence-section">
+  <div className="container">
+    <div className="section-head intelligence-head">
+      <div>
+        <span className="eyebrow">Inteligencia empresarial</span>
+
+        <h2 className="section-title">
+          La información no es inteligencia.{" "}
+          <span className="gold">
+            Entender qué significa y qué hacer con ella, sí.
+          </span>
+        </h2>
+      </div>
+
+      <p className="section-desc">
+        Una empresa genera señales todos los días. El reto no es acumular más
+        información, sino convertirla en una comprensión suficientemente clara
+        para decidir mejor.
+      </p>
+    </div>
+
+    <div className="intelligence-flow">
+      <article className="intelligence-card">
+        <span className="intelligence-number">01</span>
+        <span className="intelligence-label">Información</span>
+
+        <h3>Observar lo que realmente está ocurriendo</h3>
+
+        <p>
+          Reunimos señales provenientes de operación, ventas, procesos, personas,
+          clientes, sistemas, datos y contexto empresarial.
+        </p>
+
+        <div className="intelligence-items">
+          <span>Datos</span>
+          <span>Procesos</span>
+          <span>Señales</span>
+          <span>Contexto</span>
+        </div>
+      </article>
+
+      <article className="intelligence-card intelligence-card-featured">
+        <span className="intelligence-number">02</span>
+        <span className="intelligence-label">Inteligencia</span>
+
+        <h3>Convertir información dispersa en comprensión</h3>
+
+        <p>
+          Investigamos relaciones, contrastamos evidencia y construimos
+          explicaciones para distinguir hechos, síntomas, hipótesis y posibles
+          causas.
+        </p>
+
+        <div className="intelligence-items">
+          <span>Evidencia</span>
+          <span>Patrones</span>
+          <span>Hipótesis</span>
+          <span>Prioridades</span>
+        </div>
+      </article>
+
+      <article className="intelligence-card">
+        <span className="intelligence-number">03</span>
+        <span className="intelligence-label">Decisión</span>
+
+        <h3>Intervenir donde realmente tiene sentido</h3>
+
+        <p>
+          La comprensión se traduce en decisiones: qué mantener, qué cambiar,
+          qué investigar, qué priorizar y qué intervención tiene mayor sentido.
+        </p>
+
+        <div className="intelligence-items">
+          <span>Decisiones</span>
+          <span>Intervención</span>
+          <span>Ejecución</span>
+          <span>Aprendizaje</span>
+        </div>
+      </article>
+    </div>
+
+    <div className="intelligence-principle">
+      <div>
+        <span>Principio rector</span>
+        <strong>Comprender antes de transformar.</strong>
+      </div>
+
+      <p>
+        Mindstack no parte de una solución predeterminada. Primero construimos
+        una lectura suficientemente rigurosa del problema; después decidimos
+        cómo intervenir.
+      </p>
+    </div>
+  </div>
+</section>
 
       <section id="insights" className="section">
         <div className="container">
@@ -355,32 +462,56 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="servicios" className="section section-alt">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Servicios</span>
-              <h2 className="section-title">
-                Soluciones diseñadas para problemas reales
-              </h2>
-            </div>
-            <p className="section-desc">
-              No vendemos paquetes genéricos. Primero encontramos el problema,
-              después definimos qué intervención tiene sentido.
-            </p>
+      <section id="capacidades" className="section section-alt capabilities-section">
+  <div className="container">
+    <div className="section-head">
+      <div>
+        <span className="eyebrow">Capacidades</span>
+
+        <h2 className="section-title">
+          La solución no se elige primero.{" "}
+          <span className="gold">
+            Se determina después de comprender el problema.
+          </span>
+        </h2>
+      </div>
+
+      <p className="section-desc">
+        Mindstack trabaja con distintas capacidades de intervención. No todas
+        las organizaciones necesitan tecnología, automatización o inteligencia
+        artificial. La intervención depende de lo que la evidencia justifique.
+      </p>
+    </div>
+
+    <div className="capabilities-grid">
+      {services.map((item) => (
+        <article className="capability-card" key={item.title}>
+          <div className="capability-top">
+            <span className="capability-number">{item.num}</span>
+            <span className="capability-tag">{item.tag}</span>
           </div>
 
-          <div className="cards-3">
-            {services.map((item) => (
-              <article className="card service-card" key={item.title}>
-                <div className="number">{item.num}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </article>
-            ))}
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+
+          <div className="capability-footer">
+            <span>Mindstack</span>
+            <span>→</span>
           </div>
-        </div>
-      </section>
+        </article>
+      ))}
+    </div>
+
+    <div className="capabilities-statement">
+      <span>No somos una empresa de herramientas</span>
+
+      <strong>
+        Tecnología, datos e IA son medios. La comprensión del negocio determina
+        cuándo utilizarlos.
+      </strong>
+    </div>
+  </div>
+</section>
 
       <section id="sectores" className="section">
         <div className="container">
@@ -434,32 +565,44 @@ export default function Home() {
       </section>
 
       <section id="metodologia" className="section section-alt">
-        <div className="container method-grid">
-          <div>
-            <span className="eyebrow">Metodología</span>
-            <h2 className="section-title">
-              Claridad antes de vender soluciones
-            </h2>
-            <p className="section-desc">
-              Mindstack no entra ofreciendo herramientas ni promesas amplias.
-              Primero se identifica dónde está el problema real y qué acción
-              puede generar mayor impacto.
-            </p>
-          </div>
+  <div className="container method-grid">
+    <div>
+      <span className="eyebrow">Método Mindstack</span>
 
-          <div className="steps">
-            {steps.map((step) => (
-              <article className="step" key={step.title}>
-                <span className="step-num">{step.num}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </div>
-              </article>
-            ))}
+      <h2 className="section-title">
+        Comprender antes de transformar.
+      </h2>
+
+      <p className="section-desc">
+        Nuestro método evita comenzar por una herramienta, una tecnología o una
+        respuesta predeterminada. Primero construimos comprensión; después
+        investigamos, explicamos y decidimos cómo transformar.
+      </p>
+
+      <div className="method-principle">
+        <span>Principio rector</span>
+
+        <p>
+          Una intervención sólo tiene sentido cuando existe suficiente
+          comprensión del problema que pretende resolver.
+        </p>
+      </div>
+    </div>
+
+    <div className="steps">
+      {steps.map((step) => (
+        <article className="step" key={step.title}>
+          <span className="step-num">{step.num}</span>
+
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.desc}</p>
           </div>
-        </div>
-      </section>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
             <section id="entregable" className="section section-alt">
         <div className="container deliverable-grid">
           <div>
