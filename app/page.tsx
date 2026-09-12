@@ -228,63 +228,68 @@ function Dashboard() {
   );
 }
 
-function ReportPreview() {
+function IntelligencePreview() {
   return (
     <div className="report-preview">
       <div className="report-top">
         <div>
-          <span className="report-kicker">Vista ejecutiva</span>
-          <h3>Diagnóstico Express</h3>
+          <span className="report-kicker">Lectura empresarial</span>
+          <h3>De señales a decisiones</h3>
         </div>
-        <span className="report-status">Prioridad alta</span>
+
+        <span className="report-status">Ejemplo</span>
       </div>
 
       <div className="report-summary">
         <div>
-          <span>Fugas visibles</span>
-          <strong>3</strong>
+          <span>01</span>
+          <strong>Observar</strong>
         </div>
+
         <div>
-          <span>Áreas revisadas</span>
-          <strong>5</strong>
+          <span>02</span>
+          <strong>Explicar</strong>
         </div>
+
         <div>
-          <span>Siguiente acción</span>
-          <strong>72h</strong>
+          <span>03</span>
+          <strong>Decidir</strong>
         </div>
       </div>
 
       <div className="report-table">
         <div className="report-row report-head">
-          <span>Hallazgo</span>
-          <span>Impacto</span>
-          <span>Prioridad</span>
+          <span>Elemento</span>
+          <span>Lectura</span>
+          <span>Estado</span>
         </div>
 
         <div className="report-row">
-          <span>Demanda inconsistente entre semana</span>
-          <span>Alto</span>
-          <span className="pill pill-high">Alta</span>
+          <span>Señal observada</span>
+          <span>Hecho</span>
+          <span className="pill pill-mid">Validado</span>
         </div>
 
         <div className="report-row">
-          <span>Seguimiento débil a clientes recurrentes</span>
-          <span>Medio</span>
-          <span className="pill pill-mid">Media</span>
+          <span>Posible explicación</span>
+          <span>Hipótesis</span>
+          <span className="pill pill-mid">Investigar</span>
         </div>
 
         <div className="report-row">
-          <span>Costos operativos sin trazabilidad clara</span>
-          <span>Alto</span>
-          <span className="pill pill-high">Alta</span>
+          <span>Intervención propuesta</span>
+          <span>Decisión</span>
+          <span className="pill pill-high">Priorizar</span>
         </div>
       </div>
 
       <div className="report-note">
-        <span>Lectura inicial</span>
+        <span>Principio</span>
+
         <p>
-          El negocio no presenta un solo problema aislado. La oportunidad está
-          en ordenar demanda, seguimiento comercial y puntos de fuga operativa.
+          Una señal no se convierte automáticamente en una conclusión.
+          Mindstack separa hechos, inferencias, hipótesis y decisiones antes
+          de recomendar una intervención.
         </p>
       </div>
     </div>
@@ -644,41 +649,49 @@ export default function Home() {
   </div>
 </section>
             <section id="entregable" className="section section-alt">
-        <div className="container deliverable-grid">
-          <div>
-            <span className="eyebrow">Entregable</span>
-            <h2 className="section-title">
-              Una lectura ejecutiva, no una lista genérica de recomendaciones
-            </h2>
-            <p className="section-desc deliverable-copy">
-              El diagnóstico se traduce en hallazgos claros, prioridades y
-              acciones iniciales. El objetivo es que el dueño entienda dónde
-              puede estar perdiendo dinero y qué debería revisar primero.
-            </p>
+  <div className="container deliverable-grid">
+    <div>
+      <span className="eyebrow">Inteligencia accionable</span>
 
-            <div className="deliverable-points">
-              <div>
-                <strong>01</strong>
-                <span>Hallazgos principales</span>
-              </div>
-              <div>
-                <strong>02</strong>
-                <span>Fugas visibles o probables</span>
-              </div>
-              <div>
-                <strong>03</strong>
-                <span>Prioridad por impacto</span>
-              </div>
-              <div>
-                <strong>04</strong>
-                <span>Siguiente paso sugerido</span>
-              </div>
-            </div>
-          </div>
+      <h2 className="section-title">
+        No entregamos información para archivar.{" "}
+        <span className="gold">
+          Construimos comprensión para decidir.
+        </span>
+      </h2>
 
-          <ReportPreview />
+      <p className="section-desc deliverable-copy">
+        El trabajo de Mindstack transforma información dispersa en una lectura
+        estructurada del negocio. El objetivo no es producir más documentos,
+        sino reducir incertidumbre y mejorar la calidad de las decisiones.
+      </p>
+
+      <div className="deliverable-points">
+        <div>
+          <strong>01</strong>
+          <span>Hechos y señales relevantes</span>
         </div>
-      </section>
+
+        <div>
+          <strong>02</strong>
+          <span>Hallazgos y relaciones identificadas</span>
+        </div>
+
+        <div>
+          <strong>03</strong>
+          <span>Hipótesis y explicaciones contrastadas</span>
+        </div>
+
+        <div>
+          <strong>04</strong>
+          <span>Prioridades y decisiones posibles</span>
+        </div>
+      </div>
+    </div>
+
+    <IntelligencePreview />
+  </div>
+</section>
             <section id="nosotros" className="section">
         <div className="container about-grid">
           <div className="about-content">
