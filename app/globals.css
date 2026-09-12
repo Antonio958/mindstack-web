@@ -2864,3 +2864,509 @@ body {
     padding-bottom: 54px !important;
   }
 }
+
+
+
+/* =========================================================
+   MINDSTACK — MOBILE FINAL POLISH
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  /* ---------- Base ---------- */
+
+  .container {
+    width: calc(100% - 32px) !important;
+    max-width: 100% !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  }
+
+
+  /* ---------- Header ---------- */
+
+  .header-inner {
+    height: 64px !important;
+    gap: 12px !important;
+  }
+
+  .header .brand {
+    height: 64px !important;
+    max-width: 100px !important;
+    min-width: 0 !important;
+  }
+
+  .header .brand-symbol,
+  .header .brand-full-logo {
+    max-width: 96px !important;
+    height: auto !important;
+  }
+
+  .nav {
+    display: none !important;
+  }
+
+  /* Mantener CTA visible en móvil */
+  .header .btn {
+    display: inline-flex !important;
+    width: auto !important;
+    padding: 10px 12px !important;
+    font-size: 8px !important;
+    letter-spacing: 0.1em !important;
+    white-space: nowrap !important;
+  }
+
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding: 94px 0 58px !important;
+  }
+
+  .hero-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .hero .eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.18em !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px !important;
+  }
+
+  .hero .eyebrow::before {
+    width: 28px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(37px, 11vw, 48px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.045em !important;
+    max-width: 100% !important;
+  }
+
+  .hero-copy {
+    margin: 22px 0 26px !important;
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
+  .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .hero-actions .btn {
+    width: 100% !important;
+    min-height: 48px !important;
+    font-size: 9px !important;
+  }
+
+
+  /* ---------- Hero metrics ---------- */
+
+  .metrics-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .metric {
+    min-height: 92px !important;
+    padding: 16px 14px !important;
+  }
+
+  .metric span {
+    font-size: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  .metric strong {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+
+  .dashboard {
+    display: none !important;
+  }
+
+
+  /* ---------- General sections ---------- */
+
+  .section {
+    padding: 58px 0 !important;
+  }
+
+  .section-head {
+    margin-bottom: 30px !important;
+  }
+
+  .section-title {
+    font-size: clamp(31px, 9vw, 40px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .section-desc {
+    margin-top: 18px !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.2em !important;
+    margin-bottom: 18px !important;
+    line-height: 1.4 !important;
+  }
+
+  .eyebrow::before {
+    width: 30px !important;
+  }
+
+
+  /* ---------- Intelligence ---------- */
+
+  .intelligence-flow {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .intelligence-card {
+    min-height: auto !important;
+    padding: 24px !important;
+  }
+
+  .intelligence-number {
+    font-size: 36px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .intelligence-card h3 {
+    font-size: 21px !important;
+  }
+
+  .intelligence-card p {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .intelligence-items {
+    margin-top: 24px !important;
+    padding-top: 0 !important;
+  }
+
+  .intelligence-principle {
+    padding: 24px !important;
+    margin-top: 12px !important;
+  }
+
+  .intelligence-principle strong {
+    font-size: 23px !important;
+  }
+
+
+  /* ---------- Insights ---------- */
+
+  .insights-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .insights-grid .card {
+    padding: 24px !important;
+    min-height: auto !important;
+  }
+
+
+  /* ---------- Capabilities ---------- */
+
+  .capabilities-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .capability-card,
+  .capability-card:nth-child(4),
+  .capability-card:nth-child(5),
+  .capabilities-grid .capability-card:last-child {
+    grid-column: auto !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 24px !important;
+  }
+
+  .capability-top {
+    margin-bottom: 26px !important;
+  }
+
+  .capability-number {
+    font-size: 36px !important;
+  }
+
+  .capability-card h3 {
+    font-size: 23px !important;
+  }
+
+  .capability-footer {
+    margin-top: 26px !important;
+  }
+
+  .capabilities-statement {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 24px !important;
+  }
+
+  .capabilities-statement strong {
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+  }
+
+
+  /* ---------- Restaurant focus ---------- */
+
+  .restaurant-intro {
+    grid-template-columns: 1fr !important;
+    padding: 24px !important;
+    gap: 18px !important;
+  }
+
+  .restaurant-intro h3 {
+    font-size: 24px !important;
+  }
+
+  .restaurant-signals {
+    grid-template-columns: 1fr !important;
+  }
+
+  .restaurant-signal {
+    min-height: auto !important;
+    padding: 24px !important;
+    grid-template-columns: 36px 1fr !important;
+    gap: 14px !important;
+  }
+
+  .transversal-note {
+    grid-template-columns: 1fr !important;
+    padding: 24px !important;
+    gap: 18px !important;
+  }
+
+  .transversal-note strong {
+    font-size: 20px !important;
+  }
+
+
+  /* ---------- Method ---------- */
+
+  .method-grid {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+  }
+
+  .method-principle {
+    padding: 20px !important;
+    margin-top: 24px !important;
+  }
+
+  .method-section .steps {
+    padding-left: 22px !important;
+  }
+
+  .method-section .step {
+    grid-template-columns: 40px 1fr !important;
+    padding: 22px 0 22px 18px !important;
+    gap: 10px !important;
+  }
+
+  .method-section .step::before {
+    left: -20px !important;
+  }
+
+  .method-section .step h3 {
+    font-size: 19px !important;
+  }
+
+  .method-section .step p {
+    font-size: 13.5px !important;
+    line-height: 1.65 !important;
+  }
+
+
+  /* ---------- Intelligence actionable ---------- */
+
+  .deliverable-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .deliverable-points {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .deliverable-points div {
+    padding: 16px !important;
+  }
+
+  .report-preview {
+    padding: 20px !important;
+  }
+
+  .report-summary {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .report-row {
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+    padding: 14px !important;
+  }
+
+  .report-head {
+    display: none !important;
+  }
+
+  .report-status {
+    display: none !important;
+  }
+
+
+  /* ---------- Firm / Leadership ---------- */
+
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+
+  .about-lead {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+  }
+
+  .about-principles {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-principles div {
+    min-height: auto !important;
+    padding: 20px !important;
+  }
+
+  .leadership-card {
+    width: 100% !important;
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    padding: 14px !important;
+  }
+
+  .leadership-photo {
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .leadership-info {
+    padding: 22px 8px 8px !important;
+  }
+
+  .leadership-info h3 {
+    font-size: 27px !important;
+  }
+
+  .leadership-info p {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+
+  /* ---------- How to start ---------- */
+
+  .diagnostic-box {
+    grid-template-columns: 1fr !important;
+  }
+
+  .diagnostic-main,
+  .diagnostic-list {
+    padding: 26px !important;
+  }
+
+  .diagnostic-main h2 {
+    font-size: clamp(31px, 9vw, 40px) !important;
+  }
+
+  .diagnostic-main .btn {
+    width: 100% !important;
+  }
+
+
+  /* ---------- Focus cards ---------- */
+
+  .focus-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .focus-grid .card {
+    padding: 24px !important;
+  }
+
+
+  /* ---------- Final CTA ---------- */
+
+  .cta {
+    padding: 74px 0 !important;
+  }
+
+  .cta h2 {
+    font-size: clamp(32px, 9vw, 42px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .cta p {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
+  .cta .btn {
+    width: 100% !important;
+    max-width: 320px !important;
+  }
+
+
+  /* ---------- Footer ---------- */
+
+  .footer {
+    padding: 48px 0 24px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+  }
+
+  .footer .brand {
+    max-width: 110px !important;
+  }
+
+  .footer p,
+  .footer a {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    color: #8a8a8a !important;
+  }
+
+  .footer .btn {
+    width: 100% !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+}
