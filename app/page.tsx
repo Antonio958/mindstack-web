@@ -828,63 +828,75 @@ export default function Home() {
 </section>
 
       <section className="cta">
-        <div className="container">
-          <span className="eyebrow">Siguiente paso</span>
-          <h2>Antes de invertir más, detecta dónde está el verdadero problema.</h2>
-          <p>
-            Agenda una revisión express y recibe una lectura clara sobre los
-            puntos que pueden estar frenando el crecimiento de tu restaurante.
-          </p>
-          <ButtonGold href={WA}>Agendar por WhatsApp</ButtonGold>
-        </div>
-      </section>
+  <div className="container">
+    <span className="eyebrow">Siguiente paso</span>
+
+    <h2>
+      Cuando el problema no está claro,{" "}
+      <span className="gold">la primera decisión es comprenderlo.</span>
+    </h2>
+
+    <p>
+      Cuéntanos qué está ocurriendo en tu organización. Antes de recomendar una
+      solución, Mindstack busca entender el contexto, la evidencia disponible y
+      qué necesita investigarse.
+    </p>
+
+    <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+  </div>
+</section>
 
       <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <Brand />
-              <p style={{ marginTop: 20 }}>
-                Consultoría estratégica, datos e inteligencia aplicada para negocios
-                que buscan crecer con mayor control operativo y comercial.
-              </p>
-            </div>
+  <div className="container">
+    <div className="footer-grid">
+      <div>
+        <Brand />
 
-            <div>
-              <h4>Servicios</h4>
-              <a href="#diagnostico">Diagnóstico Express</a>
-              <a href="#servicios">Diagnóstico Inicial</a>
-              <a href="#servicios">Sistema Comercial</a>
-              <a href="#servicios">IA Operativa</a>
-            </div>
+        <p style={{ marginTop: 20 }}>
+          Firma de Inteligencia Empresarial dedicada a convertir información,
+          evidencia y contexto en comprensión, decisiones e intervenciones con
+          sentido.
+        </p>
+      </div>
 
-            <div>
-              <h4>Sectores</h4>
-              <a href="#sectores">Restaurantes y gastronomía</a>
-              <a href="#sectores">Retail y comercios locales</a>
-              <a href="#sectores">Servicios profesionales</a>
-              <a href="#sectores">Negocios con sucursales</a>
-            </div>
+      <div>
+        <h4>Capacidades</h4>
+        <a href="#capacidades">Diagnóstico</a>
+        <a href="#capacidades">Inteligencia de Negocio</a>
+        <a href="#capacidades">Automatización</a>
+        <a href="#capacidades">Inteligencia Artificial</a>
+        <a href="#capacidades">Soluciones a medida</a>
+      </div>
 
-            <div>
-              <h4>Contacto</h4>
-              <p>
-                Para consultas, diagnósticos o información sobre servicios,
-                escríbenos directamente por WhatsApp.
-              </p>
-              <ButtonGold href={WA}>Escribir por WhatsApp</ButtonGold>
-            </div>
-          </div>
+      <div>
+        <h4>Mindstack</h4>
+        <a href="#inteligencia">Inteligencia empresarial</a>
+        <a href="#metodologia">Método Mindstack</a>
+        <a href="#sectores">Industria foco</a>
+        <a href="#nosotros">La firma</a>
+      </div>
 
-          <div className="footer-bottom">
-            <span>
-              © 2026 Grupo Mindstack. Consultoría, datos e inteligencia aplicada
-              para restaurantes.
-            </span>
-            <span>México</span>
-          </div>
-        </div>
-      </footer>
+      <div>
+        <h4>Contacto</h4>
+
+        <p>
+          Para conversar sobre una situación empresarial, un proyecto o una
+          posible colaboración, escríbenos directamente.
+        </p>
+
+        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+      </div>
+    </div>
+
+    <div className="footer-bottom">
+      <span>
+        © 2026 Grupo Mindstack. Firma de Inteligencia Empresarial.
+      </span>
+
+      <span>México</span>
+    </div>
+  </div>
+</footer>
     </main>
   );
 }
