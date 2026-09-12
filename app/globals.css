@@ -2703,3 +2703,164 @@ body {
     padding: 26px;
   }
 }
+
+
+
+/* ── Insights editorial layout ───────────────────────── */
+
+.insights-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.insights-grid .card {
+  min-height: 245px !important;
+}
+
+@media (max-width: 640px) {
+  .insights-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .insights-grid .card {
+    min-height: auto !important;
+  }
+}
+
+
+/* ── Method timeline ───────────────────────── */
+
+.method-section .steps {
+  position: relative !important;
+  display: grid !important;
+  gap: 0 !important;
+  padding-left: 30px !important;
+}
+
+.method-section .steps::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 7px !important;
+  top: 20px !important;
+  bottom: 20px !important;
+  width: 1px !important;
+  background: linear-gradient(
+    to bottom,
+    var(--gold),
+    rgba(201, 162, 39, 0.12)
+  ) !important;
+}
+
+.method-section .step {
+  position: relative !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+  padding: 26px 0 26px 26px !important;
+  grid-template-columns: 54px 1fr !important;
+}
+
+.method-section .step:last-child {
+  border-bottom: 0 !important;
+}
+
+.method-section .step::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -28px !important;
+  top: 32px !important;
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  background: var(--black) !important;
+  border: 2px solid var(--gold) !important;
+}
+
+.method-section .step-num {
+  color: var(--gold) !important;
+  font-weight: 900 !important;
+}
+
+.method-section .step h3 {
+  font-size: 21px !important;
+}
+
+.method-section .step p {
+  max-width: 620px !important;
+}
+
+
+
+/* ── Capabilities balanced fifth card ───────────────── */
+
+@media (min-width: 641px) and (max-width: 980px) {
+  .capabilities-grid .capability-card:last-child {
+    grid-column: 1 / -1 !important;
+    width: calc(50% - 8px) !important;
+    justify-self: center !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .capabilities-grid .capability-card:last-child {
+    width: 100% !important;
+  }
+}
+
+
+/* ── Page rhythm ───────────────────────── */
+
+/* Secciones principales */
+#inteligencia,
+#capacidades,
+#sectores,
+#metodologia,
+#entregable,
+#nosotros {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+}
+
+/* Secciones secundarias */
+#insights,
+#contacto {
+  padding-top: 72px !important;
+  padding-bottom: 72px !important;
+}
+
+@media (max-width: 980px) {
+  #inteligencia,
+  #capacidades,
+  #sectores,
+  #metodologia,
+  #entregable,
+  #nosotros {
+    padding-top: 82px !important;
+    padding-bottom: 82px !important;
+  }
+
+  #insights,
+  #contacto {
+    padding-top: 62px !important;
+    padding-bottom: 62px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #inteligencia,
+  #capacidades,
+  #sectores,
+  #metodologia,
+  #entregable,
+  #nosotros {
+    padding-top: 68px !important;
+    padding-bottom: 68px !important;
+  }
+
+  #insights,
+  #contacto {
+    padding-top: 54px !important;
+    padding-bottom: 54px !important;
+  }
+}

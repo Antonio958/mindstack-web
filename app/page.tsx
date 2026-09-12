@@ -472,7 +472,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="cards-4">
+          <div className="insights-grid">
             {insights.map((item) => (
               <article className="card" key={item.title}>
                 <span className="tag">{item.tag}</span>
@@ -603,7 +603,10 @@ export default function Home() {
   </div>
 </section>
 
-      <section id="metodologia" className="section section-alt">
+<section
+  id="metodologia"
+  className="section section-alt method-section"
+>
   <div className="container method-grid">
     <div>
       <span className="eyebrow">Método Mindstack</span>
