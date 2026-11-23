@@ -16,6 +16,8 @@ jobs:
           cache: npm
       - name: Instalar dependencias reproducibles
         run: npm ci
+      - name: Comprobar reglas de interpretación
+        run: node --experimental-strip-types --test tests/evaluacion.test.mjs
       - name: Verificar compilacion y exportacion estatica
         run: npm run build
       - name: Verificar contenido exportado
