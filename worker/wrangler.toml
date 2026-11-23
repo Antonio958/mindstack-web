@@ -3,8 +3,11 @@ main = "src/index.ts"
 compatibility_date = "2026-11-19"
 workers_dev = true
 
-# No despliegues sin configurar primero los secretos:
-# DATABASE_URL, TURNSTILE_SECRET y PRIVACY_VERSION.
-# Cambiar ALLOWED_ORIGIN por el dominio REAL de Cloudflare Pages.
+# Worker API separado del Worker web.
+# En el dashboard registrar DATABASE_URL, TURNSTILE_SECRET y PRIVACY_VERSION
+# como secretos de runtime. No usar variables publicas ni subir credenciales a GitHub.
+# La ruta /health responde 503 hasta que todos los secretos esten configurados.
+# Para el lanzamiento final ALLOWED_ORIGIN debe ser el origen exacto del frontend.
+# Los despliegues de pruebas publicas no deben captar datos sin aviso de privacidad.
 [vars]
 ALLOWED_ORIGIN = "https://mindstack-web.luispalmhdz06.workers.dev"
