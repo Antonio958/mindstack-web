@@ -3510,6 +3510,27 @@ body {
   overflow:hidden;
   background:#111213;
 }
+/* Transición editorial: la imagen y el grafito se diluyen en marfil.
+   El degradado termina exactamente en el color de la sección siguiente. */
+.hero-refreshed::after {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:220px;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    rgba(245,242,236,0) 0%,
+    rgba(245,242,236,0) 33%,
+    rgba(245,242,236,.12) 49%,
+    rgba(245,242,236,.44) 67%,
+    rgba(245,242,236,.84) 86%,
+    #f5f2ec 100%
+  );
+}
 .hero-refreshed .hero-refreshed-grid {
   display:block;
   position:relative;
@@ -3599,7 +3620,7 @@ body {
   position:absolute;
   z-index:2;
   right:clamp(20px,4vw,72px);
-  bottom:88px;
+  bottom:158px;
   top:auto;
   color:#e7e7e1;
   opacity:.82;
@@ -3617,15 +3638,8 @@ body {
   border:0;
   padding:88px 0 92px;
 }
-.assessment-refreshed::before {
-  content:"";
-  position:absolute;
-  top:0;
-  left:max(24px,calc((100vw - 1180px)/2));
-  width:44px;
-  height:3px;
-  background:#c9a227;
-}
+/* Se retira la línea que remarcaba artificialmente el corte entre secciones. */
+.assessment-refreshed::before { display:none; }
 .assessment-refreshed .assessment-grid {
   grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
   gap:clamp(35px,5vw,84px);
@@ -3847,7 +3861,18 @@ body {
     background:linear-gradient(90deg,rgba(17,18,19,.98),rgba(17,18,19,.75)),
       linear-gradient(0deg,#111213,transparent 60%);
   }
-  .hero-refreshed .hero-photo-disclaimer { right:18px; bottom:20px; font-size:9px; }
+  .hero-refreshed::after {
+    height:165px;
+    background:linear-gradient(
+      180deg,
+      rgba(245,242,236,0) 0%,
+      rgba(245,242,236,0) 28%,
+      rgba(245,242,236,.18) 52%,
+      rgba(245,242,236,.72) 78%,
+      #f5f2ec 100%
+    );
+  }
+  .hero-refreshed .hero-photo-disclaimer { right:18px; bottom:134px; font-size:9px; }
   .assessment-refreshed { padding:51px 0 58px; }
   .assessment-refreshed .assessment-content h2 { font-size:clamp(31px,8vw,41px); }
   .assessment-result-preview { --card-pad:23px; }
