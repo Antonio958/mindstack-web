@@ -25,6 +25,10 @@ jobs:
           test -f out/index.html
           test -f out/404.html
           test -f out/evaluacion.html || test -f out/evaluacion/index.html
+      - name: Verificar Turnstile público sin activar captación prematura
+        run: |
+          grep -q '0x4AAAAAAGPUHIprbjhv5LWX' app/evaluacion/page.tsx
+          grep -q 'API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY' app/evaluacion/page.tsx
       - name: Verificar configuracion Worker web para Cloudflare
         run: |
           node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out'||cfg.preview_urls!==true||typeof cfg.previews!=='object')process.exit(1);"
