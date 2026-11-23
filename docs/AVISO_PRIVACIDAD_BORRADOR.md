@@ -1,7 +1,7 @@
 # Aviso de privacidad — evaluación empresarial gratuita de Mindstack
 
 **ESTADO: BORRADOR INTERNO. NO PUBLICAR COMO AVISO DEFINITIVO.**
-**Decisión expresada por la empresa (23 de noviembre de 2026):** mantener exclusivamente la ubicación "COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO" sin añadir calle o número en esta versión. Esto **no acredita por sí mismo el cumplimiento del requisito de domicilio completo**; queda pendiente revisión legal. **No habilitar captación de datos personales ni publicar este borrador como aviso definitivo** mientras no se resuelva esa observación.
+**Actualización de domicilio (23 de noviembre de 2026):** la empresa proporciona **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**, como domicilio donde puede atender a personas. Es **distinto del domicilio fiscal**. Antes de aprobar el aviso, confirmar que allí Grupo Mindstack, S.A. de C.V. **puede oír y recibir notificaciones**; esta distinción fiscal no impide por sí sola usarlo para privacidad si cumple esa función. **El aviso continúa en revisión y la captación de contactos permanece desactivada** hasta terminar los controles y aprobar su publicación.
 
 Para validar con el responsable de la empresa y, de ser posible, asesoría jurídica antes de recopilar información personal.
 
@@ -9,7 +9,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - Denominación de la persona moral responsable: **Grupo Mindstack, S.A. de C.V.** (razón social proporcionada por la empresa, pendiente de contraste con documentación constitutiva).
 - Nombre comercial: **Mindstack**.
-- Domicilio señalado por la empresa para el aviso: **COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO**. **Pendiente de validar si es suficiente como domicilio legalmente identificable antes de la publicación.**
+- Domicilio de atención indicado por la empresa para el aviso: **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**. Distinto del domicilio fiscal. **Pendiente de confirmar que recibe correspondencia/notificaciones para Grupo Mindstack, S.A. de C.V.**
 - Correo autorizado para privacidad y solicitudes de derechos ARCO: **mindstack.group@gmail.com** (aprobado por la empresa).
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
 - Plazo de conservación aprobado: **12 meses contados desde la recepción de cada evaluación/contacto**. Una relación contractual vigente o una obligación legal aplicable podrá justificar conservación adicional, que debe documentarse por separado.
@@ -18,7 +18,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 **Aviso de privacidad de la evaluación empresarial gratuita de Mindstack**
 
-**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio en COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO, es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
+**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio de atención en Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX, es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
 
 **2. Datos tratados.** La evaluación permite responder preguntas sobre la operación de una empresa sin registrarse. Cuando el participante opta expresamente por compartir su evaluación con Mindstack, se solicita nombre de contacto, correo electrónico y teléfono opcional, además de las respuestas proporcionadas y los resultados generados. No se solicitan contraseñas, datos de tarjetas ni información financiera detallada.
 
@@ -39,7 +39,8 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 ## Controles necesarios antes de activar el formulario
 
 - [x] Identificar responsable legal y nombre comercial (conforme a lo manifestado por la empresa; verificar contra acta constitutiva antes de aprobación).
-- [ ] Verificar que el domicilio proporcionado (colonia, alcaldía, código postal y ciudad) cumpla con el nivel de identificación requerido para el aviso y confirmar canal de derechos ARCO.
+- [x] Obtener domicilio completo indicado por la empresa para atención de personas (distinto del fiscal).
+- [ ] Confirmar que en Soria 130 se reciben correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.; verificar su validez para el aviso antes de publicar. El correo ARCO ya fue autorizado.
 - [x] Aprobar plazo de conservación de 12 meses desde la recepción, con excepciones justificadas.
 - [ ] Implementar y verificar eliminación/anonimización efectiva a los 12 meses; documentar registro de excepciones y plan de ejecución.
 - [ ] Revisar el tratamiento internacional y las condiciones de Cloudflare/Neon.
