@@ -1,5 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { QUESTIONS, VERSION, complete, evaluate, type Answers } from "../../lib/evaluacion/motor";
+import { PRIVACY_VERSION as APPROVED_PRIVACY_VERSION } from "../../lib/evaluacion/config";
 
 type Env = {
   DATABASE_URL: string;
@@ -49,22 +50,36 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null,
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+    const configured = Boolean(
+      env.DATABASE_URL && env.TURNSTILE_SECRET &&
+      env.PRIVACY_VERSION === APPROVED_PRIVACY_VERSION &&
+      env.ALLOWED_ORIGIN && !env.ALLOWED_ORIGIN.includes("replace-with")
+    );
     if (url.pathname === "/health" && request.method === "GET") {
-      const configured = Boolean(env.DATABASE_URL && env.TURNSTILE_SECRET &&
-        env.PRIVACY_VERSION && env.ALLOWED_ORIGIN &&
-        !env.ALLOWED_ORIGIN.includes("replace-with"));
-      return response({status:configured ? "ready" : "not_configured",version:VERSION},
+      return response({status: configured ? "ready" : "not_configured", version: VERSION},
         configured ? 200 : 503);
     }
-    if (url.pathname !== "/api/evaluaciones") return response({error:"No encontrado"},404);
-    if (!env.DATABASE_URL || !env.TURNSTILE_SECRET || !env.PRIVACY_VERSION ||
-        !env.ALLOWED_ORIGIN || env.ALLOWED_ORIGIN.includes("replace-with"))
-      return response({error:"Servicio no configurado"},503);
+
     const origin = request.headers.get("Origin");
-    // Permisos por origen explícito, nunca comodines.
-    // La vista previa y producción son hostnames exactos.
+    // Los dos orígenes de web autorizados no habilitan acceso público de lectura de datos.
     const allowed = [env.ALLOWED_ORIGIN, env.ALLOWED_PREVIEW_ORIGIN].filter(Boolean);
+    if (url.pathname === "/api/estado" && request.method === "GET") {
+      if (!origin || !allowed.includes(origin))
+        return response({error:"Origen no autorizado"},403);
+      if (!configured)
+        return response({status:"not_configured"},503,origin);
+      try {
+        // Además de verificar secrets, comprueba conectividad real con Neon.
+        const sql = neon(env.DATABASE_URL);
+        await sql`select 1 as conectado`;
+        return response({status:"ready",privacyVersion:env.PRIVACY_VERSION},200,origin);
+      } catch {
+        return response({status:"unavailable"},503,origin);
+      }
+    }
+    if (url.pathname !== "/api/evaluaciones") return response({error:"No encontrado"},404);
     if (!origin || !allowed.includes(origin)) return response({error:"Origen no autorizado"},403);
+    if (!configured) return response({error:"Servicio no configurado"},503,origin);
     if (request.method === "OPTIONS")
       return new Response(null,{status:204,headers:{
         "Access-Control-Allow-Origin":origin,
@@ -128,5 +143,21 @@ export default {
     } catch {
       return response({error:"No se pudo guardar la solicitud"},503,origin);
     }
+  },
+  async scheduled(_controller: unknown, env: Env): Promise<void> {
+    if (!env.DATABASE_URL) throw new Error("No se puede ejecutar retención sin DATABASE_URL");
+    const sql = neon(env.DATABASE_URL);
+    // ON DELETE CASCADE suprime también el contacto asociado; nunca expone PII en logs.
+    // Una excepción contractual/legal sólo se conserva hasta retener_hasta.
+    const rows = await sql`
+      with vencidas as (
+        delete from public.evaluaciones
+        where creado_en < now() - interval '12 months'
+          and (retener_hasta is null or retener_hasta <= now())
+        returning id
+      )
+      select count(*)::int as eliminadas from vencidas
+    `;
+    console.log("Evaluaciones vencidas suprimidas:", rows[0]?.eliminadas ?? 0);
   }
 };
