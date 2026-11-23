@@ -41,6 +41,16 @@ jobs:
           node-version: "22"
       - name: Instalar dependencias del worker
         run: npm install --prefix worker --no-audit --no-fund
+      - name: Emitir lockfile de dependencias API para incorporarlo al repositorio
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = fs.readFileSync('worker/package-lock.json');
+          console.log('MINDSTACK_LOCK_BEGIN');
+          const content = file.toString('base64');
+          for (let i = 0; i < content.length; i += 1200) console.log('MINDSTACK_LOCK_PART:' + content.slice(i, i + 1200));
+          console.log('MINDSTACK_LOCK_END');
+          NODE
       - name: Validar TypeScript del worker
         run: npm run check --prefix worker
       - name: Reproducir comando de build de Cloudflare API
