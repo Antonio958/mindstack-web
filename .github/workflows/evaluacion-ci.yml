@@ -21,7 +21,14 @@ jobs:
       - name: Verificar compilacion y exportacion estatica
         run: npm run build
       - name: Verificar contenido exportado
-        run: test -f out/index.html && test -f out/evaluacion.html || test -f out/evaluacion/index.html
+        run: |
+          test -f out/index.html
+          test -f out/404.html
+          test -f out/evaluacion.html || test -f out/evaluacion/index.html
+      - name: Verificar configuracion Worker web para Cloudflare
+        run: |
+          node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out')process.exit(1);"
+
 
   api-worker:
     runs-on: ubuntu-latest
