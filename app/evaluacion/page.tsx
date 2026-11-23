@@ -10,7 +10,8 @@ const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "https://ca
 const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || "";
 const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "";
 const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "";
-const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+// La Site Key de Turnstile es pública; la Secret Key permanece únicamente en el Worker API.
+const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAGPUHIprbjhv5LWX";
 const CAN_SAVE = Boolean(API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY);
 const WHATSAPP = "https://wa.me/525552138786?text=" + encodeURIComponent(
   "Hola Mindstack, realicé su evaluación empresarial y me gustaría conversar sobre mi negocio."
