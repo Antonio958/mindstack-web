@@ -93,3 +93,19 @@ Nunca incluir credenciales, registros reales o datos de prospectos en GitHub pú
 ## Verificación del deploy actual
 
 URL de Worker web: https://mindstack-web.luispalmhdz06.workers.dev/ . El proyecto se identifica como Worker (no Pages). No crear un nuevo proyecto Pages por ahora. Confirmar en Cloudflare que el Worker sirve los HTML exportados, y revisar los deployments por rama.
+
+## API Worker detectado y preparado
+
+- URL pública confirmada por usuario: https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/
+- Comprobar manualmente desde navegador: https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/health
+- Sin secretos, `/health` debe devolver HTTP 503 y JSON `{"status":"not_configured","version":"0.1.0"}`. No significa error de deploy, significa que la captación está bloqueada.
+- El frontend preview es `https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev`. El Worker admite este origen exacto y el origen de producción con `ALLOWED_PREVIEW_ORIGIN` y `ALLOWED_ORIGIN`.
+- Crear widget Cloudflare Turnstile con los dos HOSTNAMES de la web, sin protocolo ni path, NO el de la API:
+  - `mindstack-web.luispalmhdz06.workers.dev`
+  - `feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev`
+- La site key de Turnstile es pública y se configura durante build como `NEXT_PUBLIC_TURNSTILE_SITE_KEY`. La secret key va SOLO al Worker API como secreto `TURNSTILE_SECRET`.
+- Cloudflare Worker API > Settings > Variables and Secrets: `DATABASE_URL` (tipo Secret, URL Neon), `TURNSTILE_SECRET` (tipo Secret), `PRIVACY_VERSION` (texto de versión de aviso aprobado, no activar antes de publicar aviso).
+- Frontend web preview > Settings > Builds > Previews Base: `NEXT_PUBLIC_EVALUACION_API_URL=https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/api/evaluaciones`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `NEXT_PUBLIC_AVISO_PRIVACIDAD_URL`, `NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION`. Estas 4 deben existir para habilitar el envío opcional de contactos; deben coincidir las versiones.
+- El enlace de Calendar no garantiza sincronía de cita y evaluación: conectar leads con CRM y confirmación de reservas en otra fase.
+- Seguridad: no colocar `DATABASE_URL` en variables de compilación ni en cliente; no enviar la cadena por chat.
+- Antes de captar datos reales: aprobar aviso, probar endpoint, límites antiabuso y restauración de respaldos.
