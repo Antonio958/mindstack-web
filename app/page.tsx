@@ -3,7 +3,7 @@ const WA =
 
 const navItems = [
   ["Inicio", "#inicio"],
-  ["Inteligencia", "#inteligencia"],
+  ["Evaluación gratuita", "/evaluacion"],
   ["Capacidades", "#capacidades"],
   ["Método", "#metodologia"],
   ["Industrias", "#sectores"],
@@ -167,7 +167,7 @@ function ButtonGold({
   children: React.ReactNode;
 }) {
   return (
-    <a href={href} className="btn btn-gold" target="_blank" rel="noreferrer">
+    <a href={href} className="btn btn-gold" target={href.startsWith("/") || href.startsWith("#") ? undefined : "_blank"} rel={href.startsWith("/") || href.startsWith("#") ? undefined : "noopener noreferrer"}>
       {children}
     </a>
   );
@@ -327,7 +327,7 @@ export default function Home() {
       </p>
 
       <div className="hero-actions">
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+        <ButtonGold href="/evaluacion">Evaluación gratuita</ButtonGold>
         <ButtonOutline href="#metodologia">
           Conocer nuestro método
         </ButtonOutline>
@@ -360,6 +360,35 @@ export default function Home() {
   </div>
 </section>
 
+
+<section id="evaluacion-gratuita" className="assessment-section">
+  <div className="container assessment-grid">
+    <div className="assessment-content">
+      <span className="eyebrow">Una herramienta gratuita de Mindstack</span>
+      <h2>Conocer mejor tu negocio comienza con <span className="gold">las preguntas correctas.</span></h2>
+      <p>
+        Explora la situación de tu restaurante a través de preguntas sobre rentabilidad,
+        operación, información y decisiones. Reconoce fortalezas, situaciones que merecen
+        atención y aspectos que aún necesitan mayor claridad.
+      </p>
+      <div className="assessment-actions">
+        <ButtonGold href="/evaluacion">Realizar evaluación gratuita</ButtonGold>
+        <a href="#metodologia" className="assessment-secondary-link">Conocer nuestro enfoque ↗</a>
+      </div>
+      <p className="assessment-disclaimer">Gratuita · Sin registro · Basada en tus respuestas · No sustituye un diagnóstico</p>
+    </div>
+    <div className="assessment-panel">
+      <span className="assessment-panel-kicker">EVALUACIÓN EXPLORATORIA · RESTAURANTES</span>
+      <div className="assessment-panel-title">Una lectura inicial, sin conclusiones precipitadas.</div>
+      <div className="assessment-process">
+        <div><span>01</span><strong>Responde</strong><p>Preguntas concretas sobre tu operación.</p></div>
+        <div><span>02</span><strong>Comprende</strong><p>Señales y fortalezas según lo que declaraste.</p></div>
+        <div><span>03</span><strong>Explora</strong><p>Si existe una razón, conversa con Mindstack.</p></div>
+      </div>
+      <p className="assessment-panel-note">No inventamos causas ni forzamos servicios. Cuando la información es favorable, también lo reconocemos.</p>
+    </div>
+  </div>
+</section>
 
 <section id="inteligencia" className="section intelligence-section">
   <div className="container">
