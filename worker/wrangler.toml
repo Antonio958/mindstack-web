@@ -1,0 +1,10 @@
+name = "mindstack-evaluacion-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-19"
+workers_dev = true
+
+# No despliegues sin configurar primero los secretos:
+# DATABASE_URL, TURNSTILE_SECRET y PRIVACY_VERSION.
+# Cambiar ALLOWED_ORIGIN por el dominio REAL de Cloudflare Pages.
+[vars]
+ALLOWED_ORIGIN = "https://replace-with-real-domain.example"
