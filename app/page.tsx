@@ -1,3 +1,8 @@
+import { Manrope, Inter } from "next/font/google";
+
+const displayFont = Manrope({ subsets: ["latin"], variable: "--font-msk-display", display: "swap" });
+const readingFont = Inter({ subsets: ["latin"], variable: "--font-msk-reading", display: "swap" });
+
 const WA =
   "https://wa.me/525552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
 
@@ -253,7 +258,7 @@ function IntelligencePreview() {
 
 export default function Home() {
   return (
-    <main className="page-shell mindstack-editorial">
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`}>
       <header className="header">
         <div className="container header-inner">
           <Brand />
