@@ -1,5 +1,7 @@
 # Aviso de privacidad — evaluación empresarial gratuita de Mindstack
 
+> **ARCHIVO HISTÓRICO DE TRABAJO:** La empresa aprobó el aviso de privacidad el 23 de noviembre de 2026. La versión de publicación es `2026-11-23-v1`, cuya fuente de contenido está en [`app/aviso-de-privacidad/page.tsx`](../app/aviso-de-privacidad/page.tsx). Este borrador conserva observaciones y marcadores de revisión; **no debe utilizarse como texto visible para los prospectos**. La publicación productiva y activación de captación se verifican por separado.
+
 **ESTADO: BORRADOR INTERNO. NO PUBLICAR COMO AVISO DEFINITIVO.**
 **Actualización de domicilio (23 de noviembre de 2026):** la empresa proporciona **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**, como domicilio donde puede atender a personas. Es **distinto del domicilio fiscal**. La empresa **confirmó que allí puede recibir correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.** El hecho de que sea distinto al domicilio fiscal no impide por sí solo usarlo para privacidad; se mantiene la revisión general del aviso antes de publicarlo. **El aviso continúa en revisión y la captación de contactos permanece desactivada** hasta terminar los controles y aprobar su publicación.
 
