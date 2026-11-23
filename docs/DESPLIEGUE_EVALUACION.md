@@ -49,7 +49,8 @@ En variables de entorno de build del Worker web en Cloudflare configurar:
 - NEXT_PUBLIC_EVALUACION_API_URL: URL completa HTTPS de API Worker (termina /api/evaluaciones).
 - NEXT_PUBLIC_TURNSTILE_SITE_KEY: clave pública de Turnstile.
 - NEXT_PUBLIC_AVISO_PRIVACIDAD_URL: aviso real aprobado y accesible.
-- NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION: mismo texto que PRIVACY_VERSION del Worker.
+- NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION: `2026-11-23-v2`, igual que `PRIVACY_VERSION` del Worker API. La versión `v1` quedó sustituida al corregir el domicilio fiscal.
+- NEXT_PUBLIC_AVISO_PRIVACIDAD_URL: `https://mindstack-web.luispalmhdz06.workers.dev/aviso-de-privacidad/` cuando el aviso esté publicado en producción; para pruebas, puede usar la ruta `/aviso-de-privacidad/` en la misma web.
 
 Por seguridad, el formulario voluntario de datos permanece OCULTO si la API, clave Turnstile y aviso no están configurados. El cuestionario y la lectura inicial sí funcionan sin servidor; no transmiten respuestas.
 
