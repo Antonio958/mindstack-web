@@ -5,14 +5,16 @@ import { useEffect, useState, type FormEvent } from "react";
 import Script from "next/script";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
+import { EVALUACION_API_URL, PRIVACY_PATH, PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, TURNSTILE_SITE_KEY } from "../../lib/evaluacion/config";
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "https://calendar.app.google/t7YPiSH7QzDKR7JC6";
-const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || "";
-const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "/aviso-de-privacidad/";
-const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "2026-11-23-v2";
+const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || EVALUACION_API_URL;
+const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || PRIVACY_PATH;
+const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || APPROVED_PRIVACY_VERSION;
 // La Site Key de Turnstile es pública; la Secret Key permanece únicamente en el Worker API.
-const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAGPUHIprbjhv5LWX";
+const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || TURNSTILE_SITE_KEY;
 const CAN_SAVE = Boolean(API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY);
+const STATUS_URL = API_URL.replace(/\/api\/evaluaciones$/, "/api/estado");
 const WHATSAPP = "https://wa.me/525552138786?text=" + encodeURIComponent(
   "Hola Mindstack, realicé su evaluación empresarial y me gustaría conversar sobre mi negocio."
 );
@@ -28,6 +30,7 @@ export default function EvaluacionPage() {
   const [turnstileToken, setTurnstileToken] = useState("");
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending" | "saved" | "error">("idle");
   const [savedReference, setSavedReference] = useState("");
+  const [serviceReady, setServiceReady] = useState(false);
   const questions = visibleQuestions(answers);
   const question = questions[Math.min(step, questions.length - 1)];
   const isSelected = Boolean(answers[question.id]);
@@ -49,6 +52,28 @@ export default function EvaluacionPage() {
     };
   }, []);
 
+  // Comprobar la disponibilidad real de la API y la versión del aviso antes de mostrar el formulario.
+  // Así no se solicitan datos personales cuando Neon o Cloudflare no están listos.
+  useEffect(() => {
+    if (!finished || !CAN_SAVE) return;
+    const controller = new AbortController();
+    setServiceReady(false);
+    fetch(STATUS_URL, { signal: controller.signal, cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return response.json() as Promise<{ status?: string; privacyVersion?: string }>;
+      })
+      .then((data) => {
+        if (!controller.signal.aborted) {
+          setServiceReady(data?.status === "ready" && data.privacyVersion === PRIVACY_VERSION);
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setServiceReady(false);
+      });
+    return () => controller.abort();
+  }, [finished]);
+
   function next() {
     if (!isSelected) return;
     if (step >= questions.length - 1) {
@@ -65,10 +90,14 @@ export default function EvaluacionPage() {
     setSavedReference("");
     setTurnstileToken("");
     setContactConsent(false);
+    setContactName("");
+    setContactEmail("");
+    setContactPhone("");
+    setServiceReady(false);
   }
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!CAN_SAVE || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
+    if (!CAN_SAVE || !serviceReady || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
     setSubmissionStatus("sending");
     try {
       const response = await fetch(API_URL, {
@@ -89,6 +118,9 @@ export default function EvaluacionPage() {
       setSubmissionStatus("saved");
     } catch {
       setSubmissionStatus("error");
+      setTurnstileToken("");
+      const browser = window as typeof window & { turnstile?: { reset: () => void } };
+      browser.turnstile?.reset();
     }
   }
   const bookingHref = BOOKING_URL || WHATSAPP;
@@ -209,7 +241,7 @@ export default function EvaluacionPage() {
             <p>Este resultado no es un diagnóstico ni una auditoría. Está basado exclusivamente en declaraciones que no han sido verificadas. No establece causas raíz, impactos económicos ni soluciones recomendadas.</p>
           </section>
 
-          {CAN_SAVE && result.status !== "outside_scope" && (
+          {CAN_SAVE && serviceReady && result.status !== "outside_scope" && (
             <section className={styles.contactSection}>
               <div className={styles.sectionHeading}>
                 <span>↗</span>
