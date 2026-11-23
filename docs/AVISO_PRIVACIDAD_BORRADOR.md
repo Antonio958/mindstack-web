@@ -1,7 +1,7 @@
 # Aviso de privacidad — evaluación empresarial gratuita de Mindstack
 
 **ESTADO: BORRADOR INTERNO. NO PUBLICAR COMO AVISO DEFINITIVO.**
-**Actualización de domicilio (23 de noviembre de 2026):** la empresa proporciona **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**, como domicilio donde puede atender a personas. Es **distinto del domicilio fiscal**. Antes de aprobar el aviso, confirmar que allí Grupo Mindstack, S.A. de C.V. **puede oír y recibir notificaciones**; esta distinción fiscal no impide por sí sola usarlo para privacidad si cumple esa función. **El aviso continúa en revisión y la captación de contactos permanece desactivada** hasta terminar los controles y aprobar su publicación.
+**Actualización de domicilio (23 de noviembre de 2026):** la empresa proporciona **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**, como domicilio donde puede atender a personas. Es **distinto del domicilio fiscal**. La empresa **confirmó que allí puede recibir correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.** El hecho de que sea distinto al domicilio fiscal no impide por sí solo usarlo para privacidad; se mantiene la revisión general del aviso antes de publicarlo. **El aviso continúa en revisión y la captación de contactos permanece desactivada** hasta terminar los controles y aprobar su publicación.
 
 Para validar con el responsable de la empresa y, de ser posible, asesoría jurídica antes de recopilar información personal.
 
@@ -9,7 +9,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - Denominación de la persona moral responsable: **Grupo Mindstack, S.A. de C.V.** (razón social proporcionada por la empresa, pendiente de contraste con documentación constitutiva).
 - Nombre comercial: **Mindstack**.
-- Domicilio de atención indicado por la empresa para el aviso: **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**. Distinto del domicilio fiscal. **Pendiente de confirmar que recibe correspondencia/notificaciones para Grupo Mindstack, S.A. de C.V.**
+- Domicilio de atención indicado por la empresa para el aviso: **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**. Distinto del domicilio fiscal. **Confirmado por la empresa el 23 de noviembre de 2026: en este domicilio pueden recibirse correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.**
 - Correo autorizado para privacidad y solicitudes de derechos ARCO: **mindstack.group@gmail.com** (aprobado por la empresa).
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
 - Plazo de conservación aprobado: **12 meses contados desde la recepción de cada evaluación/contacto**. Una relación contractual vigente o una obligación legal aplicable podrá justificar conservación adicional, que debe documentarse por separado.
@@ -40,7 +40,8 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - [x] Identificar responsable legal y nombre comercial (conforme a lo manifestado por la empresa; verificar contra acta constitutiva antes de aprobación).
 - [x] Obtener domicilio completo indicado por la empresa para atención de personas (distinto del fiscal).
-- [ ] Confirmar que en Soria 130 se reciben correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.; verificar su validez para el aviso antes de publicar. El correo ARCO ya fue autorizado.
+- [x] Confirmar recepción de correspondencia y notificaciones para Grupo Mindstack, S.A. de C.V. en Soria 130 (confirmación expresada por la empresa). El correo ARCO está autorizado.
+- [ ] Validar integralmente el aviso y el procedimiento ARCO antes de aprobar su publicación.
 - [x] Aprobar plazo de conservación de 12 meses desde la recepción, con excepciones justificadas.
 - [ ] Implementar y verificar eliminación/anonimización efectiva a los 12 meses; documentar registro de excepciones y plan de ejecución.
 - [ ] Revisar el tratamiento internacional y las condiciones de Cloudflare/Neon.
