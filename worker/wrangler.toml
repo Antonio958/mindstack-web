@@ -11,3 +11,4 @@ workers_dev = true
 # Los despliegues de pruebas publicas no deben captar datos sin aviso de privacidad.
 [vars]
 ALLOWED_ORIGIN = "https://mindstack-web.luispalmhdz06.workers.dev"
+ALLOWED_PREVIEW_ORIGIN = "https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev"
