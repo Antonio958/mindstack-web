@@ -7,4 +7,4 @@ workers_dev = true
 # DATABASE_URL, TURNSTILE_SECRET y PRIVACY_VERSION.
 # Cambiar ALLOWED_ORIGIN por el dominio REAL de Cloudflare Pages.
 [vars]
-ALLOWED_ORIGIN = "https://replace-with-real-domain.example"
+ALLOWED_ORIGIN = "https://mindstack-web.luispalmhdz06.workers.dev"
