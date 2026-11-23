@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./aviso.module.css";
+import { PRIVACY_VERSION, PRIVACY_PATH } from "../../lib/evaluacion/config";
 
 export const metadata: Metadata = {
   title: "Aviso de privacidad | Mindstack",
@@ -9,7 +10,6 @@ export const metadata: Metadata = {
 
 const EMAIL = "mindstack.group@gmail.com";
 const ADDRESS = "MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240";
-const VERSION = "2026-11-23-v2";
 
 export default function AvisoDePrivacidadPage() {
   return (
@@ -26,7 +26,7 @@ export default function AvisoDePrivacidadPage() {
         <h1>Aviso de privacidad</h1>
         <p className={styles.intro}>Información sobre el tratamiento de datos personales cuando una persona decide compartir con Mindstack los resultados de su evaluación empresarial gratuita.</p>
         <div className={styles.meta}>
-          <span>Versión: {VERSION}</span>
+          <span>Versión: {PRIVACY_VERSION}</span>
           <span>Última actualización: 23 de noviembre de 2026</span>
         </div>
 
@@ -76,7 +76,7 @@ export default function AvisoDePrivacidadPage() {
 
         <section>
           <h2>8. Modificaciones del aviso</h2>
-          <p>Publicaremos las modificaciones a este aviso en esta misma dirección: <Link href="/aviso-de-privacidad/">/aviso-de-privacidad/</Link>, indicando la nueva fecha de actualización y versión. Cuando corresponda solicitar un nuevo consentimiento, lo haremos antes de utilizar los datos para nuevas finalidades.</p>
+          <p>Publicaremos las modificaciones a este aviso en esta misma dirección: <Link href={PRIVACY_PATH}>{PRIVACY_PATH}</Link>, indicando la nueva fecha de actualización y versión. Cuando corresponda solicitar un nuevo consentimiento, lo haremos antes de utilizar los datos para nuevas finalidades.</p>
         </section>
 
         <section>
