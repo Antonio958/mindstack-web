@@ -8,7 +8,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 - Denominación de la persona moral responsable: **Grupo Mindstack, S.A. de C.V.** (razón social proporcionada por la empresa, pendiente de contraste con documentación constitutiva).
 - Nombre comercial: **Mindstack**.
 - Domicilio señalado por la empresa para el aviso: **COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO**. **Pendiente de validar si es suficiente como domicilio legalmente identificable antes de la publicación.**
-- Correo de privacidad y solicitudes sobre datos personales: **[PENDIENTE DE APROBACIÓN; cuenta corporativa disponible: mindstack.group@gmail.com]**
+- Correo autorizado para privacidad y solicitudes de derechos ARCO: **mindstack.group@gmail.com** (aprobado por la empresa).
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
 - Plazo de conservación/criterio de eliminación: **[PENDIENTE]**
 
@@ -28,7 +28,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 **6. Conservación y seguridad.** Los registros se protegerán con controles de acceso, cifrado en tránsito y medidas técnicas apropiadas. El plazo de conservación de los datos será [PLAZO O CRITERIO POR CONFIRMAR], salvo obligaciones legales aplicables.
 
-**7. Derechos de la persona titular.** Para ejercer los derechos de acceso, rectificación, cancelación u oposición (ARCO), revocar el consentimiento en los supuestos permitidos o solicitar información sobre el tratamiento, comunicarse a [CORREO APROBADO], indicando los datos necesarios para identificar la solicitud. [DESCRIBIR PROCEDIMIENTO Y PLAZOS LEGALES SEGÚN REVISIÓN].
+**7. Derechos de la persona titular.** Para ejercer los derechos de acceso, rectificación, cancelación u oposición (ARCO), revocar el consentimiento en los supuestos permitidos o solicitar información sobre el tratamiento, comunicarse a mindstack.group@gmail.com, indicando los datos necesarios para identificar la solicitud. [DESCRIBIR PROCEDIMIENTO Y PLAZOS LEGALES SEGÚN REVISIÓN].
 
 **8. Modificaciones.** Las modificaciones a este aviso se comunicarán mediante [URL PÚBLICA DEFINITIVA], indicando la fecha de actualización.
 
