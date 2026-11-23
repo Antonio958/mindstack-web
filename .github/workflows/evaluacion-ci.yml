@@ -39,7 +39,8 @@ jobs:
           grep -q '0x4AAAAAAGPUHIprbjhv5LWX' lib/evaluacion/config.ts
           grep -q 'serviceReady && result.status' app/evaluacion/page.tsx
           grep -q 'url.pathname === "/api/estado"' worker/src/index.ts
-          grep -q 'data.privacyVersion === PRIVACY_VERSION' app/evaluacion/page.tsx
+          grep -q 'estado.privacyVersion === privacyVersion' lib/evaluacion/cliente.ts
+          grep -q 'comprobarDisponibilidad(API_URL, PRIVACY_VERSION' app/evaluacion/page.tsx
       - name: Verificar retención automática y excepciones legales
         run: |
           grep -q '12 months' worker/src/index.ts
