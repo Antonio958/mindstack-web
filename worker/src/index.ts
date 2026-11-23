@@ -33,7 +33,7 @@ function checkedAnswers(v: unknown): Answers | null {
   if (Object.keys(v).some(k => !QUESTIONS.some(q => q.id === k))) return null;
   return result.sector !== "other" && complete(result) ? result : null;
 }
-async function verifyTurnstile(token: string, secret: string, ip: string | null) {
+async function verifyTurnstile(token: string, secret: string, ip: string | null, expectedHostname: string) {
   const form = new FormData();
   form.append("secret", secret);
   form.append("response", token);
@@ -43,13 +43,18 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   });
   if (!answer.ok) return false;
   const data: unknown = await answer.json();
-  return isRecord(data) && data.success === true;
+  return isRecord(data) && data.success === true && data.hostname === expectedHostname;
 }
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname === "/health" && request.method === "GET")
-      return response({status:"ready",version:VERSION});
+    if (url.pathname === "/health" && request.method === "GET") {
+      const configured = Boolean(env.DATABASE_URL && env.TURNSTILE_SECRET &&
+        env.PRIVACY_VERSION && env.ALLOWED_ORIGIN &&
+        !env.ALLOWED_ORIGIN.includes("replace-with"));
+      return response({status:configured ? "ready" : "not_configured",version:VERSION},
+        configured ? 200 : 503);
+    }
     if (url.pathname !== "/api/evaluaciones") return response({error:"No encontrado"},404);
     if (!env.DATABASE_URL || !env.TURNSTILE_SECRET || !env.PRIVACY_VERSION ||
         !env.ALLOWED_ORIGIN || env.ALLOWED_ORIGIN.includes("replace-with"))
@@ -88,7 +93,7 @@ export default {
     if(name.length<2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !token)
       return response({error:"Datos de contacto incorrectos"},400,origin);
     const verified=await verifyTurnstile(token,env.TURNSTILE_SECRET,
-      request.headers.get("CF-Connecting-IP"));
+      request.headers.get("CF-Connecting-IP"),new URL(env.ALLOWED_ORIGIN).hostname);
     if(!verified) return response({error:"Verificación antiabuso fallida"},403,origin);
     const result=evaluate(a);
     if(result.status==="outside_scope") return response({error:"Sector fuera de alcance"},400,origin);
