@@ -35,7 +35,7 @@ El CRM interno y su Supabase no se modifican.
 
 1. Crear Worker `mindstack-evaluacion-api` desde el repositorio `Antonio958/mindstack-web`, directorio raíz del build `worker`. Mientras esté sin fusionar el PR, seleccionar la rama de producción `feature/evaluacion-empresarial-mvp-20261123` para este Worker API; `main` todavía no tiene la carpeta `worker`.
 1a. Comando de compilación `npm install && npm run check`; comando de despliegue `npx wrangler deploy`. Debe servir inicialmente el endpoint `/health`; sin secretos de DB/Turnstile, las escrituras quedan bloqueadas (HTTP 503).
-2. Usar worker/wrangler.toml; actualizar ALLOWED_ORIGIN al dominio EXACTO de Pages.
+2. Usar worker/wrangler.jsonc; actualizar ALLOWED_ORIGIN al dominio EXACTO de Pages.
 3. Configurar secretos: DATABASE_URL, TURNSTILE_SECRET, PRIVACY_VERSION.
 4. Configurar Turnstile para dominio público y obtener clave pública.
 5. Activar protección antiabuso/rate limiting de Cloudflare y monitoreo de errores.
@@ -109,3 +109,13 @@ URL de Worker web: https://mindstack-web.luispalmhdz06.workers.dev/ . El proyect
 - El enlace de Calendar no garantiza sincronía de cita y evaluación: conectar leads con CRM y confirmación de reservas en otra fase.
 - Seguridad: no colocar `DATABASE_URL` en variables de compilación ni en cliente; no enviar la cadena por chat.
 - Antes de captar datos reales: aprobar aviso, probar endpoint, límites antiabuso y restauración de respaldos.
+
+## Depuración del fallo 404 en /health (23-nov-2026)
+
+- En la configuración de Cloudflare del Worker `mindstack-evaluacion-api`, el directorio raíz debe ser `worker`.
+- La compilación debe ejecutar `npm run build` y el deploy `npx wrangler deploy`. `worker/package.json` define `build`.
+- Se detectó que Wrangler estaba leyendo el `wrangler.jsonc` del sitio web desde el nivel superior, lo que fallaba por ausencia de `out` en el build de la API.
+- Se creó `worker/wrangler.jsonc` con el nombre de servicio `mindstack-evaluacion-api`, entrypoint `src/index.ts` y dominios exactos; eliminamos `worker/wrangler.toml` para evitar dobles fuentes de configuración.
+- GitHub Actions verifica TypeScript, el build de la API y `cd worker && npx wrangler deploy --dry-run --outdir ../.wrangler-api-check`. La primera ejecución tras crear el archivo JSONC terminó correctamente y empaquetó 220.73 KiB.
+- `/health` devuelve `{"status":"not_configured", ...}` con HTTP 503 mientras no haya secretos. Es el resultado correcto antes de habilitar captación.
+- GitHub Actions dry-run no publica el Worker ni prueba la URL en producción. Se debe confirmar el deploy automático de Cloudflare antes de afirmar que el 404 desapareció.
