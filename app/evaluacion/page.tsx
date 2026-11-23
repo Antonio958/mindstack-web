@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import Script from "next/script";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "";
+const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || "";
+const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "";
+const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "";
+const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+const CAN_SAVE = Boolean(API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY);
 const WHATSAPP = "https://wa.me/525552138786?text=" + encodeURIComponent(
   "Hola Mindstack, realicé su evaluación empresarial y me gustaría conversar sobre mi negocio."
 );
@@ -14,11 +20,23 @@ export default function EvaluacionPage() {
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactConsent, setContactConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending" | "saved" | "error">("idle");
+  const [savedReference, setSavedReference] = useState("");
   const questions = visibleQuestions(answers);
   const question = questions[Math.min(step, questions.length - 1)];
   const isSelected = Boolean(answers[question.id]);
   const result = finished ? evaluate(answers) : null;
   const progress = Math.round(((step + 1) / questions.length) * 100);
+  useEffect(() => {
+    const w = window as typeof window & { msOnTurnstile?: (token: string) => void };
+    w.msOnTurnstile = (token: string) => setTurnstileToken(token);
+    return () => { delete w.msOnTurnstile; };
+  }, []);
 
   function next() {
     if (!isSelected) return;
@@ -32,6 +50,35 @@ export default function EvaluacionPage() {
     setAnswers({});
     setStep(0);
     setFinished(false);
+    setSubmissionStatus("idle");
+    setSavedReference("");
+    setTurnstileToken("");
+    setContactConsent(false);
+  }
+  async function submitContact(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!CAN_SAVE || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
+    setSubmissionStatus("sending");
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers,
+          contact: { name: contactName, email: contactEmail, phone: contactPhone },
+          privacyConsent: true,
+          privacyVersion: PRIVACY_VERSION,
+          turnstileToken,
+          source: new URLSearchParams(window.location.search).get("utm_source") || "web",
+        }),
+      });
+      const data: { ok?: boolean; evaluationId?: string } = await response.json();
+      if (!response.ok || !data.ok) throw new Error("No se pudo enviar");
+      setSavedReference(data.evaluationId || "");
+      setSubmissionStatus("saved");
+    } catch {
+      setSubmissionStatus("error");
+    }
   }
   const bookingHref = BOOKING_URL || WHATSAPP;
 
@@ -148,6 +195,44 @@ export default function EvaluacionPage() {
             <strong>Alcance de esta evaluación</strong>
             <p>Este resultado no es un diagnóstico ni una auditoría. Está basado exclusivamente en declaraciones que no han sido verificadas. No establece causas raíz, impactos económicos ni soluciones recomendadas.</p>
           </section>
+
+          {CAN_SAVE && result.status !== "outside_scope" && (
+            <section className={styles.contactSection}>
+              <div className={styles.sectionHeading}>
+                <span>↗</span>
+                <h2>¿Quieres compartir tus resultados con Mindstack?</h2>
+              </div>
+              <p className={styles.contactIntro}>Es opcional. Puedes obtener tu resultado completo sin dejar datos. Si decides compartirlo, conservaremos tus respuestas para preparar una posible conversación.</p>
+              {submissionStatus === "saved" ? (
+                <div className={styles.successBox}>
+                  <strong>Recibimos tu evaluación.</strong>
+                  <p>Referencia: {savedReference}. Puedes continuar con la reserva de una conversación si te interesa.</p>
+                </div>
+              ) : (
+                <form onSubmit={submitContact} className={styles.contactForm}>
+                  <label>Nombre de contacto
+                    <input required minLength={2} maxLength={120} autoComplete="name" value={contactName} onChange={e => setContactName(e.target.value)}/>
+                  </label>
+                  <label>Correo electrónico
+                    <input required type="email" maxLength={254} autoComplete="email" value={contactEmail} onChange={e => setContactEmail(e.target.value)}/>
+                  </label>
+                  <label>Teléfono (opcional)
+                    <input type="tel" maxLength={32} autoComplete="tel" value={contactPhone} onChange={e => setContactPhone(e.target.value)}/>
+                  </label>
+                  <label className={styles.consent}>
+                    <input type="checkbox" checked={contactConsent} onChange={e => setContactConsent(e.target.checked)} required/>
+                    <span>Autorizo el tratamiento de mis datos y respuestas para atender mi solicitud conforme al <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">aviso de privacidad de Mindstack</a>. Esta autorización no implica aceptar publicidad futura.</span>
+                  </label>
+                  <div className="cf-turnstile" data-sitekey={TURNSTILE_KEY} data-callback="msOnTurnstile"/>
+                  {submissionStatus === "error" && <p role="alert" className={styles.formError}>No fue posible guardar la información. Inténtalo de nuevo o utiliza el contacto directo.</p>}
+                  <button className={styles.primaryButton} type="submit" disabled={!contactConsent || !turnstileToken || submissionStatus === "sending"}>
+                    {submissionStatus === "sending" ? "Guardando..." : "Compartir mi evaluación"}
+                  </button>
+                </form>
+              )}
+              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+            </section>
+          )}
 
           <section className={styles.closing}>
             <p className={styles.eyebrow}>MINDSTACK · COMPRENDER ANTES DE TRANSFORMAR</p>
