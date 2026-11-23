@@ -1,0 +1,53 @@
+.shell {
+  min-height: 100vh;
+  background: #f6f4ee;
+  color: #1c1d1b;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.header {
+  min-height: 82px;
+  background: #101010;
+  color: #f7f4ec;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 14px max(28px, calc((100vw - 1180px) / 2));
+  border-bottom: 1px solid #34302b;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #f7f4ec;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+.logo { width: 40px; height: 40px; object-fit: contain; }
+.back { color: #d9d3c5; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.back:hover { color: #d3ad45; }
+.content { width: min(800px, calc(100% - 42px)); margin: 0 auto; padding: 65px 0 100px; }
+.kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; color: #916e15; }
+.content h1 { margin: 18px 0 17px; font-size: clamp(38px, 5.3vw, 60px); font-weight: 760; line-height: 1.12; letter-spacing: -.052em; }
+.intro { max-width: 690px; color: #50534e; font-size: 17px; line-height: 1.75; margin-bottom: 26px; }
+.meta { display: flex; flex-wrap: wrap; gap: 9px 24px; font-size: 12px; color: #656761; padding: 21px 0; border-top: 1px solid #ded9ce; border-bottom: 1px solid #ded9ce; margin-bottom: 22px; }
+.content section { border-bottom: 1px solid #ded9ce; padding: 25px 0 27px; }
+.content section h2 { font-size: 21px; line-height: 1.35; font-weight: 750; margin: 0 0 16px; letter-spacing: -.025em; }
+.content section p { color: #3e423c; font-size: 15px; line-height: 1.82; margin: 0 0 12px; }
+.content section p:last-child { margin-bottom: 0; }
+.content strong { font-weight: 760; color: #20231e; }
+.content section a, .footer a { color: #6c5111; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.content section a:hover, .footer a:hover { color: #292014; }
+.footer { padding: 30px 0 0; font-size: 13px; line-height: 1.7; color: #585b56; }
+.footer strong { display: block; margin-bottom: 9px; }
+.footer p { margin: 4px 0; }
+.footer > a { display: inline-block; margin-top: 20px; font-weight: 760; }
+@media (max-width: 600px) {
+ .header { padding: 14px 20px; }
+ .back { font-size: 10px; }
+ .content { padding-top: 42px; }
+ .content section { padding: 20px 0 22px; }
+ .content section h2 { font-size: 19px; }
+ .content section p { font-size: 14px; }
+}
