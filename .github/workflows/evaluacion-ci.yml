@@ -26,19 +26,26 @@ jobs:
           test -f out/404.html
           test -f out/evaluacion.html || test -f out/evaluacion/index.html
           test -f out/aviso-de-privacidad.html || test -f out/aviso-de-privacidad/index.html
-      - name: Verificar aviso visible, versionado y captacion desactivada
+      - name: Verificar aviso y versión desde fuente central
         run: |
-          grep -q '2026-11-23-v2' app/aviso-de-privacidad/page.tsx
-          grep -q '2026-11-23-v2' app/evaluacion/page.tsx
+          grep -q '2026-11-23-v2' lib/evaluacion/config.ts
+          grep -q '2026-11-23-v2' worker/wrangler.jsonc
           grep -q 'mindstack.group@gmail.com' app/aviso-de-privacidad/page.tsx
           grep -q 'MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240' app/aviso-de-privacidad/page.tsx
           ! grep -q 'Soria 130' app/aviso-de-privacidad/page.tsx
-          ! grep -q '03400' app/aviso-de-privacidad/page.tsx
-          grep -q 'API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY' app/evaluacion/page.tsx
-      - name: Verificar Turnstile público sin activar captación prematura
+          grep -q 'APPROVED_PRIVACY_VERSION' app/evaluacion/page.tsx
+      - name: Verificar protección del envío y conectividad a Neon
         run: |
-          grep -q '0x4AAAAAAGPUHIprbjhv5LWX' app/evaluacion/page.tsx
-          grep -q 'API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY' app/evaluacion/page.tsx
+          grep -q '0x4AAAAAAGPUHIprbjhv5LWX' lib/evaluacion/config.ts
+          grep -q 'serviceReady && result.status' app/evaluacion/page.tsx
+          grep -q 'url.pathname === "/api/estado"' worker/src/index.ts
+          grep -q 'data.privacyVersion === PRIVACY_VERSION' app/evaluacion/page.tsx
+      - name: Verificar retención automática y excepciones legales
+        run: |
+          grep -q '12 months' worker/src/index.ts
+          grep -q 'retener_hasta' worker/src/index.ts
+          grep -Fq '0 8 * * *' worker/wrangler.jsonc
+          test -f infra/neon/002_retencion_evaluaciones.sql
       - name: Verificar configuracion Worker web para Cloudflare
         run: |
           node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out'||cfg.preview_urls!==true||typeof cfg.previews!=='object')process.exit(1);"
