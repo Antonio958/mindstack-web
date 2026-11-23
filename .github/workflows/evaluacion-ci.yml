@@ -28,9 +28,12 @@ jobs:
           test -f out/aviso-de-privacidad.html || test -f out/aviso-de-privacidad/index.html
       - name: Verificar aviso visible, versionado y captacion desactivada
         run: |
-          grep -q '2026-11-23-v1' app/aviso-de-privacidad/page.tsx
+          grep -q '2026-11-23-v2' app/aviso-de-privacidad/page.tsx
+          grep -q '2026-11-23-v2' app/evaluacion/page.tsx
           grep -q 'mindstack.group@gmail.com' app/aviso-de-privacidad/page.tsx
-          grep -q 'Soria 130' app/aviso-de-privacidad/page.tsx
+          grep -q 'MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240' app/aviso-de-privacidad/page.tsx
+          ! grep -q 'Soria 130' app/aviso-de-privacidad/page.tsx
+          ! grep -q '03400' app/aviso-de-privacidad/page.tsx
           grep -q 'API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY' app/evaluacion/page.tsx
       - name: Verificar Turnstile público sin activar captación prematura
         run: |
