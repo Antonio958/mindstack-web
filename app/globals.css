@@ -4518,3 +4518,73 @@ body {
   .home-contact-option { padding:25px 0 !important; }
   .home-contact-option + .home-contact-option { border-left:0; border-top:1px solid #777366; }
 }
+
+/* Navigation: discoverable even when the desktop nav collapses. */
+.home-mobile-menu { display:none; position:relative; }
+.home-mobile-menu > summary {
+  list-style:none;
+  cursor:pointer;
+  color:#f7f5ee;
+  font-size:11px;
+  font-weight:760;
+  padding:10px 7px;
+  letter-spacing:.035em;
+}
+.home-mobile-menu > summary::-webkit-details-marker { display:none; }
+.home-mobile-menu > summary::before {
+  display:inline-block;
+  content:"☰";
+  margin-right:8px;
+  color:#d1b05a;
+  font-size:16px;
+  vertical-align:-1px;
+}
+.home-mobile-menu > summary:focus-visible {
+  outline:2px solid #dfbd64;
+  outline-offset:2px;
+}
+.home-mobile-menu[open] nav {
+  position:absolute;
+  right:-12px;
+  top:calc(100% + 16px);
+  z-index:99;
+  min-width:226px;
+  padding:10px;
+  display:grid;
+  gap:2px;
+  background:#191b19;
+  color:#f5f2eb;
+  border:1px solid #454237;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+}
+.home-mobile-menu nav a {
+  padding:12px 11px;
+  font-size:12px;
+  font-weight:650;
+}
+.home-mobile-menu nav a:hover,
+.home-mobile-menu nav a:focus-visible { background:#303027; color:#f6e5a8; }
+
+/* Hover only on actual interactive controls, not informational service rows. */
+.story-service-row { cursor:default; }
+.story-text-link:focus-visible,
+.story-services-link:focus-visible,
+.home-contact-secondary:focus-visible,
+.footer-direct-contact:focus-visible {
+  outline:3px solid #c9a227;
+  outline-offset:4px;
+}
+@media(max-width:980px) {
+  .home-mobile-menu { display:block; margin-left:auto; }
+  .header .header-inner { gap:14px; }
+}
+@media(max-width:640px) {
+  #sectores.home-story-sector { padding:47px 0 66px !important; }
+  #capacidades.home-services { padding:145px 0 70px !important; }
+  #metodologia.home-method { padding:155px 0 70px !important; }
+  #entregable.home-deliverable { padding:66px 0 85px !important; }
+  #nosotros.home-firm { padding:142px 0 80px !important; }
+  #contacto.home-contact { padding:77px 0 73px !important; }
+  .home-mobile-menu > summary { padding:8px 4px; font-size:10px; }
+  .home-mobile-menu > summary::before { margin-right:5px; font-size:14px; }
+}
