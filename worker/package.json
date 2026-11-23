@@ -1,0 +1,17 @@
+{
+  "name": "mindstack-evaluacion-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "wrangler": "4.164.0"
+  }
+}
