@@ -8,6 +8,7 @@ type Env = {
   PRIVACY_VERSION: string;
   ALLOWED_ORIGIN: string;
   ALLOWED_PREVIEW_ORIGIN?: string;
+  PUBLIC_API_RATE_LIMITER: { limit: (opts: { key: string }) => Promise<{ success: boolean }> };
 };
 const headers = {
   "Content-Type": "application/json; charset=utf-8",
@@ -66,6 +67,11 @@ export default {
     if (url.pathname === "/api/estado" && request.method === "GET") {
       if (!origin || !allowed.includes(origin))
         return response({error:"Origen no autorizado"},403);
+      // Límite aproximado por origen de red; antes de consumir Neon.
+      const statusLimit = await env.PUBLIC_API_RATE_LIMITER.limit({
+        key: "evaluacion:" + (request.headers.get("CF-Connecting-IP") || "unknown")
+      });
+      if (!statusLimit.success) return response({error:"Demasiadas solicitudes"},429,origin);
       if (!configured)
         return response({status:"not_configured"},503,origin);
       try {
@@ -88,6 +94,10 @@ export default {
         "Access-Control-Max-Age":"3600",Vary:"Origin"
       }});
     if (request.method !== "POST") return response({error:"Método no admitido"},405,origin);
+    const submitLimit = await env.PUBLIC_API_RATE_LIMITER.limit({
+      key: "evaluacion:" + (request.headers.get("CF-Connecting-IP") || "unknown")
+    });
+    if (!submitLimit.success) return response({error:"Demasiadas solicitudes"},429,origin);
     if (!(request.headers.get("Content-Type") || "").startsWith("application/json"))
       return response({error:"Tipo de contenido incorrecto"},415,origin);
     if (Number(request.headers.get("Content-Length") || 0) > 16000)
