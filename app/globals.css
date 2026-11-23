@@ -4591,8 +4591,8 @@ body {
 
 /* Homepage editorial v2 — scope deliberately excludes assessment route. */
 .mindstack-editorial {
-  --display: "Manrope", "Avenir Next", system-ui, sans-serif;
-  --reading: "Inter", "Segoe UI", system-ui, sans-serif;
+  --display: var(--font-msk-display), "Avenir Next", system-ui, sans-serif;
+  --reading: var(--font-msk-reading), "Segoe UI", system-ui, sans-serif;
   font-family: var(--reading);
 }
 .mindstack-editorial :is(h1,h2,h3,h4) { font-family:var(--display); text-wrap:balance; }
