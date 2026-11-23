@@ -108,3 +108,20 @@
 @media (prefers-reduced-motion: reduce) {
   .option, .trackFill, .primaryButton, .secondaryButton { transition: none; }
 }
+
+
+.contactSection { margin: 0 0 70px; padding: 0 0 18px; }
+.contactIntro { color: #5c5b56; font-size: 15px; line-height: 1.75; max-width: 700px; margin: 22px 0 27px; }
+.contactForm { display: grid; gap: 20px; max-width: 650px; }
+.contactForm > label:not(.consent) { display: grid; gap: 8px; font-weight: 650; font-size: 13px; }
+.contactForm input:not([type="checkbox"]) { border: 1px solid #cdc7bc; border-radius: 8px; height: 51px; padding: 11px 14px; background: #fffefa; color: #1b1b1b; font: inherit; }
+.contactForm input:focus-visible { outline: 3px solid rgba(170,129,35,.32); outline-offset: 2px; }
+.consent { display: flex; align-items: flex-start; gap: 12px; font-size: 12px; font-weight: 500; line-height: 1.65; color: #57564f; }
+.consent input { width: 19px; height: 19px; margin-top: 2px; flex: none; accent-color: #a47a21; }
+.consent a { text-decoration: underline; color: #815e12; }
+.formError { color: #9b2929; margin: 0; font-size: 13px; }
+.successBox { background: #eaeedf; border-left: 3px solid #518447; padding: 21px; border-radius: 4px; color: #30442c; }
+.successBox p { margin: 8px 0 0; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .contactForm > button { width: 100%; }
+}
