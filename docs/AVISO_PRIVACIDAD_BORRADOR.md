@@ -1,9 +1,9 @@
 # Aviso de privacidad — evaluación empresarial gratuita de Mindstack
 
-> **ARCHIVO HISTÓRICO DE TRABAJO:** La empresa aprobó el aviso de privacidad el 23 de noviembre de 2026. La versión de publicación es `2026-11-23-v1`, cuya fuente de contenido está en [`app/aviso-de-privacidad/page.tsx`](../app/aviso-de-privacidad/page.tsx). Este borrador conserva observaciones y marcadores de revisión; **no debe utilizarse como texto visible para los prospectos**. La publicación productiva y activación de captación se verifican por separado.
+> **ARCHIVO HISTÓRICO DE TRABAJO:** La empresa aprobó el aviso de privacidad el 23 de noviembre de 2026. La versión de publicación corregida es `2026-11-23-v2`, cuya fuente de contenido está en [`app/aviso-de-privacidad/page.tsx`](../app/aviso-de-privacidad/page.tsx). Este borrador conserva observaciones y marcadores de revisión; **no debe utilizarse como texto visible para los prospectos**. La publicación productiva y activación de captación se verifican por separado.
 
 **ESTADO: BORRADOR INTERNO. NO PUBLICAR COMO AVISO DEFINITIVO.**
-**Actualización de domicilio (23 de noviembre de 2026):** la empresa proporciona **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**, como domicilio donde puede atender a personas. Es **distinto del domicilio fiscal**. La empresa **confirmó que allí puede recibir correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.** El hecho de que sea distinto al domicilio fiscal no impide por sí solo usarlo para privacidad; se mantiene la revisión general del aviso antes de publicarlo. **El aviso continúa en revisión y la captación de contactos permanece desactivada** hasta terminar los controles y aprobar su publicación.
+**Corrección del domicilio (23 de noviembre de 2026):** la empresa sustituyó la dirección anterior por **MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240** y confirmó que **es el domicilio fiscal de Grupo Mindstack, S.A. de C.V.** Este es el domicilio autorizado para figurar en el aviso de privacidad. **La recepción de contactos permanece desactivada** hasta verificar despliegue, configuración y controles técnicos.
 
 Para validar con el responsable de la empresa y, de ser posible, asesoría jurídica antes de recopilar información personal.
 
@@ -11,7 +11,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - Denominación de la persona moral responsable: **Grupo Mindstack, S.A. de C.V.** (razón social proporcionada por la empresa, pendiente de contraste con documentación constitutiva).
 - Nombre comercial: **Mindstack**.
-- Domicilio de atención indicado por la empresa para el aviso: **Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX**. Distinto del domicilio fiscal. **Confirmado por la empresa el 23 de noviembre de 2026: en este domicilio pueden recibirse correspondencia y notificaciones dirigidas a Grupo Mindstack, S.A. de C.V.**
+- Domicilio fiscal indicado por la empresa para el aviso: **MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240**. Sustituye al domicilio de atención previamente proporcionado; la empresa ha indicado que esta es la dirección correcta para el aviso.
 - Correo autorizado para privacidad y solicitudes de derechos ARCO: **mindstack.group@gmail.com** (aprobado por la empresa).
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
 - Plazo de conservación aprobado: **12 meses contados desde la recepción de cada evaluación/contacto**. Una relación contractual vigente o una obligación legal aplicable podrá justificar conservación adicional, que debe documentarse por separado.
@@ -20,7 +20,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 **Aviso de privacidad de la evaluación empresarial gratuita de Mindstack**
 
-**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio de atención en Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX, es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
+**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio fiscal en MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240, es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
 
 **2. Datos tratados.** La evaluación permite responder preguntas sobre la operación de una empresa sin registrarse. Cuando el participante opta expresamente por compartir su evaluación con Mindstack, se solicita nombre de contacto, correo electrónico y teléfono opcional, además de las respuestas proporcionadas y los resultados generados. No se solicitan contraseñas, datos de tarjetas ni información financiera detallada.
 
@@ -41,8 +41,8 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 ## Controles necesarios antes de activar el formulario
 
 - [x] Identificar responsable legal y nombre comercial (conforme a lo manifestado por la empresa; verificar contra acta constitutiva antes de aprobación).
-- [x] Obtener domicilio completo indicado por la empresa para atención de personas (distinto del fiscal).
-- [x] Confirmar recepción de correspondencia y notificaciones para Grupo Mindstack, S.A. de C.V. en Soria 130 (confirmación expresada por la empresa). El correo ARCO está autorizado.
+- [x] Obtener domicilio completo fiscal indicado por la empresa y corregir el domicilio previamente proporcionado.
+- [x] Sustituir la dirección de atención anterior por el domicilio fiscal proporcionado por la empresa. El correo ARCO está autorizado.
 - [ ] Validar integralmente el aviso y el procedimiento ARCO antes de aprobar su publicación.
 - [x] Aprobar plazo de conservación de 12 meses desde la recepción, con excepciones justificadas.
 - [ ] Implementar y verificar eliminación/anonimización efectiva a los 12 meses; documentar registro de excepciones y plan de ejecución.
