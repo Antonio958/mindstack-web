@@ -1,0 +1,178 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
+import styles from "./evaluacion.module.css";
+
+const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "";
+const WHATSAPP = "https://wa.me/525552138786?text=" + encodeURIComponent(
+  "Hola Mindstack, realicé su evaluación empresarial y me gustaría conversar sobre mi negocio."
+);
+
+export default function EvaluacionPage() {
+  const [answers, setAnswers] = useState<Answers>({});
+  const [step, setStep] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const questions = visibleQuestions(answers);
+  const question = questions[Math.min(step, questions.length - 1)];
+  const isSelected = Boolean(answers[question.id]);
+  const result = finished ? evaluate(answers) : null;
+  const progress = Math.round(((step + 1) / questions.length) * 100);
+
+  function next() {
+    if (!isSelected) return;
+    if (step >= questions.length - 1) {
+      setFinished(true);
+      return;
+    }
+    setStep(step + 1);
+  }
+  function reset() {
+    setAnswers({});
+    setStep(0);
+    setFinished(false);
+  }
+  const bookingHref = BOOKING_URL || WHATSAPP;
+
+  return (
+    <main className={styles.shell}>
+      <header className={styles.header}>
+        <Link href="/" className={styles.brand} aria-label="Volver al inicio de Mindstack">
+          <img src="/logo-mindstack.png" alt="" className={styles.logo} />
+          <span>MINDSTACK</span>
+        </Link>
+        <Link href="/" className={styles.backLink}>Conocer la firma <span aria-hidden="true">↗</span></Link>
+      </header>
+
+      {!finished ? (
+        <div className={styles.main}>
+          <div className={styles.topline}>
+            <span>EXPLORACIÓN EMPRESARIAL GRATUITA</span>
+            <span>V. {VERSION}</span>
+          </div>
+          <div className={styles.progressMeta}>
+            <span>Paso {step + 1} de {questions.length}</span>
+            <span>{progress}%</span>
+          </div>
+          <div className={styles.track} role="progressbar" aria-valuenow={step + 1} aria-valuemin={1} aria-valuemax={questions.length} aria-label="Progreso de la evaluación">
+            <div className={styles.trackFill} style={{ width: progress + "%" }} />
+          </div>
+          <div className={styles.questionArea}>
+            <p className={styles.eyebrow}>{question.group}</p>
+            <h1 className={styles.questionTitle}>{question.title}</h1>
+            {question.help && <p className={styles.help}>{question.help}</p>}
+            <fieldset className={styles.options}>
+              <legend className={styles.srOnly}>Selecciona una respuesta</legend>
+              {question.choices.map((choice) => (
+                <label key={choice.value} className={styles.option + (answers[question.id] === choice.value ? " " + styles.selected : "")}>
+                  <input
+                    type="radio"
+                    name={question.id}
+                    value={choice.value}
+                    checked={answers[question.id] === choice.value}
+                    onChange={() => setAnswers(prev => ({ ...prev, [question.id]: choice.value }))}
+                  />
+                  <span className={styles.choiceText}>{choice.label}</span>
+                  <span aria-hidden="true" className={styles.choiceMark}>✓</span>
+                </label>
+              ))}
+            </fieldset>
+          </div>
+          <nav className={styles.navigation} aria-label="Navegación del cuestionario">
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              disabled={step === 0}
+              onClick={() => setStep(s => Math.max(s - 1, 0))}
+            >
+              Anterior
+            </button>
+            <button type="button" className={styles.primaryButton} disabled={!isSelected} onClick={next}>
+              {step >= questions.length - 1 ? "Ver mis resultados" : "Continuar"} <span aria-hidden="true">→</span>
+            </button>
+          </nav>
+          <p className={styles.disclosure}>
+            Sin registro ni cuenta. Tus respuestas permanecen en esta sesión del navegador y no se envían a nuestros servidores en esta versión preliminar.
+          </p>
+        </div>
+      ) : result && (
+        <div className={styles.results}>
+          <div className={styles.topline}>
+            <span>RESULTADOS DE TU EXPLORACIÓN</span>
+            <span>V. {VERSION}</span>
+          </div>
+          <div className={styles.resultHero}>
+            <p className={styles.eyebrow}>UNA LECTURA INICIAL BASADA EN TUS RESPUESTAS</p>
+            <h1>{result.title}</h1>
+            <p>{result.intro}</p>
+          </div>
+
+          {result.findings.length > 0 && (
+            <section className={styles.resultSection} aria-labelledby="finding-heading">
+              <div className={styles.sectionHeading}>
+                <span>01</span>
+                <h2 id="finding-heading">Situaciones reportadas</h2>
+              </div>
+              {result.findings.map((f, i) => (
+                <article className={styles.finding} key={f.id}>
+                  <p className={styles.findingIndex}>SEÑAL {String(i + 1).padStart(2, "0")} · {f.family.toUpperCase()}</p>
+                  <h3>{f.title}</h3>
+                  <div className={styles.reading}>
+                    <div><strong>Lo que respondiste</strong><p>{f.evidence}</p></div>
+                    <div><strong>Por qué podría importar</strong><p>{f.importance}</p></div>
+                    <div><strong>Lo que aún no sabemos</strong><p>{f.limitation}</p></div>
+                  </div>
+                  <div className={styles.capability}>
+                    <strong>Cómo podría contribuir Mindstack</strong>
+                    <p>{f.capability}</p>
+                  </div>
+                </article>
+              ))}
+            </section>
+          )}
+
+          {result.strengths.length > 0 && (
+            <section className={styles.resultSection}>
+              <div className={styles.sectionHeading}><span>+</span><h2>Prácticas favorables declaradas</h2></div>
+              <ul className={styles.observationList}>{result.strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
+            </section>
+          )}
+          {result.unknowns.length > 0 && (
+            <section className={styles.resultSection}>
+              <div className={styles.sectionHeading}><span>?</span><h2>Aspectos que requieren más claridad</h2></div>
+              <ul className={styles.observationList}>{result.unknowns.map((s, i) => <li key={i}>{s}</li>)}</ul>
+            </section>
+          )}
+          <section className={styles.limitSection}>
+            <strong>Alcance de esta evaluación</strong>
+            <p>Este resultado no es un diagnóstico ni una auditoría. Está basado exclusivamente en declaraciones que no han sido verificadas. No establece causas raíz, impactos económicos ni soluciones recomendadas.</p>
+          </section>
+
+          <section className={styles.closing}>
+            <p className={styles.eyebrow}>MINDSTACK · COMPRENDER ANTES DE TRANSFORMAR</p>
+            <h2>{result.status === "signals" ? "¿Vale la pena profundizar en lo que has observado?" : "Conocer tu empresa también es reconocer lo que funciona."}</h2>
+            <p>{result.invitation}</p>
+            <div className={styles.closingActions}>
+              {result.status === "signals" ? (
+                <a className={styles.primaryButton} href={bookingHref} target="_blank" rel="noopener noreferrer">
+                  {BOOKING_URL ? "Agendar conversación inicial" : "Conversar con Mindstack"} <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <Link href="/" className={styles.primaryButton}>Conocer Mindstack <span aria-hidden="true">↗</span></Link>
+              )}
+              <button type="button" className={styles.secondaryButton} onClick={reset}>Realizar otra evaluación</button>
+            </div>
+            {result.status === "signals" && (
+              <p className={styles.smallNote}>{BOOKING_URL ? "La reserva se realiza mediante la agenda de Mindstack." : "La agenda directa estará disponible al configurar el calendario de reservas; por ahora el contacto es mediante WhatsApp."}</p>
+            )}
+          </section>
+        </div>
+      )}
+      <footer className={styles.footer}>
+        <span>© 2026 Grupo Mindstack</span>
+        <span>Exploración orientativa · No sustituye investigación profesional</span>
+      </footer>
+    </main>
+  );
+}
