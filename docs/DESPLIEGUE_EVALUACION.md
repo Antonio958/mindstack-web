@@ -16,7 +16,7 @@ Responsable de los datos: **Grupo Mindstack, S.A. de C.V.**
 | Aviso legal | `app/aviso-de-privacidad/page.tsx` | Aviso `2026-11-23-v2` aprobado por Mindstack |
 | API privada | `worker/src/index.ts` | Valida origen, datos, consentimiento, Turnstile; inserta en Neon; elimina vencidos |
 | Configuración Cloudflare API | `worker/wrangler.jsonc` | Orígenes, versión del aviso, cron diario y límite de peticiones |
-| Persistencia | `infra/neon/001_evaluaciones.sql` y `002_retencion_evaluaciones.sql` | Evaluaciones, contactos y excepciones de retención |
+| Persistencia | `infra/neon/001_evaluaciones.sql`, `002_retencion_evaluaciones.sql` y `003_retencion_excepciones_validacion.sql` | Evaluaciones, contactos y excepciones de retención con motivo obligatorio |
 | CI | `.github/workflows/evaluacion-ci.yml` | Pruebas del motor, build estático, TypeScript y empaquetado Workers |
 
 ### Separación deliberada
@@ -59,7 +59,7 @@ No se ha implementado lectura pública de prospectos, y ninguna credencial de Ne
 
 ## 4. Conservación de datos y borrado
 
-- Migración `002_retencion_evaluaciones.sql` **ya aplicada** a Neon. Agrega `retener_hasta` y `motivo_retencion`.
+- Migraciones `002_retencion_evaluaciones.sql` y `003_retencion_excepciones_validacion.sql` **ya aplicadas** a Neon. Agregan `retener_hasta` y `motivo_retencion`, y exigen justificar cada excepción con un motivo documentado de 5 a 500 caracteres.
 - Trigger cron del Worker API: `0 8 * * *` (08:00 UTC diariamente; 02:00 en Ciudad de México cuando aplica UTC−6).
 - El manejador `scheduled()` busca registros anteriores a 12 meses y elimina la evaluación; la relación `ON DELETE CASCADE` elimina el contacto asociado.
 - Los casos con `retener_hasta` en el futuro se preservan temporalmente por excepción justificada; el equipo debe registrar `motivo_retencion`.
@@ -124,3 +124,21 @@ Una ejecución de GitHub Actions desde un runner externo comprobó:
 **Única intervención externa imprescindible:** en Cloudflare, abrir `mindstack-evaluacion-api`, confirmar la rama y directorio `worker`, desplegar el commit más reciente de `feature/evaluacion-empresarial-mvp-20261123` y mantener `DATABASE_URL` y `TURNSTILE_SECRET` como secrets de producción. El archivo `wrangler.jsonc` declara `PRIVACY_VERSION=2026-11-23-v2`, el cron y la limitación de peticiones. Repetir la comprobación: `/health` deberá pasar a 200 y, desde la web de preview, `/api/estado` deberá confirmar conexión a Neon y versión.
 
 El sistema **no está operativo para registrar leads** hasta completar esa comprobación y la primera evaluación sintética con Turnstile.
+
+## 9. Prueba real de punta a punta — confirmada (23 de noviembre de 2026)
+
+La persona responsable de Mindstack completó el cuestionario de vista previa, marcó el consentimiento y superó Turnstile. La API respondió con la referencia **`568badfe-88d7-48e1-b9a7-769d64c8ad1a`** y el mensaje «Recibimos tu evaluación».
+
+Se consultó Neon directamente, sin publicar datos de contacto. El resultado comprobado:
+
+- Existe **1 evaluación** con esa referencia y **1 contacto vinculado**; **no existen duplicados** en las tablas a fecha de la comprobación.
+- Evaluación versión **`0.1.0`**, sector **restaurant**, lectura inicial **signals**, con respuestas en JSON correctamente almacenadas.
+- Contacto con nombre y correo válidos; el teléfono puede omitirse. Se registró la hora del consentimiento.
+- `version_aviso_privacidad = 2026-11-23-v2` y `consentimiento_marketing = false`, como dicta la política de consentimiento independiente.
+- `estado_reserva = sin_solicitar`; compartir la evaluación **no equivale** a reservar una sesión.
+- `retener_hasta IS NULL` y `motivo_retencion IS NULL`; este registro está sujeto a la conservación ordinaria de **12 meses**.
+- La migración de justificación obligatoria para excepciones de retención se aplicó sin alterar ni eliminar evaluaciones.
+
+**Estado: flujo de captación verificado y listo para fase de front.** No equivale a validar una reserva de Google Calendar, el cron real de Cloudflare, la restauración de respaldos, ni la publicación del PR en `main`. El cron está declarado y compilado, pero debe verificarse su primera ejecución en los registros de Cloudflare. El registro de prueba se conserva por ahora como comprobante; no eliminarlo sin autorización expresa de Mindstack.
+
+La siguiente etapa es visual. Mantener la rama de pruebas sin fusionar a `main` hasta que Mindstack apruebe el diseño. No modificar el CRM/Supabase.
