@@ -10,29 +10,6 @@ const navItems = [
   ["Contacto", "#contacto"],
 ];
 
-const insights = [
-  {
-    tag: "Crecimiento",
-    title: "Crecimiento estable vs. crecimiento accidental",
-    desc: "Muchos negocios venden sin saber qué genera realmente sus mejores días. Construir crecimiento estable implica entender qué se puede repetir, medir y mejorar.",
-  },
-  {
-    tag: "Rentabilidad",
-    title: "Dónde se escapa el dinero en la operación",
-    desc: "Fugas de margen, procesos débiles, costos poco visibles y decisiones sin datos pueden reducir la rentabilidad sin que el problema sea evidente.",
-  },
-  {
-    tag: "Comercial",
-    title: "Seguimiento débil, baja recompra y ventas inestables",
-    desc: "Cuando no existe un proceso comercial claro, cada venta depende demasiado del momento, del vendedor o de la suerte.",
-  },
-  {
-    tag: "Datos",
-    title: "Información operativa para tomar mejores decisiones",
-    desc: "Los negocios generan datos todos los días. La diferencia está en saber cuáles leer, cómo interpretarlos y qué acciones tomar a partir de ellos.",
-  },
-];
-
 const services = [
   {
     num: "01",
@@ -103,49 +80,31 @@ const steps = [
   {
     num: "01",
     title: "Comprender",
-    desc: "Partimos del contexto real de la organización. Observamos cómo funciona, qué quiere lograr, qué restricciones existen y qué problema necesita realmente ser entendido antes de intervenir.",
+    desc: "Escuchamos el contexto, los objetivos y las restricciones del negocio antes de decidir qué merece atención.",
   },
   {
     num: "02",
     title: "Investigar",
-    desc: "Reunimos y contrastamos evidencia. Analizamos datos, procesos, señales, comportamientos y contexto para separar hechos de inferencias y reducir conclusiones prematuras.",
+    desc: "Contrastamos datos, procesos y señales para distinguir hechos, inferencias y preguntas abiertas.",
   },
   {
     num: "03",
     title: "Explicar",
-    desc: "Construimos una lectura estructurada de lo encontrado: qué está ocurriendo, qué puede estar causándolo, qué incertidumbre permanece y qué merece atención prioritaria.",
+    desc: "Organizamos hallazgos y explicaciones posibles sin confundir hipótesis con certezas.",
   },
   {
     num: "04",
     title: "Transformar",
-    desc: "Diseñamos e implementamos la intervención que tenga mayor sentido para el problema, ya sea operativa, analítica, tecnológica, automatizada o construida a medida.",
+    desc: "Diseñamos una intervención proporcional al problema, sea operativa, analítica o tecnológica.",
   },
   {
     num: "05",
     title: "Aprender",
-    desc: "Medimos lo ocurrido después de intervenir, incorporamos nueva evidencia y convertimos los resultados del proyecto en conocimiento reutilizable para la organización.",
+    desc: "Observamos resultados e incorporamos lo aprendido para mejorar decisiones futuras.",
   },
 ];
 
 
-
-const focus = [
-  {
-    tag: "Comprensión",
-    title: "El problema antes que la herramienta",
-    desc: "No comenzamos recomendando software, automatización o inteligencia artificial. Primero buscamos comprender qué está ocurriendo y qué necesita realmente la organización.",
-  },
-  {
-    tag: "Evidencia",
-    title: "Distinguir hechos de explicaciones",
-    desc: "Separamos señales, hechos, inferencias e hipótesis para evitar convertir una observación inicial en una conclusión prematura.",
-  },
-  {
-    tag: "Intervención",
-    title: "Actuar de forma proporcional",
-    desc: "La solución debe corresponder al problema, su impacto, la evidencia disponible y los recursos de la organización. No toda situación requiere una transformación compleja.",
-  },
-];
 
 function Brand() {
   return (
@@ -184,41 +143,6 @@ function ButtonOutline({
     <a href={href} className="btn btn-outline">
       {children}
     </a>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div className="dashboard">
-      <div className="dashboard-top">
-        <span className="dashboard-title">Inteligencia empresarial</span>
-        <span className="live">Mindstack</span>
-      </div>
-
-      <div className="dashboard-grid">
-        <div className="dash-card">
-          <span>Señales</span>
-          <strong>Observadas</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Evidencia</span>
-          <strong>Contrastada</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Hipótesis</span>
-          <strong>Explicadas</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Decisiones</span>
-          <strong>Priorizadas</strong>
-        </div>
-      </div>
-
-      <div className="chart" />
-    </div>
   );
 }
 
@@ -305,6 +229,14 @@ export default function Home() {
             ))}
           </nav>
 
+          <details className="home-mobile-menu">
+            <summary aria-label="Abrir menú de navegación">Menú</summary>
+            <nav aria-label="Navegación móvil">
+              {navItems.map(([label, href]) => (
+                <a key={href} href={href}>{label}</a>
+              ))}
+            </nav>
+          </details>
           <ButtonGold href="/evaluacion">Evaluación gratuita</ButtonGold>
         </div>
       </header>
