@@ -6,22 +6,22 @@ El CRM interno y su Supabase no se modifican.
 ## Componentes
 
 - GitHub: Antonio958/mindstack-web, rama feature/evaluacion-empresarial-mvp-20261123.
-- Web: Next.js 16 estático para Cloudflare Pages.
+- Web: Next.js 16 exportado a archivos estáticos y servido por Cloudflare Worker `mindstack-web`.
 - API: carpeta worker para Cloudflare Workers.
 - BD: Neon PostgreSQL nuevo. Esquema en infra/neon/001_evaluaciones.sql.
 - Agenda: https://calendar.app.google/t7YPiSH7QzDKR7JC6 (proporcionado por Mindstack, incorporado como URL por defecto en evaluación).
 - Neon: organización Mindstack, proyecto existente Mindstack (odd-silence-54841723), base neondb. Tablas evaluaciones y contactos_evaluacion confirmadas en el esquema público, vacías al verificar.
 
-## 1. Cuenta Cloudflare
+## 1. Cloudflare Workers — WEB YA CREADA
 
-1. Abrir https://dash.cloudflare.com/sign-up e ingresar o crear cuenta.
-2. Workers & Pages > Create > Pages > Connect to Git.
-3. Autorizar acceso al repositorio Antonio958/mindstack-web.
-4. Crear sitio Pages mindstack-web, producción futura desde main.
-5. Construcción: Next.js (Static HTML Export), comando npm run build, salida out, Node 22.
-6. Activar vista Preview para rama feature/evaluacion-empresarial-mvp-20261123.
-7. Verificar homepage y /evaluacion en escritorio y móvil.
-8. Mantener Vercel actual hasta validar el nuevo sitio; NO eliminarlo prematuramente.
+1. El usuario creó el Worker web actual: https://mindstack-web.luispalmhdz06.workers.dev/ (URL proporcionada por el usuario).
+2. La conexión GitHub ya apunta al repo Antonio958/mindstack-web; el despliegue inicial de la rama main apareció correcto en el panel.
+3. El despliegue del Worker usa comando `npm run build` y `npx wrangler deploy`.
+4. Se añadió `wrangler.jsonc` en la rama de desarrollo, con `name: mindstack-web` y carpeta de assets `./out`, compatible con exportación estática Next.js.
+5. La rama `main` es la publicada; la evaluación sigue en `feature/evaluacion-empresarial-mvp-20261123`.
+6. Probar en una URL preview de Cloudflare antes de fusionar a main. No modificar el dominio principal ni eliminar Vercel antes de validar.
+7. Tras desplegar al Worker, comprobar /, /evaluacion, 404, assets JS/CSS y móviles.
+8. La API `mindstack-evaluacion-api` es otro Worker separado. No colocar `DATABASE_URL` en el Worker de la web.
 
 ## 2. Neon aislado
 
@@ -43,7 +43,7 @@ El CRM interno y su Supabase no se modifican.
 
 ## 4. Variables de entorno del frontend
 
-En Cloudflare Pages configurar:
+En variables de entorno de build del Worker web en Cloudflare configurar:
 - NEXT_PUBLIC_DISCOVERY_BOOKING_URL: https://calendar.app.google/t7YPiSH7QzDKR7JC6 (ya existe como valor por defecto en el código, pero configurar explícitamente para producción).
 - NEXT_PUBLIC_EVALUACION_API_URL: URL completa HTTPS de API Worker (termina /api/evaluaciones).
 - NEXT_PUBLIC_TURNSTILE_SITE_KEY: clave pública de Turnstile.
@@ -84,7 +84,11 @@ Nunca incluir credenciales, registros reales o datos de prospectos en GitHub pú
 - Neon: confirmado. Tablas existentes, 0 filas al comprobar.
 - Agenda: enlace incorporado en app/evaluacion/page.tsx. La apertura pública de la agenda debe probarse en navegación incógnita; este enlace NO sincroniza por sí mismo el ID de evaluación con el evento de Calendar.
 - Frontend: sólo rama feature; main aún sin los cambios.
-- Cloudflare: cuenta creada por usuario, falta confirmar proyecto Pages y su dominio pages.dev; conectar GitHub es un paso adicional a crear cuenta.
+- Cloudflare: Worker web existente en https://mindstack-web.luispalmhdz06.workers.dev/ ; primera compilación en main reportada correcta en captura del usuario, pero no se ha verificado acceso externo desde las herramientas de este chat. La configuración de assets de la evaluación está preparada en wrangler.jsonc de la rama feature.
 - API: no desplegada; captación con consentimiento y Turnstile bloqueada por ausencia de variables de despliegue.
 - Cambiar estado de reserva a sin_solicitar cuando solo se comparten respuestas: ya corregido en Worker.
 - El calendario principal reportó previamente zona UTC; verificar disponibilidad de la página de reservas en America/Mexico_City.
+
+## Verificación del deploy actual
+
+URL de Worker web: https://mindstack-web.luispalmhdz06.workers.dev/ . El proyecto se identifica como Worker (no Pages). No crear un nuevo proyecto Pages por ahora. Confirmar en Cloudflare que el Worker sirve los HTML exportados, y revisar los deployments por rama.
