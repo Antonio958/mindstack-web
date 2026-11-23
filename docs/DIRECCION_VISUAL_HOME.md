@@ -41,3 +41,44 @@ La portada debe comunicar **inteligencia empresarial con criterio humano**, y da
 - Se modificaron exclusivamente `app/page.tsx` y `app/globals.css`.
 - No se modificaron el cuestionario interno, su motor, la API, el aviso, Cloudflare Worker ni Neon.
 - Mantener cambios en PR #1, sin fusionar a `main` ni alterar producción hasta aprobación visual.
+
+
+## Iteración integral — todas las secciones (23 de noviembre de 2026)
+
+**Problema hallado:** 12 secciones con numerosos titulares y tarjetas sobre negro, repetición del principio «comprender antes de transformar», escasa narrativa fotográfica y elementos que aparentaban ser enlaces sin serlo.
+
+**Solución implementada en rama de pruebas:** pasar de 12 a **8 capítulos** claros, sin modificar la web de producción ni la infraestructura de captación:
+
+1. **Hero:** conservar la fotografía editorial de análisis y la evaluación como acción prioritaria.
+2. **Evaluación gratuita:** mantener fondo marfil, CTA y ejemplo ilustrativo del resultado.
+3. **Industria / Restaurantes:** fotografía documental de una cocina en operación, explicación del contexto, seis señales empresariales preservadas y acceso a la evaluación; sin otra cuadrícula de tarjetas oscuras.
+4. **Capacidades:** cinco servicios reales conservados en lista editorial, sin flechas ni falsas interacciones en tarjetas.
+5. **Método:** cinco pasos, ahora más concisos, presentados en un recorrido visual lineal, sin repetir el bloque de «inteligencia» anterior.
+6. **Lectura empresarial:** ejemplo ilustrativo del tipo de comprensión que puede aportar la consultoría, **distinto** de la evaluación gratuita; esquema, no informe real ni caso de éxito.
+7. **La firma:** fotografía institucional de dirección general, propuesta de valor resumida y tres principios verificables de trabajo.
+8. **Contacto:** único cierre comercial, con dos rutas diferenciadas: evaluación para restaurantes y conversación directa sobre un problema empresarial.
+
+La sección de **Insights**, que sólo mostraba extractos no enlazados, quedó fuera de la home. Su contenido relevante ya se cubre mediante señales de operación. Si se producen artículos reales, podrá recuperarse como una sección de publicaciones auténticas. Se fusionaron también «Nuestro enfoque», «Cómo empezar» y el cierre duplicado.
+
+### Nuevas fotografías y condiciones
+
+- **Operación restaurantera:** https://unsplash.com/photos/chefs-working-in-a-busy-restaurant-kitchen-dAGv2gGGj-4, fotografía de Madeline Liu, de 22 de octubre de 2025, anunciada como gratuita bajo licencia Unsplash. Archivo temporal de vista previa: `https://images.unsplash.com/photo-1761095596618-081ea3f043a5`.
+- **Contexto urbano de Ciudad de México:** https://unsplash.com/photos/white-and-blue-glass-walled-high-rise-building-zdharkdAqaY, fotografía de Tomas Martinez (WTC, Ciudad de México), anunciada como gratuita bajo licencia Unsplash. Archivo temporal: `https://images.unsplash.com/photo-1628516315527-110eb03991ac`.
+- Las imágenes no representan trabajadores, clientes ni edificios propiedad de Mindstack, salvo el retrato institucional propio de la firma.
+- No se añadieron datos de clientes, testimonios, certificaciones ni cifras ficticias. La consulta comercial sigue separada del envío de evaluaciones.
+- **Pendiente de aprobación final:** confirmar derechos de imagen y autoalojar archivos optimizados, una vez elegido el resultado visual definitivo.
+
+### Diseño y experiencia
+
+- Se conserva negro grafito, marfil y dorado. Los capítulos transicionan progresivamente entre superficies para evitar el efecto de diapositivas.
+- La fotografía se utiliza para mostrar **personas, operación y contexto**; los gráficos se reservan para **método y resultados**.
+- Los servicios y situaciones empresariales usan filas editoriales con líneas divisorias, no tarjetas interactivas falsas.
+- Los títulos se jerarquizan para no competir con el hero.
+- La evaluación es la acción principal del encabezado y también la vía específica para restaurantes en el cierre.
+- Se añadió menú móvil desplegable en HTML nativo, conservando visible el CTA principal.
+
+### No tocar
+
+Toda esta fase cambia únicamente `app/page.tsx` y `app/globals.css`. Se mantiene intacto el motor `lib/evaluacion/motor.ts`, `lib/evaluacion/cliente.ts`, `app/evaluacion/`, el aviso, Worker API y Neon.
+
+**Antes de publicarla:** revisar vista previa en escritorio y móvil, legibilidad de fotografías, accesibilidad de contraste, peso de imágenes, rutas de botones y pruebas de integración. Mantener PR #1 como borrador hasta aprobación expresa.
