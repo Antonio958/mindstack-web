@@ -310,6 +310,16 @@ export default function Home() {
       </header>
 
       <section id="inicio" className="hero hero-refreshed">
+  <div className="hero-photo">
+    <img
+      src="https://images.unsplash.com/photo-1758518729908-d4220a678d81?auto=format&fit=crop&w=2000&q=82"
+      alt="Dos profesionales revisan un documento durante una conversación de trabajo"
+      loading="eager"
+      decoding="async"
+      fetchPriority="high"
+    />
+    <span className="hero-photo-disclaimer">Imagen ilustrativa · Unsplash</span>
+  </div>
   <div className="container hero-grid hero-refreshed-grid">
     <div className="hero-copy-block">
       <span className="eyebrow">Firma de inteligencia empresarial</span>
@@ -329,22 +339,16 @@ export default function Home() {
         Evaluación inicial disponible para restaurantes. Sin registro obligatorio.
       </p>
     </div>
-
-    <div className="hero-photo" aria-label="Fotografía editorial ilustrativa de una reunión de trabajo">
-      <img
-        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=82"
-        alt="Personas colaborando alrededor de una mesa en un entorno de trabajo"
-        loading="eager"
-        decoding="async"
-      />
-      <div className="hero-photo-caption">
-        <span>Una perspectiva más clara</span>
-        <strong>Información, contexto y criterio.</strong>
-      </div>
-      <span className="hero-photo-disclaimer">Fotografía ilustrativa</span>
-    </div>
   </div>
 </section>
+
+<div className="narrative-bridge" aria-label="Nuestro enfoque: observar, comprender y decidir">
+  <div className="container narrative-bridge-inner">
+    <div><span>01</span><strong>Observar la realidad</strong></div>
+    <div><span>02</span><strong>Comprender las señales</strong></div>
+    <div><span>03</span><strong>Decidir si profundizar</strong></div>
+  </div>
+</div>
 
 <section id="evaluacion-gratuita" className="assessment-section assessment-refreshed">
   <div className="container assessment-grid">
@@ -365,6 +369,15 @@ export default function Home() {
       </p>
     </div>
     <div className="assessment-result-preview">
+      <div className="assessment-context-photo">
+        <img
+          src="https://images.unsplash.com/photo-1667388969250-1c7220bf3f37?auto=format&fit=crop&w=1200&q=78"
+          alt="Interior de un restaurante preparado para recibir a sus clientes"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>CONTEXTO · OPERACIÓN RESTAURANTERA</span>
+      </div>
       <div className="assessment-preview-header">
         <span>ASÍ SE VE TU LECTURA INICIAL</span>
         <strong>EJEMPLO</strong>
