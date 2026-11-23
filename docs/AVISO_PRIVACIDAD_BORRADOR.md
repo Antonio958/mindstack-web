@@ -1,6 +1,8 @@
 # Aviso de privacidad — evaluación empresarial gratuita de Mindstack
 
 **ESTADO: BORRADOR INTERNO. NO PUBLICAR COMO AVISO DEFINITIVO.**
+**Decisión expresada por la empresa (23 de noviembre de 2026):** mantener exclusivamente la ubicación "COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO" sin añadir calle o número en esta versión. Esto **no acredita por sí mismo el cumplimiento del requisito de domicilio completo**; queda pendiente revisión legal. **No habilitar captación de datos personales ni publicar este borrador como aviso definitivo** mientras no se resuelva esa observación.
+
 Para validar con el responsable de la empresa y, de ser posible, asesoría jurídica antes de recopilar información personal.
 
 ## Datos del responsable que deben confirmarse
