@@ -17,12 +17,11 @@ La portada debe comunicar **inteligencia empresarial con criterio humano**, y da
 - Tratamiento: imagen editorial extendida hacia el borde derecho del hero, con máscara gradiente a grafito y sin texto promocional dentro de la foto.
 - La imagen **no representa** al personal ni a clientes de Mindstack; se rotula «Imagen ilustrativa» para evitar esa asociación.
 
-### Evaluación — contexto restaurantero
+### Evaluación — vista previa del producto
 
-- Archivo remoto: `https://images.unsplash.com/photo-1667388969250-1c7220bf3f37`
-- Página de origen: https://unsplash.com/fr/photos/une-salle-avec-tables-et-chaises-e4B5AvA7Jqo
-- Uso: fotografía de restaurante, como franja editorial del ejemplo de lectura inicial, para que se visualice el sector al que está dirigido el cuestionario.
-- Tratamiento: recorte horizontal sobrio; no se presentan cifras ni resultados financieros sobre una foto.
+- **Decisión de iteración 2:** retirar la segunda fotografía de restaurante. Competía con la fotografía protagonista y hacía que el resultado pareciera otra tarjeta ajena al hero.
+- El producto ahora se visualiza como interfaz marfil con una cabecera grafito y línea dorada que se superpone parcialmente al borde inferior del hero.
+- Se conservan ejemplos claramente ilustrativos de fortaleza declarada, situación por comprender y aspecto por aclarar; no se presentan indicadores ni diagnósticos inventados.
 
 ### Precauciones de producción
 
@@ -32,8 +31,9 @@ La portada debe comunicar **inteligencia empresarial con criterio humano**, y da
 
 ## Recursos narrativos adicionales
 
-- Riel editorial de tres ideas: **Observar la realidad → Comprender las señales → Decidir si profundizar**.
-- Transición de hero grafito a evaluación marfil, con la misma línea dorada y retícula; evita sensación de secciones desconectadas.
+- La primera iteración incluía un riel separado de tres ideas. **Se retiró** porque se percibía como una franja añadida y generaba espacio vacío.
+- La continuidad se logra ahora con el propio ejemplo de resultados, que cruza parcialmente el límite hero/evaluación. Su cabecera comparte grafito y dorado con el hero y su contenido está sobre el marfil de la sección siguiente.
+- La fotografía principal sigue siendo la única imagen de gran formato en esta secuencia.
 - Preview de resultados como interfaz, no puntuación ficticia. Sus ejemplos siguen siendo *ilustrativos*, vinculados a los conceptos que el motor ya reconoce.
 
 ## Límites de esta fase
