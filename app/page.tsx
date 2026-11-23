@@ -473,93 +473,50 @@ export default function Home() {
   </div>
 </section>
 
-<section
-  id="metodologia"
-  className="section section-alt method-section"
->
-  <div className="container method-grid">
-    <div>
-      <span className="eyebrow">Método Mindstack</span>
-
-      <h2 className="section-title">
-        Comprender antes de transformar.
-      </h2>
-
-      <p className="section-desc">
-        Nuestro método evita comenzar por una herramienta, una tecnología o una
-        respuesta predeterminada. Primero construimos comprensión; después
-        investigamos, explicamos y decidimos cómo transformar.
-      </p>
-
-      <div className="method-principle">
-        <span>Principio rector</span>
-
-        <p>
-          Una intervención sólo tiene sentido cuando existe suficiente
-          comprensión del problema que pretende resolver.
-        </p>
+{/* V. Método: una secuencia que se puede recorrer con la vista. */}
+<section id="metodologia" className="home-method">
+  <span id="inteligencia" className="home-anchor" aria-hidden="true" />
+  <div className="container">
+    <div className="home-method-heading">
+      <div>
+        <span className="eyebrow">Método Mindstack</span>
+        <h2>Comprender antes de transformar.</h2>
       </div>
+      <p>Las soluciones no deberían elegirse por tendencia. Partimos del contexto, contrastamos evidencia y diseñamos una intervención proporcional a lo que encontramos.</p>
     </div>
-
-    <div className="steps">
+    <div className="home-method-rail" aria-label="Cinco etapas del método Mindstack">
       {steps.map((step) => (
-        <article className="step" key={step.title}>
-          <span className="step-num">{step.num}</span>
-
-          <div>
-            <h3>{step.title}</h3>
-            <p>{step.desc}</p>
-          </div>
+        <article className="home-method-step" key={step.num}>
+          <span className="home-method-number">{step.num}</span>
+          <h3>{step.title}</h3>
+          <p>{step.desc}</p>
         </article>
       ))}
     </div>
+    <p className="home-method-note"><span aria-hidden="true">✦</span> Una señal es el inicio de una investigación, no una conclusión.</p>
   </div>
 </section>
-            <section id="entregable" className="section section-alt">
+
+{/* VI. Entregable: visualización ilustrativa de una lectura de consultoría. */}
+<section id="entregable" className="home-deliverable">
   <div className="container deliverable-grid">
-    <div>
-      <span className="eyebrow">Inteligencia accionable</span>
-
-      <h2 className="section-title">
-        No entregamos información para archivar.{" "}
-        <span className="gold">
-          Construimos comprensión para decidir.
-        </span>
-      </h2>
-
-      <p className="section-desc deliverable-copy">
-        El trabajo de Mindstack transforma información dispersa en una lectura
-        estructurada del negocio. El objetivo no es producir más documentos,
-        sino reducir incertidumbre y mejorar la calidad de las decisiones.
-      </p>
-
-      <div className="deliverable-points">
-        <div>
-          <strong>01</strong>
-          <span>Hechos y señales relevantes</span>
-        </div>
-
-        <div>
-          <strong>02</strong>
-          <span>Hallazgos y relaciones identificadas</span>
-        </div>
-
-        <div>
-          <strong>03</strong>
-          <span>Hipótesis y explicaciones contrastadas</span>
-        </div>
-
-        <div>
-          <strong>04</strong>
-          <span>Prioridades y decisiones posibles</span>
-        </div>
+    <div className="home-deliverable-copy">
+      <span className="eyebrow">El valor de una lectura estructurada</span>
+      <h2>La información importa cuando ayuda a <span>decidir.</span></h2>
+      <p>Organizamos hechos, relaciones e incertidumbres para que una organización pueda distinguir qué conoce, qué necesita investigar y qué decisiones merecen atención.</p>
+      <div className="home-deliverable-facts">
+        <div><strong>01</strong><span>Hechos y señales relevantes</span></div>
+        <div><strong>02</strong><span>Relaciones y hallazgos identificados</span></div>
+        <div><strong>03</strong><span>Hipótesis que requieren contraste</span></div>
+        <div><strong>04</strong><span>Prioridades para decidir con criterio</span></div>
       </div>
+      <p className="home-deliverable-legal">La visualización es conceptual y no representa un informe emitido a un cliente ni el resultado de la evaluación gratuita.</p>
     </div>
-
     <IntelligencePreview />
   </div>
 </section>
-            <section id="nosotros" className="section">
+
+<section id="nosotros" className="section">
   <div className="container about-grid">
     <div className="about-content">
       <span className="eyebrow">La firma</span>
