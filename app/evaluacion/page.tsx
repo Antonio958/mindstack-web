@@ -34,9 +34,19 @@ export default function EvaluacionPage() {
   const result = finished ? evaluate(answers) : null;
   const progress = Math.round(((step + 1) / questions.length) * 100);
   useEffect(() => {
-    const w = window as typeof window & { msOnTurnstile?: (token: string) => void };
+    const w = window as typeof window & {
+      msOnTurnstile?: (token: string) => void;
+      msOnTurnstileExpired?: () => void;
+      msOnTurnstileError?: () => void;
+    };
     w.msOnTurnstile = (token: string) => setTurnstileToken(token);
-    return () => { delete w.msOnTurnstile; };
+    w.msOnTurnstileExpired = () => setTurnstileToken("");
+    w.msOnTurnstileError = () => setTurnstileToken("");
+    return () => {
+      delete w.msOnTurnstile;
+      delete w.msOnTurnstileExpired;
+      delete w.msOnTurnstileError;
+    };
   }, []);
 
   function next() {
@@ -141,7 +151,9 @@ export default function EvaluacionPage() {
             </button>
           </nav>
           <p className={styles.disclosure}>
-            Sin registro ni cuenta. Tus respuestas permanecen en esta sesión del navegador y no se envían a nuestros servidores en esta versión preliminar.
+            {CAN_SAVE
+              ? "Sin registro ni cuenta. Tus respuestas se procesan en este navegador y solo se envían si al final decides compartirlas y aceptas el aviso de privacidad."
+              : "Sin registro ni cuenta. Tus respuestas permanecen en esta sesión del navegador y no se envían a nuestros servidores en esta versión preliminar."}
           </p>
         </div>
       ) : result && (
@@ -203,7 +215,7 @@ export default function EvaluacionPage() {
                 <span>↗</span>
                 <h2>¿Quieres compartir tus resultados con Mindstack?</h2>
               </div>
-              <p className={styles.contactIntro}>Es opcional. Puedes obtener tu resultado completo sin dejar datos. Si decides compartirlo, conservaremos tus respuestas para preparar una posible conversación.</p>
+              <p className={styles.contactIntro}>Es opcional. Puedes obtener tu resultado completo sin dejar datos. Si decides compartirlo, conservaremos tus respuestas y datos de contacto hasta 12 meses para atender tu solicitud, salvo una obligación legal o relación contractual que justifique un plazo distinto.</p>
               {submissionStatus === "saved" ? (
                 <div className={styles.successBox}>
                   <strong>Recibimos tu evaluación.</strong>
@@ -224,7 +236,7 @@ export default function EvaluacionPage() {
                     <input type="checkbox" checked={contactConsent} onChange={e => setContactConsent(e.target.checked)} required/>
                     <span>Autorizo el tratamiento de mis datos y respuestas para atender mi solicitud conforme al <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">aviso de privacidad de Mindstack</a>. Esta autorización no implica aceptar publicidad futura.</span>
                   </label>
-                  <div className="cf-turnstile" data-sitekey={TURNSTILE_KEY} data-callback="msOnTurnstile"/>
+                  <div className="cf-turnstile" data-sitekey={TURNSTILE_KEY} data-callback="msOnTurnstile" data-expired-callback="msOnTurnstileExpired" data-error-callback="msOnTurnstileError"/>
                   {submissionStatus === "error" && <p role="alert" className={styles.formError}>No fue posible guardar la información. Inténtalo de nuevo o utiliza el contacto directo.</p>}
                   <button className={styles.primaryButton} type="submit" disabled={!contactConsent || !turnstileToken || submissionStatus === "sending"}>
                     {submissionStatus === "sending" ? "Guardando..." : "Compartir mi evaluación"}
