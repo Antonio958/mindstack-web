@@ -7,7 +7,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - Denominación de la persona moral responsable: **Grupo Mindstack, S.A. de C.V.** (razón social proporcionada por la empresa, pendiente de contraste con documentación constitutiva).
 - Nombre comercial: **Mindstack**.
-- Domicilio para efectos del aviso y de ejercicio de derechos: **[PENDIENTE]**
+- Domicilio señalado por la empresa para el aviso: **COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO**. **Pendiente de validar si es suficiente como domicilio legalmente identificable antes de la publicación.**
 - Correo de privacidad y solicitudes sobre datos personales: **[PENDIENTE DE APROBACIÓN; cuenta corporativa disponible: mindstack.group@gmail.com]**
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
 - Plazo de conservación/criterio de eliminación: **[PENDIENTE]**
@@ -16,7 +16,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 **Aviso de privacidad de la evaluación empresarial gratuita de Mindstack**
 
-**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio en [DOMICILIO POR CONFIRMAR], es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
+**1. Responsable.** Grupo Mindstack, S.A. de C.V., persona moral que opera comercialmente bajo la marca Mindstack, con domicilio en COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO, es responsable del tratamiento de los datos personales recabados a través de la evaluación empresarial gratuita.
 
 **2. Datos tratados.** La evaluación permite responder preguntas sobre la operación de una empresa sin registrarse. Cuando el participante opta expresamente por compartir su evaluación con Mindstack, se solicita nombre de contacto, correo electrónico y teléfono opcional, además de las respuestas proporcionadas y los resultados generados. No se solicitan contraseñas, datos de tarjetas ni información financiera detallada.
 
@@ -37,7 +37,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 ## Controles necesarios antes de activar el formulario
 
 - [x] Identificar responsable legal y nombre comercial (conforme a lo manifestado por la empresa; verificar contra acta constitutiva antes de aprobación).
-- [ ] Confirmar domicilio y canal de derechos ARCO.
+- [ ] Verificar que el domicilio proporcionado (colonia, alcaldía, código postal y ciudad) cumpla con el nivel de identificación requerido para el aviso y confirmar canal de derechos ARCO.
 - [ ] Acordar conservación y políticas de supresión/archivado.
 - [ ] Revisar el tratamiento internacional y las condiciones de Cloudflare/Neon.
 - [ ] Aprobar texto legal definitivo y versión identificable.
