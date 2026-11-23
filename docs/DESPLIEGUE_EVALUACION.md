@@ -12,6 +12,7 @@ Responsable de los datos: **Grupo Mindstack, S.A. de C.V.**
 | Evaluación pública | `app/evaluacion/page.tsx`, `evaluacion.module.css` | Cuestionario, resultados, consentimiento y formulario opcional |
 | Reglas interpretativas | `lib/evaluacion/motor.ts` | Preguntas, condiciones, hallazgos y limitaciones sin diagnóstico |
 | Configuración pública compartida | `lib/evaluacion/config.ts` | URL de API, versión aprobada del aviso, ruta legal y Site Key pública |
+| Cliente API web | `lib/evaluacion/cliente.ts` | Comprobación de disponibilidad y envío, independiente de los componentes visuales |
 | Aviso legal | `app/aviso-de-privacidad/page.tsx` | Aviso `2026-11-23-v2` aprobado por Mindstack |
 | API privada | `worker/src/index.ts` | Valida origen, datos, consentimiento, Turnstile; inserta en Neon; elimina vencidos |
 | Configuración Cloudflare API | `worker/wrangler.jsonc` | Orígenes, versión del aviso, cron diario y límite de peticiones |
@@ -101,7 +102,7 @@ Para la siguiente fase visual, trabajar principalmente en:
 - `app/evaluacion/page.tsx` y `app/evaluacion/evaluacion.module.css` para el cuestionario y resultados.
 - `app/aviso-de-privacidad/aviso.module.css` para la presentación del aviso.
 
-**No** cambiar `worker/src/index.ts`, `infra/neon/`, `lib/evaluacion/config.ts` ni `lib/evaluacion/motor.ts` para simples decisiones de estilo. Las preguntas y las reglas no son parte de la capa visual.
+**No** cambiar `worker/src/index.ts`, `infra/neon/`, `lib/evaluacion/config.ts`, `lib/evaluacion/cliente.ts` ni `lib/evaluacion/motor.ts` para simples decisiones de estilo. Las preguntas y las reglas no son parte de la capa visual.
 
 La agenda externa de Google Calendar ya está enlazada, pero **no confirma automáticamente en Neon la reserva ni conecta el estado comercial con el CRM**; esa integración es un proyecto diferente y no es requisito para captar evaluaciones.
 
@@ -111,3 +112,15 @@ La agenda externa de Google Calendar ya está enlazada, pero **no confirma autom
 - La limitación de peticiones en Cloudflare es aproximada y por ubicación; el servicio Turnstile complementa la protección.
 - El aviso fue aprobado por Mindstack, no revisado independientemente por un abogado. Mantener el procedimiento real ARCO y la eliminación de datos acorde con el texto publicado.
 - Nunca exponer la cadena `DATABASE_URL` ni la Secret Key de Turnstile en código público, capturas o chats.
+
+## 8. Resultado de verificación externa (23 de noviembre de 2026)
+
+Una ejecución de GitHub Actions desde un runner externo comprobó:
+
+- `GET https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/health`: **HTTP 503**, `{"status":"not_configured","version":"0.1.0"}`.
+- `GET /api/estado` con el `Origin` de preview autorizado: **HTTP 404**, porque **la API desplegada es anterior** al nuevo endpoint de comprobación.
+- Los jobs de compilación de **web y API sí terminaron correctamente** en el último commit verificado.
+
+**Única intervención externa imprescindible:** en Cloudflare, abrir `mindstack-evaluacion-api`, confirmar la rama y directorio `worker`, desplegar el commit más reciente de `feature/evaluacion-empresarial-mvp-20261123` y mantener `DATABASE_URL` y `TURNSTILE_SECRET` como secrets de producción. El archivo `wrangler.jsonc` declara `PRIVACY_VERSION=2026-11-23-v2`, el cron y la limitación de peticiones. Repetir la comprobación: `/health` deberá pasar a 200 y, desde la web de preview, `/api/estado` deberá confirmar conexión a Neon y versión.
+
+El sistema **no está operativo para registrar leads** hasta completar esa comprobación y la primera evaluación sintética con Turnstile.
