@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 };
 
 const EMAIL = "mindstack.group@gmail.com";
-const ADDRESS = "Soria 130, colonia Álamos, alcaldía Benito Juárez, C.P. 03400, Ciudad de México, CDMX";
-const VERSION = "2026-11-23-v1";
+const ADDRESS = "MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240";
+const VERSION = "2026-11-23-v2";
 
 export default function AvisoDePrivacidadPage() {
   return (
@@ -33,7 +33,7 @@ export default function AvisoDePrivacidadPage() {
         <section>
           <h2>1. Responsable y domicilio</h2>
           <p><strong>Grupo Mindstack, S.A. de C.V.</strong>, persona moral que opera bajo el nombre comercial <strong>Mindstack</strong>, es responsable del tratamiento de los datos personales obtenidos mediante la evaluación empresarial gratuita.</p>
-          <p>Su domicilio para atención de personas titulares y recepción de notificaciones es: <strong>{ADDRESS}</strong>. Este domicilio de atención es distinto al domicilio fiscal de la sociedad.</p>
+          <p>Su domicilio para atención de personas titulares y recepción de notificaciones es: <strong>{ADDRESS}</strong>. Este domicilio también es el domicilio fiscal de Grupo Mindstack, S.A. de C.V.</p>
           <p>Correo de atención en materia de privacidad y derechos ARCO: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
         </section>
 
