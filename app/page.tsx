@@ -397,244 +397,78 @@ export default function Home() {
   </div>
 </section>
 
-<section id="inteligencia" className="section intelligence-section">
-  <div className="container">
-    <div className="section-head intelligence-head">
-      <div>
-        <span className="eyebrow">Inteligencia empresarial</span>
-
-        <h2 className="section-title">
-          La información no es inteligencia.{" "}
-          <span className="gold">
-            Entender qué significa y qué hacer con ella, sí.
-          </span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        Una empresa genera señales todos los días. El reto no es acumular más
-        información, sino convertirla en una comprensión suficientemente clara
-        para decidir mejor.
-      </p>
-    </div>
-
-    <div className="intelligence-flow">
-      <article className="intelligence-card">
-        <span className="intelligence-number">01</span>
-        <span className="intelligence-label">Información</span>
-
-        <h3>Observar lo que realmente está ocurriendo</h3>
-
-        <p>
-          Reunimos señales provenientes de operación, ventas, procesos, personas,
-          clientes, sistemas, datos y contexto empresarial.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Datos</span>
-          <span>Procesos</span>
-          <span>Señales</span>
-          <span>Contexto</span>
-        </div>
-      </article>
-
-      <article className="intelligence-card intelligence-card-featured">
-        <span className="intelligence-number">02</span>
-        <span className="intelligence-label">Inteligencia</span>
-
-        <h3>Convertir información dispersa en comprensión</h3>
-
-        <p>
-          Investigamos relaciones, contrastamos evidencia y construimos
-          explicaciones para distinguir hechos, síntomas, hipótesis y posibles
-          causas.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Evidencia</span>
-          <span>Patrones</span>
-          <span>Hipótesis</span>
-          <span>Prioridades</span>
-        </div>
-      </article>
-
-      <article className="intelligence-card">
-        <span className="intelligence-number">03</span>
-        <span className="intelligence-label">Decisión</span>
-
-        <h3>Intervenir donde realmente tiene sentido</h3>
-
-        <p>
-          La comprensión se traduce en decisiones: qué mantener, qué cambiar,
-          qué investigar, qué priorizar y qué intervención tiene mayor sentido.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Decisiones</span>
-          <span>Intervención</span>
-          <span>Ejecución</span>
-          <span>Aprendizaje</span>
-        </div>
-      </article>
-    </div>
-
-    <div className="intelligence-principle">
-      <div>
-        <span>Principio rector</span>
-        <strong>Comprender antes de transformar.</strong>
-      </div>
-
+{/* III. Industria: una historia operativa, no otra cuadrícula oscura. */}
+<section id="sectores" className="home-story-sector">
+  <div className="container story-sector-layout">
+    <figure className="story-sector-photo">
+      <img
+        src="https://images.unsplash.com/photo-1761095596618-081ea3f043a5?auto=format&fit=crop&w=1400&q=80"
+        alt="Equipo de cocina colaborando durante la operación de un restaurante"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>Imagen ilustrativa · Operación restaurantera</figcaption>
+    </figure>
+    <div className="story-sector-copy">
+      <span className="eyebrow">Especialización actual / Restaurantes</span>
+      <h2>La inteligencia comienza <span>en la operación.</span></h2>
       <p>
-        Mindstack no parte de una solución predeterminada. Primero construimos
-        una lectura suficientemente rigurosa del problema; después decidimos
-        cómo intervenir.
+        Un restaurante reúne ventas, inventario, costos, equipos y experiencia
+        del cliente en un mismo sistema. Entender cómo interactúan es el primer
+        paso para tomar mejores decisiones.
       </p>
+      <p>
+        Actualmente concentramos nuestro desarrollo comercial en restaurantes,
+        grupos gastronómicos y operaciones con varias sucursales.
+      </p>
+      <a className="story-text-link" href="/evaluacion">
+        Explorar la evaluación para restaurantes <span aria-hidden="true">↗</span>
+      </a>
     </div>
   </div>
-</section>
-
-      <section id="insights" className="section">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Insights</span>
-              <h2 className="section-title">
-                Para negocios que quieren crecer con control y claridad.
-              </h2>
-            </div>
-            <p className="section-desc">
-              Lecturas ejecutivas para entender ventas, fugas, procesos y decisiones
-              operativas antes de invertir más.
-            </p>
-          </div>
-
-          <div className="insights-grid">
-            {insights.map((item) => (
-              <article className="card" key={item.title}>
-                <span className="tag">{item.tag}</span>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-                <span className="card-link" aria-hidden="true">Análisis empresarial</span>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="capacidades" className="section section-alt capabilities-section">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Capacidades</span>
-
-        <h2 className="section-title">
-          La solución no se elige primero.{" "}
-          <span className="gold">
-            Se determina después de comprender el problema.
-          </span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        Mindstack trabaja con distintas capacidades de intervención. No todas
-        las organizaciones necesitan tecnología, automatización o inteligencia
-        artificial. La intervención depende de lo que la evidencia justifique.
-      </p>
+  <div className="container story-signals-wrap">
+    <div className="story-signals-heading">
+      <span className="eyebrow">Situaciones que merecen claridad</span>
+      <h3>Lo importante no siempre está a simple vista.</h3>
+      <p>Señales empresariales habituales que conviene investigar, sin asumir causas de antemano.</p>
     </div>
-
-    <div className="capabilities-grid">
-      {services.map((item) => (
-        <article className="capability-card" key={item.title}>
-          <div className="capability-top">
-            <span className="capability-number">{item.num}</span>
-            <span className="capability-tag">{item.tag}</span>
-          </div>
-
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-
-          <div className="capability-footer">
-            <span>Mindstack</span>
-            <span>→</span>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div className="capabilities-statement">
-      <span>No somos una empresa de herramientas</span>
-
-      <strong>
-        Tecnología, datos e IA son medios. La comprensión del negocio determina
-        cuándo utilizarlos.
-      </strong>
-    </div>
-  </div>
-</section>
-
-      <section id="sectores" className="section restaurant-section">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Industria foco</span>
-
-        <h2 className="section-title">
-          Inteligencia empresarial aplicada al{" "}
-          <span className="gold">sector restaurantero.</span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        La metodología de Mindstack es transversal, pero actualmente
-        concentramos nuestro desarrollo comercial y aprendizaje sectorial en
-        restaurantes, grupos gastronómicos y operaciones con múltiples
-        sucursales.
-      </p>
-    </div>
-
-    <div className="restaurant-intro">
-      <div>
-        <span className="restaurant-kicker">Por qué restaurantes</span>
-
-        <h3>
-          Operaciones donde pequeñas diferencias pueden convertirse en grandes
-          diferencias de margen.
-        </h3>
-      </div>
-
-      <p>
-        Un restaurante combina demanda, inventario, personal, tiempos,
-        experiencia del cliente, costos, procesos y datos en una misma
-        operación. Cuando el negocio crece, comprender cómo interactúan esas
-        variables se vuelve cada vez más importante.
-      </p>
-    </div>
-
-    <div className="restaurant-signals">
+    <div className="story-signals">
       {restaurantSignals.map((signal) => (
-        <article className="restaurant-signal" key={signal.title}>
-          <span>{signal.num}</span>
-
-          <div>
-            <h3>{signal.title}</h3>
-            <p>{signal.desc}</p>
-          </div>
+        <article className="story-signal" key={signal.title}>
+          <span className="story-signal-number">{signal.num}</span>
+          <h4>{signal.title}</h4>
+          <p>{signal.desc}</p>
         </article>
       ))}
     </div>
+    <p className="story-transversal-note">Nuestro enfoque también puede aplicarse a otros sectores cuando su situación requiere investigación, análisis de datos y decisiones empresariales.</p>
+  </div>
+</section>
 
-    <div className="transversal-note">
-      <div>
-        <span>Capacidad transversal</span>
-        <strong>El método no depende de una sola industria.</strong>
+{/* IV. Capacidades: servicios en una lista editorial, sin tarjetas falsas. */}
+<section id="capacidades" className="home-services">
+  <div className="container story-services-layout">
+    <div className="story-services-intro">
+      <span className="eyebrow">Lo que hacemos</span>
+      <h2>Distintos recursos. <span>Un mismo criterio.</span></h2>
+      <p>La solución no se escoge antes de comprender el problema. Combinamos investigación, datos y tecnología según la situación de cada organización.</p>
+      <a href="#metodologia" className="story-services-link">Conocer cómo trabajamos <span aria-hidden="true">↗</span></a>
+      <div className="story-services-aside">
+        <span>PRINCIPIO DE TRABAJO</span>
+        <p>Primero comprender. Después, intervenir donde exista una razón para hacerlo.</p>
       </div>
-
-      <p>
-        Mindstack puede estudiar organizaciones de otros sectores cuando el
-        problema requiere comprender sistemas empresariales, procesos, datos y
-        decisiones. El foco restaurantero representa nuestra especialización
-        comercial actual, no un límite metodológico.
-      </p>
+    </div>
+    <div className="story-services-list">
+      {services.map((item) => (
+        <article className="story-service-row" key={item.num}>
+          <span className="story-service-number">{item.num}</span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+          <span className="story-service-tag">{item.tag}</span>
+        </article>
+      ))}
     </div>
   </div>
 </section>
