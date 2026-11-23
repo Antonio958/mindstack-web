@@ -8,8 +8,8 @@ import styles from "./evaluacion.module.css";
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "https://calendar.app.google/t7YPiSH7QzDKR7JC6";
 const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || "";
-const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "";
-const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "";
+const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "/aviso-de-privacidad/";
+const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "2026-11-23-v1";
 // La Site Key de Turnstile es pública; la Secret Key permanece únicamente en el Worker API.
 const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAGPUHIprbjhv5LWX";
 const CAN_SAVE = Boolean(API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY);
@@ -270,6 +270,7 @@ export default function EvaluacionPage() {
       <footer className={styles.footer}>
         <span>© 2026 Grupo Mindstack</span>
         <span>Exploración orientativa · No sustituye investigación profesional</span>
+        <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">Aviso de privacidad</a>
       </footer>
     </main>
   );
