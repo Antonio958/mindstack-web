@@ -4588,3 +4588,75 @@ body {
   .home-mobile-menu > summary { padding:8px 4px; font-size:10px; }
   .home-mobile-menu > summary::before { margin-right:5px; font-size:14px; }
 }
+
+/* Homepage editorial v2 — scope deliberately excludes assessment route. */
+.mindstack-editorial {
+  --display: "Manrope", "Avenir Next", system-ui, sans-serif;
+  --reading: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-family: var(--reading);
+}
+.mindstack-editorial :is(h1,h2,h3,h4) { font-family:var(--display); text-wrap:balance; }
+.mindstack-editorial .hero-refreshed .hero-copy-block h1 {font-size:clamp(48px,5.4vw,82px)!important;font-weight:800!important;line-height:1.06!important;letter-spacing:-.055em!important;}
+.mindstack-editorial .hero-copy-block {width:min(690px,65%);}
+.mindstack-editorial .hero-refreshed {min-height:740px;padding:150px 0 200px;}
+.mindstack-editorial .hero-refreshed::after {height:142px;}
+.mindstack-editorial .hero-copy {font-size:18px;color:#eeeae2;max-width:540px;}
+.mindstack-editorial .hero-footnote {color:#ddd8ce;font-size:13px;}
+.mindstack-editorial .eyebrow {font-size:12px!important;font-weight:700!important;letter-spacing:.16em!important;gap:12px!important;margin-bottom:16px!important;}
+.mindstack-editorial .eyebrow::before {width:28px!important;flex-shrink:0;}
+.mindstack-editorial :is(.assessment-content,.story-sector-copy,.story-services-intro,.home-method-heading,.home-deliverable-copy,.home-firm-copy) h2 {font-size:clamp(34px,3.5vw,54px);font-weight:760;line-height:1.13;letter-spacing:-.043em;}
+.mindstack-editorial .story-signals-heading h3 {font-weight:730;font-size:clamp(30px,3vw,43px);}
+.mindstack-editorial :is(.story-signal h4,.home-method-step h3) {font-size:21px;font-weight:750;line-height:1.3;}
+.mindstack-editorial :is(.story-signal p,.home-method-step p,.story-service-row p,.home-contact-option p,.home-firm-profile p) {font-size:15px;line-height:1.75;}
+.mindstack-editorial :is(.story-sector-copy p,.story-services-intro > p,.home-method-heading p,.home-firm-copy p,.home-deliverable-copy > p:not(.home-deliverable-legal),.assessment-content > p:not(.assessment-disclaimer)) {font-size:17px;line-height:1.75;}
+.mindstack-editorial .assessment-result-preview {margin-top:-100px;}
+.mindstack-editorial .assessment-preview-masthead strong {color:#fffdf7;}
+.mindstack-editorial .assessment-preview-description,.mindstack-editorial .assessment-preview-items p {font-size:14px;}
+.mindstack-editorial .assessment-preview-note,.mindstack-editorial .assessment-disclaimer {color:#50554e;font-size:12px;}
+.mindstack-editorial .home-services {background:linear-gradient(180deg,#f5f2ec 0,#171918 120px,#171918 100%);padding-top:180px;}
+.mindstack-editorial .home-method {background:linear-gradient(180deg,#171918 0,#f5f2ec 120px,#f5f2ec 100%);padding-top:180px;}
+.mindstack-editorial .home-firm {background:linear-gradient(180deg,#e9e4da 0,#121413 120px,#121413 100%);padding-top:180px;}
+.mindstack-editorial .story-service-row p {color:#d3d6cf;}
+.mindstack-editorial .story-services-intro > p,.mindstack-editorial .home-firm-copy p {color:#dedfd8;}
+.mindstack-editorial .story-services-aside {margin-top:24px;}
+.mindstack-editorial .editorial-graphic {display:block;width:100%;max-width:420px;height:auto;}
+.mindstack-editorial .editorial-graphic--layers {margin:26px 0 0;}
+.mindstack-editorial .editorial-graphic--method {width:min(100%,700px);max-width:none;margin:-25px auto 24px;max-height:170px;}
+.mindstack-editorial .story-signal-number {font-size:12px;color:#785b16;}
+.mindstack-editorial .story-signal {padding:27px 12px 28px 0;}
+.mindstack-editorial .report-preview .report-top h3 {color:#fffdf7!important;font-weight:720;font-size:28px;}
+.mindstack-editorial .report-preview :is(.report-row span,.report-note p,.report-summary span) {color:#d0d3ca;}
+.mindstack-editorial .report-preview .report-head span {color:#e5c578;}
+.mindstack-editorial .report-preview .pill-mid {color:#dedfd9!important;}
+.mindstack-editorial .report-preview .report-summary strong {font-size:clamp(17px,2vw,24px);}
+.mindstack-editorial .home-firm-leader {max-width:440px;width:100%;justify-self:center;}
+.mindstack-editorial .home-firm-portrait {height:auto;aspect-ratio:auto;overflow:visible;background:#252824;}
+.mindstack-editorial .home-firm-portrait img {width:100%;height:auto;max-height:560px;object-fit:contain;object-position:center;filter:none;}
+.mindstack-editorial .home-firm-profile {padding-top:20px;}
+.mindstack-editorial .home-contact-photo {opacity:.65;}
+.mindstack-editorial .home-contact-photo img {filter:saturate(.65) brightness(.9);}
+.mindstack-editorial .home-contact-photo::after {background:linear-gradient(90deg,#101312 0%,rgba(16,19,18,.96) 38%,rgba(16,19,18,.75) 72%,rgba(16,19,18,.24)),linear-gradient(0deg,#101312,transparent 65%);}
+.mindstack-editorial .footer :is(p,a) {color:#bcbfb7!important;}
+.mindstack-editorial .footer .footer-direct-contact {color:#e2c77e!important;}
+.mindstack-editorial .footer-bottom {color:#a0a39b!important;}
+.mindstack-editorial .footer .brand {height:auto!important;min-height:0!important;margin:0!important;justify-content:flex-start;}
+.mindstack-editorial .footer .brand-symbol {width:132px!important;height:85px!important;object-fit:contain!important;object-position:left center;}
+.mindstack-editorial .nav a {color:#d0d0ca;font-size:12px;letter-spacing:.065em;}
+.mindstack-editorial .btn {font-family:var(--reading);font-weight:700;letter-spacing:.035em;}
+.mindstack-editorial section[id] {scroll-margin-top:82px;}
+@media(max-width:900px){
+ .mindstack-editorial .hero-copy-block {width:min(600px,90%);}
+ .mindstack-editorial .assessment-result-preview {margin-top:0;}
+ .mindstack-editorial .editorial-graphic--layers {max-width:320px;}
+}
+@media(max-width:640px){
+ .mindstack-editorial .hero-refreshed {min-height:660px;padding:115px 0 155px!important;}
+ .mindstack-editorial .hero-copy-block {width:100%;}
+ .mindstack-editorial .hero-refreshed .hero-copy-block h1 {font-size:clamp(39px,10vw,52px)!important;}
+ .mindstack-editorial .hero-refreshed::after {height:110px;}
+ .mindstack-editorial .hero-photo-disclaimer {bottom:120px;}
+ .mindstack-editorial .hero-copy {font-size:16px;}
+ .mindstack-editorial .editorial-graphic--method {display:none;}
+ .mindstack-editorial .report-preview .report-summary strong {font-size:21px;}
+ .mindstack-editorial .home-firm-portrait img {max-height:480px;}
+}
