@@ -6,6 +6,7 @@ import Script from "next/script";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
 import { EVALUACION_API_URL, PRIVACY_PATH, PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, TURNSTILE_SITE_KEY } from "../../lib/evaluacion/config";
+import { comprobarDisponibilidad, compartirEvaluacion } from "../../lib/evaluacion/cliente";
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "https://calendar.app.google/t7YPiSH7QzDKR7JC6";
 const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || EVALUACION_API_URL;
@@ -14,7 +15,6 @@ const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || APPR
 // La Site Key de Turnstile es pública; la Secret Key permanece únicamente en el Worker API.
 const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || TURNSTILE_SITE_KEY;
 const CAN_SAVE = Boolean(API_URL && PRIVACY_URL && PRIVACY_VERSION && TURNSTILE_KEY);
-const STATUS_URL = API_URL.replace(/\/api\/evaluaciones$/, "/api/estado");
 const WHATSAPP = "https://wa.me/525552138786?text=" + encodeURIComponent(
   "Hola Mindstack, realicé su evaluación empresarial y me gustaría conversar sobre mi negocio."
 );
@@ -58,18 +58,9 @@ export default function EvaluacionPage() {
     if (!finished || !CAN_SAVE) return;
     const controller = new AbortController();
     setServiceReady(false);
-    fetch(STATUS_URL, { signal: controller.signal, cache: "no-store" })
-      .then(async (response) => {
-        if (!response.ok) return null;
-        return response.json() as Promise<{ status?: string; privacyVersion?: string }>;
-      })
-      .then((data) => {
-        if (!controller.signal.aborted) {
-          setServiceReady(data?.status === "ready" && data.privacyVersion === PRIVACY_VERSION);
-        }
-      })
-      .catch(() => {
-        if (!controller.signal.aborted) setServiceReady(false);
+    comprobarDisponibilidad(API_URL, PRIVACY_VERSION, controller.signal)
+      .then((ready) => {
+        if (!controller.signal.aborted) setServiceReady(ready);
       });
     return () => controller.abort();
   }, [finished]);
@@ -100,21 +91,14 @@ export default function EvaluacionPage() {
     if (!CAN_SAVE || !serviceReady || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
     setSubmissionStatus("sending");
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          answers,
-          contact: { name: contactName, email: contactEmail, phone: contactPhone },
-          privacyConsent: true,
-          privacyVersion: PRIVACY_VERSION,
-          turnstileToken,
-          source: new URLSearchParams(window.location.search).get("utm_source") || "web",
-        }),
+      const reference = await compartirEvaluacion(API_URL, {
+        answers,
+        contact: { name: contactName, email: contactEmail, phone: contactPhone },
+        privacyVersion: PRIVACY_VERSION,
+        turnstileToken,
+        source: new URLSearchParams(window.location.search).get("utm_source") || "web",
       });
-      const data: { ok?: boolean; evaluationId?: string } = await response.json();
-      if (!response.ok || !data.ok) throw new Error("No se pudo enviar");
-      setSavedReference(data.evaluationId || "");
+      setSavedReference(reference);
       setSubmissionStatus("saved");
     } catch {
       setSubmissionStatus("error");
