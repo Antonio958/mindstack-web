@@ -6,7 +6,9 @@
   "workers_dev": true,
   "preview_urls": true,
   "previews": {},
+  "triggers": { "crons": ["0 8 * * *"] },
   "vars": {
+    "PRIVACY_VERSION": "2026-11-23-v2",
     "ALLOWED_ORIGIN": "https://mindstack-web.luispalmhdz06.workers.dev",
     "ALLOWED_PREVIEW_ORIGIN": "https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev"
   }
