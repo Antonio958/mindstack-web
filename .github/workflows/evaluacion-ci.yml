@@ -1,0 +1,34 @@
+name: Evaluacion empresarial - validacion
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sitio-estatico:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Instalar dependencias reproducibles
+        run: npm ci
+      - name: Verificar compilacion y exportacion estatica
+        run: npm run build
+      - name: Verificar contenido exportado
+        run: test -f out/index.html && test -f out/evaluacion.html || test -f out/evaluacion/index.html
+
+  api-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar dependencias del worker
+        run: npm install --prefix worker --no-audit --no-fund
+      - name: Validar TypeScript del worker
+        run: npm run check --prefix worker
