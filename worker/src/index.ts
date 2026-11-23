@@ -101,18 +101,18 @@ export default {
             (version_cuestionario,sector,rol_declarante,respuestas,tipo_resultado,
              hallazgos_json,fortalezas_json,incertidumbres_json,origen)
           values
-            (__DOLLAR__{VERSION}, __DOLLAR__{a.sector}, __DOLLAR__{a.role},
-             __DOLLAR__{JSON.stringify(a)}::jsonb, __DOLLAR__{result.status},
-             __DOLLAR__{JSON.stringify(result.findings)}::jsonb,
-             __DOLLAR__{JSON.stringify(result.strengths)}::jsonb,
-             __DOLLAR__{JSON.stringify(result.unknowns)}::jsonb, __DOLLAR__{source})
+            (${VERSION}, ${a.sector}, ${a.role},
+             ${JSON.stringify(a)}::jsonb, ${result.status},
+             ${JSON.stringify(result.findings)}::jsonb,
+             ${JSON.stringify(result.strengths)}::jsonb,
+             ${JSON.stringify(result.unknowns)}::jsonb, ${source})
           returning id
         )
         insert into public.contactos_evaluacion
           (evaluacion_id,nombre,correo,telefono,consentimiento_contacto_en,
            version_aviso_privacidad,estado_reserva)
-        select id, __DOLLAR__{name}, __DOLLAR__{email}, __DOLLAR__{phone},now(),
-               __DOLLAR__{env.PRIVACY_VERSION},'solicitada'
+        select id, ${name}, ${email}, ${phone},now(),
+               ${env.PRIVACY_VERSION},'solicitada'
         from nueva returning evaluacion_id
       `;
       return response({ok:true,evaluationId:rows[0]?.evaluacion_id,status:result.status},201,origin);
