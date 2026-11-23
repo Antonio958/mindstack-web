@@ -3,11 +3,11 @@ const WA =
 
 const navItems = [
   ["Inicio", "#inicio"],
-  ["Evaluación gratuita", "/evaluacion"],
   ["Capacidades", "#capacidades"],
   ["Método", "#metodologia"],
   ["Industrias", "#sectores"],
   ["Firma", "#nosotros"],
+  ["Contacto", "#contacto"],
 ];
 
 const insights = [
@@ -305,87 +305,91 @@ export default function Home() {
             ))}
           </nav>
 
-          <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+          <ButtonGold href="/evaluacion">Evaluación gratuita</ButtonGold>
         </div>
       </header>
 
-      <section id="inicio" className="hero">
-  <div className="container hero-grid">
-    <div>
-      <span className="eyebrow">Firma de Inteligencia Empresarial</span>
-
+      <section id="inicio" className="hero hero-refreshed">
+  <div className="container hero-grid hero-refreshed-grid">
+    <div className="hero-copy-block">
+      <span className="eyebrow">Firma de inteligencia empresarial</span>
       <h1>
-        Comprender mejor.{" "}
-        <span className="gold">Decidir mejor.</span>{" "}
-        Transformar con inteligencia.
+        Comprender mejor.
+        <span className="gold"> Decidir mejor.</span>
       </h1>
-
       <p className="hero-copy">
-        Mindstack investiga cómo funciona realmente una empresa, conecta
-        operación, procesos, datos y contexto, y convierte esa comprensión
-        en decisiones e intervenciones con sentido.
+        Investigamos lo que ocurre en una organización y conectamos datos,
+        procesos y contexto para tomar decisiones con mayor claridad.
       </p>
-
       <div className="hero-actions">
-        <ButtonGold href="/evaluacion">Evaluación gratuita</ButtonGold>
-        <ButtonOutline href="#metodologia">
-          Conocer nuestro método
-        </ButtonOutline>
+        <ButtonGold href="/evaluacion">Comenzar evaluación gratuita</ButtonGold>
+        <ButtonOutline href="#capacidades">Conocer nuestras capacidades</ButtonOutline>
       </div>
-
-      <div className="metrics-row">
-        <div className="metric">
-          <span>Comprensión</span>
-          <strong>Antes de intervenir</strong>
-        </div>
-
-        <div className="metric">
-          <span>Evidencia</span>
-          <strong>Antes de concluir</strong>
-        </div>
-
-        <div className="metric">
-          <span>Decisión</span>
-          <strong>Antes de ejecutar</strong>
-        </div>
-
-        <div className="metric">
-          <span>Tecnología</span>
-          <strong>Cuando tiene sentido</strong>
-        </div>
-      </div>
+      <p className="hero-footnote">
+        Evaluación inicial disponible para restaurantes. Sin registro obligatorio.
+      </p>
     </div>
 
-    <Dashboard />
+    <div className="hero-photo" aria-label="Fotografía editorial ilustrativa de una reunión de trabajo">
+      <img
+        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=82"
+        alt="Personas colaborando alrededor de una mesa en un entorno de trabajo"
+        loading="eager"
+        decoding="async"
+      />
+      <div className="hero-photo-caption">
+        <span>Una perspectiva más clara</span>
+        <strong>Información, contexto y criterio.</strong>
+      </div>
+      <span className="hero-photo-disclaimer">Fotografía ilustrativa</span>
+    </div>
   </div>
 </section>
 
-
-<section id="evaluacion-gratuita" className="assessment-section">
+<section id="evaluacion-gratuita" className="assessment-section assessment-refreshed">
   <div className="container assessment-grid">
     <div className="assessment-content">
       <span className="eyebrow">Una herramienta gratuita de Mindstack</span>
-      <h2>Conocer mejor tu negocio comienza con <span className="gold">las preguntas correctas.</span></h2>
+      <h2>¿Qué tan clara tienes la situación de <span className="gold">tu restaurante?</span></h2>
       <p>
-        Explora la situación de tu restaurante a través de preguntas sobre rentabilidad,
-        operación, información y decisiones. Reconoce fortalezas, situaciones que merecen
-        atención y aspectos que aún necesitan mayor claridad.
+        Responde preguntas concretas sobre rentabilidad, operación, información y decisiones.
+        Obtén una lectura inicial de fortalezas, situaciones que merecen atención y aspectos
+        que aún requieren claridad.
       </p>
       <div className="assessment-actions">
-        <ButtonGold href="/evaluacion">Realizar evaluación gratuita</ButtonGold>
-        <a href="#metodologia" className="assessment-secondary-link">Conocer nuestro enfoque ↗</a>
+        <ButtonGold href="/evaluacion">Comenzar mi evaluación</ButtonGold>
+        <a href="#metodologia" className="assessment-secondary-link">Conocer el método ↗</a>
       </div>
-      <p className="assessment-disclaimer">Gratuita · Sin registro · Basada en tus respuestas · No sustituye un diagnóstico</p>
+      <p className="assessment-disclaimer">
+        Gratis · Sin crear una cuenta · Resultado orientativo · No es un diagnóstico
+      </p>
     </div>
-    <div className="assessment-panel">
-      <span className="assessment-panel-kicker">EVALUACIÓN EXPLORATORIA · RESTAURANTES</span>
-      <div className="assessment-panel-title">Una lectura inicial, sin conclusiones precipitadas.</div>
-      <div className="assessment-process">
-        <div><span>01</span><strong>Responde</strong><p>Preguntas concretas sobre tu operación.</p></div>
-        <div><span>02</span><strong>Comprende</strong><p>Señales y fortalezas según lo que declaraste.</p></div>
-        <div><span>03</span><strong>Explora</strong><p>Si existe una razón, conversa con Mindstack.</p></div>
+    <div className="assessment-result-preview">
+      <div className="assessment-preview-header">
+        <span>ASÍ SE VE TU LECTURA INICIAL</span>
+        <strong>EJEMPLO</strong>
       </div>
-      <p className="assessment-panel-note">No inventamos causas ni forzamos servicios. Cuando la información es favorable, también lo reconocemos.</p>
+      <h3>Una mirada más clara a tu operación.</h3>
+      <p className="assessment-preview-description">
+        Identificamos lo que declaras, no inventamos causas ni calificaciones.
+      </p>
+      <div className="assessment-preview-items">
+        <div>
+          <span>FORTALEZA DECLARADA</span>
+          <p>Seguimiento regular de indicadores operativos.</p>
+        </div>
+        <div>
+          <span>SITUACIÓN POR COMPRENDER</span>
+          <p>Diferencias recurrentes de inventario reportadas.</p>
+        </div>
+        <div>
+          <span>ASPECTO POR ACLARAR</span>
+          <p>Cómo se conoce la rentabilidad por producto.</p>
+        </div>
+      </div>
+      <p className="assessment-preview-note">
+        Vista ilustrativa. Tu resultado dependerá exclusivamente de tus respuestas.
+      </p>
     </div>
   </div>
 </section>
@@ -507,7 +511,7 @@ export default function Home() {
                 <span className="tag">{item.tag}</span>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
-                <span className="card-link">Leer más →</span>
+                <span className="card-link" aria-hidden="true">Análisis empresarial</span>
               </article>
             ))}
           </div>
