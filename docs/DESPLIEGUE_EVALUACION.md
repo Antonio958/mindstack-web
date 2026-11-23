@@ -33,7 +33,8 @@ El CRM interno y su Supabase no se modifican.
 
 ## 3. API Cloudflare Worker
 
-1. Crear Worker mindstack-evaluacion-api desde el mismo repositorio, directorio worker.
+1. Crear Worker `mindstack-evaluacion-api` desde el repositorio `Antonio958/mindstack-web`, directorio raíz del build `worker`. Mientras esté sin fusionar el PR, seleccionar la rama de producción `feature/evaluacion-empresarial-mvp-20261123` para este Worker API; `main` todavía no tiene la carpeta `worker`.
+1a. Comando de compilación `npm install && npm run check`; comando de despliegue `npx wrangler deploy`. Debe servir inicialmente el endpoint `/health`; sin secretos de DB/Turnstile, las escrituras quedan bloqueadas (HTTP 503).
 2. Usar worker/wrangler.toml; actualizar ALLOWED_ORIGIN al dominio EXACTO de Pages.
 3. Configurar secretos: DATABASE_URL, TURNSTILE_SECRET, PRIVACY_VERSION.
 4. Configurar Turnstile para dominio público y obtener clave pública.
