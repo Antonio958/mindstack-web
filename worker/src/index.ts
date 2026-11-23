@@ -112,7 +112,7 @@ export default {
           (evaluacion_id,nombre,correo,telefono,consentimiento_contacto_en,
            version_aviso_privacidad,estado_reserva)
         select id, ${name}, ${email}, ${phone},now(),
-               ${env.PRIVACY_VERSION},'solicitada'
+               ${env.PRIVACY_VERSION},'sin_solicitar'
         from nueva returning evaluacion_id
       `;
       return response({ok:true,evaluationId:rows[0]?.evaluacion_id,status:result.status},201,origin);
