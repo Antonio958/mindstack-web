@@ -27,7 +27,7 @@ jobs:
           test -f out/evaluacion.html || test -f out/evaluacion/index.html
       - name: Verificar configuracion Worker web para Cloudflare
         run: |
-          node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out')process.exit(1);"
+          node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out'||cfg.preview_urls!==true||typeof cfg.previews!=='object')process.exit(1);"
       - name: Validar empaquetado Wrangler sin publicar
         run: npx --yes wrangler@4.164.0 deploy --dry-run --outdir .wrangler-build-check
 
