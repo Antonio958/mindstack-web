@@ -6,6 +6,7 @@ type Env = {
   TURNSTILE_SECRET: string;
   PRIVACY_VERSION: string;
   ALLOWED_ORIGIN: string;
+  ALLOWED_PREVIEW_ORIGIN?: string;
 };
 const headers = {
   "Content-Type": "application/json; charset=utf-8",
@@ -60,10 +61,13 @@ export default {
         !env.ALLOWED_ORIGIN || env.ALLOWED_ORIGIN.includes("replace-with"))
       return response({error:"Servicio no configurado"},503);
     const origin = request.headers.get("Origin");
-    if (origin !== env.ALLOWED_ORIGIN) return response({error:"Origen no autorizado"},403);
+    // Permisos por origen explícito, nunca comodines.
+    // La vista previa y producción son hostnames exactos.
+    const allowed = [env.ALLOWED_ORIGIN, env.ALLOWED_PREVIEW_ORIGIN].filter(Boolean);
+    if (!origin || !allowed.includes(origin)) return response({error:"Origen no autorizado"},403);
     if (request.method === "OPTIONS")
       return new Response(null,{status:204,headers:{
-        "Access-Control-Allow-Origin":env.ALLOWED_ORIGIN,
+        "Access-Control-Allow-Origin":origin,
         "Access-Control-Allow-Methods":"POST, OPTIONS",
         "Access-Control-Allow-Headers":"Content-Type",
         "Access-Control-Max-Age":"3600",Vary:"Origin"
@@ -93,7 +97,7 @@ export default {
     if(name.length<2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !token)
       return response({error:"Datos de contacto incorrectos"},400,origin);
     const verified=await verifyTurnstile(token,env.TURNSTILE_SECRET,
-      request.headers.get("CF-Connecting-IP"),new URL(env.ALLOWED_ORIGIN).hostname);
+      request.headers.get("CF-Connecting-IP"),new URL(origin).hostname);
     if(!verified) return response({error:"Verificación antiabuso fallida"},403,origin);
     const result=evaluate(a);
     if(result.status==="outside_scope") return response({error:"Sector fuera de alcance"},400,origin);
