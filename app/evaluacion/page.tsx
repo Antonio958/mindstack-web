@@ -6,7 +6,7 @@ import Script from "next/script";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
 
-const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "";
+const BOOKING_URL = process.env.NEXT_PUBLIC_DISCOVERY_BOOKING_URL || "https://calendar.app.google/t7YPiSH7QzDKR7JC6";
 const API_URL = process.env.NEXT_PUBLIC_EVALUACION_API_URL || "";
 const PRIVACY_URL = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_URL || "";
 const PRIVACY_VERSION = process.env.NEXT_PUBLIC_AVISO_PRIVACIDAD_VERSION || "";
