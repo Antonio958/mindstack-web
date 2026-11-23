@@ -342,14 +342,6 @@ export default function Home() {
   </div>
 </section>
 
-<div className="narrative-bridge" aria-label="Nuestro enfoque: observar, comprender y decidir">
-  <div className="container narrative-bridge-inner">
-    <div><span>01</span><strong>Observar la realidad</strong></div>
-    <div><span>02</span><strong>Comprender las señales</strong></div>
-    <div><span>03</span><strong>Decidir si profundizar</strong></div>
-  </div>
-</div>
-
 <section id="evaluacion-gratuita" className="assessment-section assessment-refreshed">
   <div className="container assessment-grid">
     <div className="assessment-content">
@@ -368,41 +360,39 @@ export default function Home() {
         Gratis · Sin crear una cuenta · Resultado orientativo · No es un diagnóstico
       </p>
     </div>
-    <div className="assessment-result-preview">
-      <div className="assessment-context-photo">
-        <img
-          src="https://images.unsplash.com/photo-1667388969250-1c7220bf3f37?auto=format&fit=crop&w=1200&q=78"
-          alt="Interior de un restaurante preparado para recibir a sus clientes"
-          loading="lazy"
-          decoding="async"
-        />
-        <span>CONTEXTO · OPERACIÓN RESTAURANTERA</span>
+    <div className="assessment-result-preview" aria-label="Vista de ejemplo de los resultados de la evaluación">
+      <div className="assessment-preview-masthead">
+        <span>MSK / EVALUACIÓN EMPRESARIAL</span>
+        <strong>De las señales a una primera lectura.</strong>
+        <div className="assessment-preview-masthead-rule" aria-hidden="true"><i /><i /><i /></div>
       </div>
-      <div className="assessment-preview-header">
-        <span>ASÍ SE VE TU LECTURA INICIAL</span>
-        <strong>EJEMPLO</strong>
+      <div className="assessment-preview-body">
+        <div className="assessment-preview-header">
+          <span>LECTURA INICIAL · RESTAURANTES</span>
+          <strong>EJEMPLO</strong>
+        </div>
+        <h3>Una mirada más clara a tu operación.</h3>
+        <p className="assessment-preview-description">
+          Identificamos lo que declaras, no inventamos causas ni calificaciones.
+        </p>
+        <div className="assessment-preview-items">
+          <div>
+            <span>FORTALEZA DECLARADA</span>
+            <p>Seguimiento regular de indicadores operativos.</p>
+          </div>
+          <div>
+            <span>SITUACIÓN POR COMPRENDER</span>
+            <p>Diferencias recurrentes de inventario reportadas.</p>
+          </div>
+          <div>
+            <span>ASPECTO POR ACLARAR</span>
+            <p>Cómo se conoce la rentabilidad por producto.</p>
+          </div>
+        </div>
+        <p className="assessment-preview-note">
+          Vista ilustrativa. Tu resultado dependerá exclusivamente de tus respuestas.
+        </p>
       </div>
-      <h3>Una mirada más clara a tu operación.</h3>
-      <p className="assessment-preview-description">
-        Identificamos lo que declaras, no inventamos causas ni calificaciones.
-      </p>
-      <div className="assessment-preview-items">
-        <div>
-          <span>FORTALEZA DECLARADA</span>
-          <p>Seguimiento regular de indicadores operativos.</p>
-        </div>
-        <div>
-          <span>SITUACIÓN POR COMPRENDER</span>
-          <p>Diferencias recurrentes de inventario reportadas.</p>
-        </div>
-        <div>
-          <span>ASPECTO POR ACLARAR</span>
-          <p>Cómo se conoce la rentabilidad por producto.</p>
-        </div>
-      </div>
-      <p className="assessment-preview-note">
-        Vista ilustrativa. Tu resultado dependerá exclusivamente de tus respuestas.
-      </p>
     </div>
   </div>
 </section>
