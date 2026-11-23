@@ -10,7 +10,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 - Domicilio señalado por la empresa para el aviso: **COL. VALLE GÓMEZ, ALCALDÍA CUAUHTÉMOC, C.P. 06240, CIUDAD DE MÉXICO**. **Pendiente de validar si es suficiente como domicilio legalmente identificable antes de la publicación.**
 - Correo autorizado para privacidad y solicitudes de derechos ARCO: **mindstack.group@gmail.com** (aprobado por la empresa).
 - Fecha de entrada en vigor y versión aprobada: **[PENDIENTE]**
-- Plazo de conservación/criterio de eliminación: **[PENDIENTE]**
+- Plazo de conservación aprobado: **12 meses contados desde la recepción de cada evaluación/contacto**. Una relación contractual vigente o una obligación legal aplicable podrá justificar conservación adicional, que debe documentarse por separado.
 
 ## Texto propuesto para revisión
 
@@ -26,7 +26,7 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 **5. Encargados tecnológicos.** Para operar el servicio se utilizarán proveedores de infraestructura tecnológica, incluidos Cloudflare para alojamiento y protección contra abuso y Neon para almacenamiento de evaluaciones. Deben verificarse las condiciones contractuales, ubicaciones y obligaciones aplicables a esos encargados y cualquier transferencia o tratamiento internacional que proceda describir.
 
-**6. Conservación y seguridad.** Los registros se protegerán con controles de acceso, cifrado en tránsito y medidas técnicas apropiadas. El plazo de conservación de los datos será [PLAZO O CRITERIO POR CONFIRMAR], salvo obligaciones legales aplicables.
+**6. Conservación y seguridad.** Los registros se protegerán con controles de acceso, cifrado en tránsito y medidas técnicas apropiadas. Los datos de las evaluaciones y de sus contactos se conservarán durante un máximo de 12 meses contados desde su recepción. Transcurrido ese plazo, se eliminarán o anonimizarán, salvo cuando exista una relación contractual vigente o una obligación legal aplicable que justifique su conservación por más tiempo. En estos supuestos, la extensión se limitará a la finalidad y periodo justificados.
 
 **7. Derechos de la persona titular.** Para ejercer los derechos de acceso, rectificación, cancelación u oposición (ARCO), revocar el consentimiento en los supuestos permitidos o solicitar información sobre el tratamiento, comunicarse a mindstack.group@gmail.com, indicando los datos necesarios para identificar la solicitud. [DESCRIBIR PROCEDIMIENTO Y PLAZOS LEGALES SEGÚN REVISIÓN].
 
@@ -38,7 +38,8 @@ Para validar con el responsable de la empresa y, de ser posible, asesoría jurí
 
 - [x] Identificar responsable legal y nombre comercial (conforme a lo manifestado por la empresa; verificar contra acta constitutiva antes de aprobación).
 - [ ] Verificar que el domicilio proporcionado (colonia, alcaldía, código postal y ciudad) cumpla con el nivel de identificación requerido para el aviso y confirmar canal de derechos ARCO.
-- [ ] Acordar conservación y políticas de supresión/archivado.
+- [x] Aprobar plazo de conservación de 12 meses desde la recepción, con excepciones justificadas.
+- [ ] Implementar y verificar eliminación/anonimización efectiva a los 12 meses; documentar registro de excepciones y plan de ejecución.
 - [ ] Revisar el tratamiento internacional y las condiciones de Cloudflare/Neon.
 - [ ] Aprobar texto legal definitivo y versión identificable.
 - [ ] Publicar en URL estable y probar enlace desde formulario.
