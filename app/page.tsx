@@ -516,167 +516,66 @@ export default function Home() {
   </div>
 </section>
 
-<section id="nosotros" className="section">
-  <div className="container about-grid">
-    <div className="about-content">
+{/* VII. La firma: presencia humana, sin declaraciones de experiencia no documentadas. */}
+<section id="nosotros" className="home-firm">
+  <div className="container home-firm-grid">
+    <div className="home-firm-copy">
       <span className="eyebrow">La firma</span>
-
-      <h2 className="section-title">
-        Mindstack es una{" "}
-        <span className="gold">Firma de Inteligencia Empresarial.</span>
-      </h2>
-
-      <p className="about-lead">
-        Ayudamos a organizaciones a comprender mejor cómo funcionan antes de
-        decidir qué transformar. Integramos investigación, análisis empresarial,
-        datos, procesos y tecnología para convertir información dispersa en
-        comprensión, decisiones e intervenciones con sentido.
-      </p>
-
-      <p className="about-lead">
-        Nuestro trabajo no comienza con una herramienta ni con una solución
-        predeterminada. Comienza construyendo una lectura suficientemente
-        rigurosa del problema, contrastando evidencia y distinguiendo hechos,
-        inferencias e hipótesis antes de actuar.
-      </p>
-
-      <div className="about-principles">
-        <div>
-          <strong>01</strong>
-          <span>Comprender antes de transformar</span>
-        </div>
-
-        <div>
-          <strong>02</strong>
-          <span>Evidencia antes de prescripción</span>
-        </div>
-
-        <div>
-          <strong>03</strong>
-          <span>Tecnología al servicio del problema</span>
-        </div>
+      <h2>El criterio humano detrás de <span>cada decisión.</span></h2>
+      <p>Mindstack es una firma de inteligencia empresarial que combina investigación, análisis de procesos, datos y tecnología para comprender situaciones antes de proponer intervenciones.</p>
+      <p>No comenzamos vendiendo una herramienta. Comenzamos por entender el negocio y reconocer qué evidencia necesitamos para trabajar con rigor.</p>
+      <div className="home-firm-principles">
+        <span>Evidencia antes de prescripción</span>
+        <span>Contexto antes de tecnología</span>
+        <span>Intervenciones proporcionales</span>
       </div>
     </div>
-
-    <div className="leadership-card">
-      <div className="leadership-photo">
-        <img src="/foto-luis-palma.jpg" alt="Dirección General de Mindstack" />
+    <div className="home-firm-leader">
+      <div className="home-firm-portrait">
+        <img src="/foto-luis-palma.jpg" alt="Retrato institucional de la dirección de Mindstack" loading="lazy" decoding="async" />
       </div>
-
-      <div className="leadership-info">
-        <span className="leadership-kicker">Dirección General</span>
-
+      <div className="home-firm-profile">
+        <span>DIRECCIÓN GENERAL · MINDSTACK</span>
         <h3>Antonio Hernández</h3>
-
-        <p>
-          Lidera la dirección estratégica de Mindstack y el desarrollo de su
-          sistema de inteligencia empresarial. Su trabajo se concentra en
-          comprender problemas de negocio, estructurar investigación y traducir
-          evidencia, datos y contexto en decisiones e intervenciones
-          empresariales.
-        </p>
-
-        <div className="leadership-tags">
-          <span>Inteligencia empresarial</span>
-          <span>Estrategia</span>
-          <span>Datos</span>
-          <span>Procesos</span>
-          <span>IA aplicada</span>
-        </div>
+        <p>Responsable de la dirección estratégica y del desarrollo del enfoque de inteligencia empresarial de Mindstack.</p>
       </div>
     </div>
   </div>
 </section>
 
-      <section id="contacto" className="section">
-  <div className="container">
-    <div className="diagnostic-box">
-      <div className="diagnostic-main">
-        <span className="eyebrow">Cómo empezar</span>
-
-        <h2>
-          Antes de definir una solución,{" "}
-          <span className="gold">entendamos el problema.</span>
-        </h2>
-
-        <p>
-          Si existe una situación que necesita mayor claridad, compártenos el
-          contexto. La primera conversación sirve para comprender qué está
-          ocurriendo, qué necesita investigarse y si Mindstack puede aportar
-          valor antes de proponer cualquier intervención.
-        </p>
-
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+{/* VIII. Un único cierre comercial, con dos rutas según el visitante. */}
+<section id="contacto" className="home-contact">
+  <div className="home-contact-photo" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1628516315527-110eb03991ac?auto=format&fit=crop&w=1700&q=78"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div className="container home-contact-content">
+    <span className="eyebrow">El siguiente paso</span>
+    <h2>Conversemos desde una comprensión más clara.</h2>
+    <p>Hay dos maneras de comenzar: explorar gratuitamente la situación de tu restaurante o conversar directamente con Mindstack sobre un reto empresarial.</p>
+    <div className="home-contact-options">
+      <div className="home-contact-option home-contact-option-primary">
+        <span>01 / PARA RESTAURANTES</span>
+        <h3>Comienza por explorar tu operación.</h3>
+        <p>Una lectura inicial basada en tus respuestas, sin registro obligatorio.</p>
+        <ButtonGold href="/evaluacion">Iniciar evaluación gratuita</ButtonGold>
       </div>
-
-      <div className="diagnostic-list">
-        <span className="eyebrow">Primera conversación</span>
-
-        <ul>
-          <li>Contexto del negocio y situación actual</li>
-          <li>Qué está ocurriendo y por qué importa</li>
-          <li>Qué evidencia existe y qué falta comprender</li>
-          <li>Si Mindstack puede aportar valor</li>
-          <li>Siguiente paso proporcional al problema</li>
-        </ul>
+      <div className="home-contact-option">
+        <span>02 / PARA OTRAS CONVERSACIONES</span>
+        <h3>Cuéntanos qué necesitas comprender.</h3>
+        <p>Exploramos el contexto de tu organización y si podemos aportar valor.</p>
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="home-contact-secondary">Hablar con Mindstack <span aria-hidden="true">↗</span></a>
       </div>
     </div>
+    <small className="home-contact-photo-note">Fotografía ilustrativa de Ciudad de México</small>
   </div>
 </section>
 
-      <section className="section section-alt">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Nuestro enfoque</span>
-
-        <h2 className="section-title">
-          No empezamos por la solución.{" "}
-          <span className="gold">
-            Empezamos por comprender.
-          </span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        La calidad de una intervención depende de la calidad de la comprensión
-        que existe antes de ejecutarla. Por eso Mindstack trabaja primero sobre
-        evidencia, contexto y explicación.
-      </p>
-    </div>
-
-    <div className="focus-grid">
-      {focus.map((item) => (
-        <article className="card" key={item.title}>
-          <span className="tag">{item.tag}</span>
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-
-      <section className="cta">
-  <div className="container">
-    <span className="eyebrow">Siguiente paso</span>
-
-    <h2>
-      Cuando el problema no está claro,{" "}
-      <span className="gold">la primera decisión es comprenderlo.</span>
-    </h2>
-
-    <p>
-      Cuéntanos qué está ocurriendo en tu organización. Antes de recomendar una
-      solución, Mindstack busca entender el contexto, la evidencia disponible y
-      qué necesita investigarse.
-    </p>
-
-    <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
-  </div>
-</section>
-
-      <footer className="footer">
+<footer className="footer">
   <div className="container">
     <div className="footer-grid">
       <div>
@@ -715,7 +614,8 @@ export default function Home() {
           posible colaboración, escríbenos directamente.
         </p>
 
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+        <a className="footer-direct-contact" href={WA} target="_blank" rel="noopener noreferrer">WhatsApp de Mindstack ↗</a>
+        <a href="mailto:mindstack.group@gmail.com">mindstack.group@gmail.com</a>
       </div>
     </div>
 
