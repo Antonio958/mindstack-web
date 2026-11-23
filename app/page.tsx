@@ -906,6 +906,7 @@ export default function Home() {
         <a href="#metodologia">Método Mindstack</a>
         <a href="#sectores">Industria foco</a>
         <a href="#nosotros">La firma</a>
+        <a href="/aviso-de-privacidad/">Aviso de privacidad</a>
       </div>
 
       <div>
