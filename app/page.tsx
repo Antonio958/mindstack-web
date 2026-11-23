@@ -1,5 +1,5 @@
 const WA =
-  "https://wa.me/5552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
+  "https://wa.me/525552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
 
 const navItems = [
   ["Inicio", "#inicio"],
@@ -146,6 +146,43 @@ function ButtonOutline({
   );
 }
 
+function EditorialGraphic({ variant = "layers" }: { variant?: "layers" | "method" }) {
+  return (
+    <svg className={`editorial-graphic editorial-graphic--${variant}`} viewBox="0 0 440 220" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id={`surface-${variant}`} x1="0" y1="0" x2="1" y2="1">
+          <stop stopColor="#d9c58c" stopOpacity=".65" />
+          <stop offset="1" stopColor="#786745" stopOpacity=".12" />
+        </linearGradient>
+      </defs>
+      {variant === "layers" ? (
+        <g strokeLinejoin="round">
+          {[0, 1, 2, 3].map((i) => (
+            <g key={i} transform={`translate(0 ${i * 27})`}>
+              <path d="M65 60 220 8 375 60 220 112Z" fill={`url(#surface-${variant})`} stroke="#c3a663" strokeOpacity=".8" />
+              <path d="M65 60v9l155 52 155-52v-9L220 112Z" fill="#77643b" fillOpacity=".55" stroke="#c3a663" strokeOpacity=".55" />
+              <path d="m115 60 105-35 105 35-105 35Z" stroke="#e0cc98" strokeOpacity=".35" />
+              <path d="m166 60 54-18 54 18-54 18Z" stroke="#e0cc98" strokeOpacity=".55" />
+            </g>
+          ))}
+          <path d="M220 12v194M65 60v90M375 60v90" stroke="#e2c77e" strokeDasharray="3 7" strokeOpacity=".55" />
+        </g>
+      ) : (
+        <g stroke="#997b32" strokeWidth="1.3">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <g key={i} transform={`translate(${42 + i * 76} 100)`}>
+              <path d="M0-33 32-16 32 19 0 36-32 19-32-16Z" fill={`url(#surface-${variant})`} />
+              <path d="M-32-16 0 1 32-16M0 1v35" />
+              <circle cx="0" cy="-33" r="3" fill="#997b32" />
+            </g>
+          ))}
+          <path d="M42 165H346" strokeDasharray="3 5" />
+        </g>
+      )}
+    </svg>
+  );
+}
+
 function IntelligencePreview() {
   return (
     <div className="report-preview">
@@ -183,20 +220,20 @@ function IntelligencePreview() {
         </div>
 
         <div className="report-row">
-          <span>Señal observada</span>
+          <span>Diferencias de inventario registradas</span>
           <span>Hecho</span>
           <span className="pill pill-mid">Validado</span>
         </div>
 
         <div className="report-row">
-          <span>Posible explicación</span>
+          <span>Posibles fallas de registro</span>
           <span>Hipótesis</span>
           <span className="pill pill-mid">Investigar</span>
         </div>
 
         <div className="report-row">
-          <span>Intervención propuesta</span>
-          <span>Decisión</span>
+          <span>Contrastar registros y conteos</span>
+          <span>Acción propuesta</span>
           <span className="pill pill-high">Priorizar</span>
         </div>
       </div>
@@ -216,7 +253,7 @@ function IntelligencePreview() {
 
 export default function Home() {
   return (
-    <main className="page-shell">
+    <main className="page-shell mindstack-editorial">
       <header className="header">
         <div className="container header-inner">
           <Brand />
@@ -260,8 +297,7 @@ export default function Home() {
         <span className="gold"> Decidir mejor.</span>
       </h1>
       <p className="hero-copy">
-        Investigamos lo que ocurre en una organización y conectamos datos,
-        procesos y contexto para tomar decisiones con mayor claridad.
+        Conectamos datos, procesos y contexto para entender qué ocurre en tu organización, dónde enfocar tus esfuerzos y qué decisiones merecen atención.
       </p>
       <div className="hero-actions">
         <ButtonGold href="/evaluacion">Comenzar evaluación gratuita</ButtonGold>
@@ -305,7 +341,7 @@ export default function Home() {
         </div>
         <h3>Una mirada más clara a tu operación.</h3>
         <p className="assessment-preview-description">
-          Identificamos lo que declaras, no inventamos causas ni calificaciones.
+          Una primera lectura organizada a partir de tus respuestas.
         </p>
         <div className="assessment-preview-items">
           <div>
@@ -350,8 +386,7 @@ export default function Home() {
         paso para tomar mejores decisiones.
       </p>
       <p>
-        Actualmente concentramos nuestro desarrollo comercial en restaurantes,
-        grupos gastronómicos y operaciones con varias sucursales.
+        Trabajamos con especial interés en restaurantes, grupos gastronómicos y operaciones con varias sucursales, donde la visibilidad de costos y procesos resulta especialmente importante.
       </p>
       <a className="story-text-link" href="/evaluacion">
         Explorar la evaluación para restaurantes <span aria-hidden="true">↗</span>
@@ -361,7 +396,7 @@ export default function Home() {
   <div className="container story-signals-wrap">
     <div className="story-signals-heading">
       <span className="eyebrow">Situaciones que merecen claridad</span>
-      <h3>Lo importante no siempre está a simple vista.</h3>
+      <h3>¿Reconoces alguna de estas situaciones?</h3>
       <p>Señales empresariales habituales que conviene investigar, sin asumir causas de antemano.</p>
     </div>
     <div className="story-signals">
@@ -385,6 +420,7 @@ export default function Home() {
       <h2>Distintos recursos. <span>Un mismo criterio.</span></h2>
       <p>La solución no se escoge antes de comprender el problema. Combinamos investigación, datos y tecnología según la situación de cada organización.</p>
       <a href="#metodologia" className="story-services-link">Conocer cómo trabajamos <span aria-hidden="true">↗</span></a>
+      <EditorialGraphic />
       <div className="story-services-aside">
         <span>PRINCIPIO DE TRABAJO</span>
         <p>Primero comprender. Después, intervenir donde exista una razón para hacerlo.</p>
@@ -416,6 +452,7 @@ export default function Home() {
       </div>
       <p>Las soluciones no deberían elegirse por tendencia. Partimos del contexto, contrastamos evidencia y diseñamos una intervención proporcional a lo que encontramos.</p>
     </div>
+    <EditorialGraphic variant="method" />
     <div className="home-method-rail" aria-label="Cinco etapas del método Mindstack">
       {steps.map((step) => (
         <article className="home-method-step" key={step.num}>
@@ -487,7 +524,7 @@ export default function Home() {
   </div>
   <div className="container home-contact-content">
     <span className="eyebrow">El siguiente paso</span>
-    <h2>Conversemos desde una comprensión más clara.</h2>
+    <h2>Hablemos de lo que tu negocio necesita comprender.</h2>
     <p>Hay dos maneras de comenzar: explorar gratuitamente la situación de tu restaurante o conversar directamente con Mindstack sobre un reto empresarial.</p>
     <div className="home-contact-options">
       <div className="home-contact-option home-contact-option-primary">
@@ -497,9 +534,9 @@ export default function Home() {
         <ButtonGold href="/evaluacion">Iniciar evaluación gratuita</ButtonGold>
       </div>
       <div className="home-contact-option">
-        <span>02 / PARA OTRAS CONVERSACIONES</span>
+        <span>02 / CONVERSACIÓN DIRECTA</span>
         <h3>Cuéntanos qué necesitas comprender.</h3>
-        <p>Exploramos el contexto de tu organización y si podemos aportar valor.</p>
+        <p>Cuéntanos el reto de tu organización, sea o no un restaurante. Exploraremos si podemos aportar valor.</p>
         <a href={WA} target="_blank" rel="noopener noreferrer" className="home-contact-secondary">Hablar con Mindstack <span aria-hidden="true">↗</span></a>
       </div>
     </div>
