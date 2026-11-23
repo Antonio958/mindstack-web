@@ -9,7 +9,8 @@ El CRM interno y su Supabase no se modifican.
 - Web: Next.js 16 estático para Cloudflare Pages.
 - API: carpeta worker para Cloudflare Workers.
 - BD: Neon PostgreSQL nuevo. Esquema en infra/neon/001_evaluaciones.sql.
-- Agenda: enlace de reserva de Google Calendar pendiente.
+- Agenda: https://calendar.app.google/t7YPiSH7QzDKR7JC6 (proporcionado por Mindstack, incorporado como URL por defecto en evaluación).
+- Neon: organización Mindstack, proyecto existente Mindstack (odd-silence-54841723), base neondb. Tablas evaluaciones y contactos_evaluacion confirmadas en el esquema público, vacías al verificar.
 
 ## 1. Cuenta Cloudflare
 
@@ -24,10 +25,10 @@ El CRM interno y su Supabase no se modifican.
 
 ## 2. Neon aislado
 
-1. Crear un proyecto independiente llamado mindstack-evaluacion en plan gratuito.
-2. Aplicar archivo infra/neon/001_evaluaciones.sql en el editor SQL de Neon.
-3. Guardar la conexión DATABASE_URL como secreto del Worker, NUNCA en GitHub ni frontend.
-4. Probar escritura, lectura administrativa y respaldo restaurable.
+1. Ya existe proyecto Neon Mindstack (Free) separado del Supabase del CRM.
+2. El usuario ejecutó infra/neon/001_evaluaciones.sql; se verificaron las tablas evaluaciones y contactos_evaluacion. No volver a aplicar el script sin revisar previamente el esquema.
+3. Queda pendiente registrar la cadena DATABASE_URL como secreto de Cloudflare Worker, NUNCA en GitHub ni frontend.
+4. Probar escritura y respaldo restaurable antes de recopilar información real.
 5. Configurar límites y alertas de capacidad.
 
 ## 3. API Cloudflare Worker
@@ -43,7 +44,7 @@ El CRM interno y su Supabase no se modifican.
 ## 4. Variables de entorno del frontend
 
 En Cloudflare Pages configurar:
-- NEXT_PUBLIC_DISCOVERY_BOOKING_URL: enlace real de reservas de Google Calendar.
+- NEXT_PUBLIC_DISCOVERY_BOOKING_URL: https://calendar.app.google/t7YPiSH7QzDKR7JC6 (ya existe como valor por defecto en el código, pero configurar explícitamente para producción).
 - NEXT_PUBLIC_EVALUACION_API_URL: URL completa HTTPS de API Worker (termina /api/evaluaciones).
 - NEXT_PUBLIC_TURNSTILE_SITE_KEY: clave pública de Turnstile.
 - NEXT_PUBLIC_AVISO_PRIVACIDAD_URL: aviso real aprobado y accesible.
@@ -77,3 +78,13 @@ Copiar enlace público a NEXT_PUBLIC_DISCOVERY_BOOKING_URL y comprobar reserva d
 - Worker: cd worker; npm install; npm run check
 
 Nunca incluir credenciales, registros reales o datos de prospectos en GitHub público.
+
+## Estado de la integración — 23 de noviembre de 2026
+
+- Neon: confirmado. Tablas existentes, 0 filas al comprobar.
+- Agenda: enlace incorporado en app/evaluacion/page.tsx. La apertura pública de la agenda debe probarse en navegación incógnita; este enlace NO sincroniza por sí mismo el ID de evaluación con el evento de Calendar.
+- Frontend: sólo rama feature; main aún sin los cambios.
+- Cloudflare: cuenta creada por usuario, falta confirmar proyecto Pages y su dominio pages.dev; conectar GitHub es un paso adicional a crear cuenta.
+- API: no desplegada; captación con consentimiento y Turnstile bloqueada por ausencia de variables de despliegue.
+- Cambiar estado de reserva a sin_solicitar cuando solo se comparten respuestas: ya corregido en Worker.
+- El calendario principal reportó previamente zona UTC; verificar disponibilidad de la página de reservas en America/Mexico_City.
