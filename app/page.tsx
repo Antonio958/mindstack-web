@@ -12,37 +12,43 @@ const navItems = [
   ["Método", "#metodologia"],
   ["Industrias", "#sectores"],
   ["Firma", "#nosotros"],
+  ["Preguntas frecuentes", "/preguntas-frecuentes"],
   ["Contacto", "#contacto"],
 ];
 
 const services = [
   {
     num: "01",
-    title: "Diagnóstico",
+    title: "Diagnóstico empresarial",
+    output: "Hallazgos documentados y recomendaciones priorizadas.",
     desc: "Investigamos problemas operativos y comerciales, contrastamos evidencia y delimitamos qué conviene intervenir. Por ejemplo, diferencias de inventario o variaciones entre sucursales.",
     tag: "Comprender",
   },
   {
     num: "02",
-    title: "Inteligencia de Negocio",
+    title: "Inteligencia de negocio",
+    output: "Indicadores, análisis y tableros de seguimiento.",
     desc: "Integramos información dispersa para analizar ventas, costos, rentabilidad y desempeño operativo mediante indicadores y herramientas de seguimiento.",
     tag: "Explicar",
   },
   {
     num: "03",
     title: "Automatización",
+    output: "Flujos automatizados e integraciones.",
     desc: "Diseñamos flujos para reducir tareas repetitivas, errores de captura y consolidación manual de información, cuando existe una mejora operativa justificable.",
     tag: "Transformar",
   },
   {
     num: "04",
-    title: "Inteligencia Artificial",
+    title: "Inteligencia artificial",
+    output: "Modelos, asistentes o herramientas de análisis.",
     desc: "Exploramos aplicaciones como clasificación de información, análisis de comentarios y apoyo a tareas analíticas, cuando la evidencia justifica su uso.",
     tag: "Potenciar",
   },
   {
     num: "05",
     title: "Soluciones a medida",
+    output: "Aplicaciones o sistemas específicos para el negocio.",
     desc: "Combinamos análisis, procesos y desarrollo tecnológico para resolver necesidades que no encajan en una herramienta estándar.",
     tag: "Integrar",
   },
@@ -51,32 +57,32 @@ const services = [
 const restaurantSignals = [
   {
     num: "01",
-    title: "Varias sucursales",
+    title: "Sucursales que operan de forma distinta",
     desc: "La operación empieza a diferir entre unidades y aumenta la dificultad para mantener visibilidad y control.",
   },
   {
     num: "02",
-    title: "Crecimiento con poca visibilidad",
+    title: "Crecimiento difícil de explicar",
     desc: "El negocio vende y crece, pero no siempre puede explicar con claridad qué está impulsando ese crecimiento.",
   },
   {
     num: "03",
-    title: "Márgenes difíciles de leer",
+    title: "Vender más no siempre es ganar más",
     desc: "Costos, merma, tiempos, descuentos y diferencias operativas pueden ocultar dónde se está deteriorando la rentabilidad.",
   },
   {
     num: "04",
-    title: "Procesos dependientes de personas",
+    title: "Dependencia de personas clave",
     desc: "Parte importante de la operación depende del dueño, gerente o conocimiento informal que todavía no está institucionalizado.",
   },
   {
     num: "05",
-    title: "Datos fragmentados",
+    title: "Información dispersa",
     desc: "Ventas, inventario, clientes, reseñas, costos y operación existen en distintos sistemas sin convertirse en una lectura integrada.",
   },
   {
     num: "06",
-    title: "Decisiones bajo incertidumbre",
+    title: "Dudas sobre qué resolver primero",
     desc: "Existen señales de problemas u oportunidades, pero no suficiente evidencia para saber qué intervenir primero.",
   },
 ];
@@ -281,11 +287,11 @@ export default function Home() {
         <span className="gold"> Decidir mejor.</span>
       </h1>
       <p className="hero-copy">
-        Conectamos datos, procesos y contexto para entender qué ocurre en tu organización, dónde enfocar tus esfuerzos y qué decisiones merecen atención.
+        Ayudamos a las organizaciones a identificar problemas, entender su desempeño y mejorar sus operaciones mediante investigación, análisis de datos y tecnología aplicada.
       </p>
       <div className="hero-actions">
         <ButtonGold href="/evaluacion">Comenzar evaluación gratuita</ButtonGold>
-        <ButtonOutline href="#capacidades">Conocer nuestras capacidades</ButtonOutline>
+        <ButtonOutline href="#capacidades">Conoce cómo podemos ayudarte</ButtonOutline>
       </div>
       <p className="hero-footnote">
         Evaluación inicial disponible para restaurantes. Sin registro obligatorio.
@@ -362,7 +368,7 @@ export default function Home() {
       <figcaption>Imagen ilustrativa · Operación restaurantera</figcaption>
     </figure>
     <div className="story-sector-copy">
-      <span className="eyebrow">Especialización actual / Restaurantes</span>
+      <span className="eyebrow">Industria prioritaria / Restaurantes</span>
       <h2>La inteligencia comienza <span>en la operación.</span></h2>
       <p>
         Un restaurante reúne ventas, inventario, costos, equipos y experiencia
@@ -370,7 +376,7 @@ export default function Home() {
         paso para tomar mejores decisiones.
       </p>
       <p>
-        Trabajamos con especial interés en restaurantes, grupos gastronómicos y operaciones con varias sucursales, donde la visibilidad de costos y procesos resulta especialmente importante.
+        Nuestro enfoque comercial actual está en restaurantes y grupos gastronómicos. También exploramos proyectos de otros sectores cuando nuestras capacidades pueden aportar valor.
       </p>
       <a className="story-text-link" href="/evaluacion">
         Explorar la evaluación para restaurantes <span aria-hidden="true">↗</span>
@@ -392,7 +398,7 @@ export default function Home() {
         </article>
       ))}
     </div>
-    <p className="story-transversal-note">Nuestro enfoque también puede aplicarse a otros sectores cuando su situación requiere investigación, análisis de datos y decisiones empresariales.</p>
+    <p className="story-transversal-note">No necesitas conocer la causa del problema para empezar una conversación con nosotros.</p>
   </div>
 </section>
 
@@ -401,13 +407,13 @@ export default function Home() {
   <div className="container story-services-layout">
     <div className="story-services-intro">
       <span className="eyebrow">Lo que hacemos</span>
-      <h2>Distintos recursos. <span>Un mismo criterio.</span></h2>
-      <p>La solución no se escoge antes de comprender el problema. Combinamos investigación, datos y tecnología según la situación de cada organización.</p>
+      <h2>Soluciones para <span>retos reales.</span></h2>
+      <p>No vendemos una herramienta predeterminada. Elegimos los recursos según el problema, los objetivos y las condiciones de tu organización.</p>
       <a href="#metodologia" className="story-services-link">Conocer cómo trabajamos <span aria-hidden="true">↗</span></a>
       <EvidenceMap />
       <div className="story-services-aside">
         <span>PRINCIPIO DE TRABAJO</span>
-        <p>Primero comprender. Después, intervenir donde exista una razón para hacerlo.</p>
+        <p>Los entregables se acuerdan en la propuesta de cada proyecto.</p>
       </div>
     </div>
     <div className="story-services-list">
@@ -417,6 +423,7 @@ export default function Home() {
           <div>
             <h3>{item.title}</h3>
             <p>{item.desc}</p>
+            <p className="msk-service-output"><strong>Posibles entregables:</strong> {item.output}</p>
           </div>
           <span className="story-service-tag">{item.tag}</span>
         </article>
@@ -453,9 +460,9 @@ export default function Home() {
 <section id="entregable" className="home-deliverable">
   <div className="container deliverable-grid">
     <div className="home-deliverable-copy">
-      <span className="eyebrow">El valor de una lectura estructurada</span>
-      <h2>La información importa cuando ayuda a <span>decidir.</span></h2>
-      <p>Organizamos hechos, relaciones e incertidumbres para que una organización pueda distinguir qué conoce, qué necesita investigar y qué decisiones merecen atención.</p>
+      <span className="eyebrow">Resultados y entregables</span>
+      <h2>De la evidencia a <span>acciones concretas.</span></h2>
+      <p>Según el proyecto, entregamos análisis, recomendaciones o soluciones implementadas. Este ejemplo muestra cómo distinguimos un hecho de una hipótesis y de una acción propuesta.</p>
       <div className="home-deliverable-facts">
         <div><strong>01</strong><span>Hechos y señales relevantes</span></div>
         <div><strong>02</strong><span>Relaciones y hallazgos identificados</span></div>
@@ -475,11 +482,12 @@ export default function Home() {
       <span className="eyebrow">La firma</span>
       <h2>El criterio humano detrás de <span>cada decisión.</span></h2>
       <p>Mindstack es una firma de inteligencia empresarial que combina investigación, análisis de procesos, datos y tecnología para comprender situaciones antes de proponer intervenciones.</p>
-      <p>No comenzamos vendiendo una herramienta. Comenzamos por entender el negocio y reconocer qué evidencia necesitamos para trabajar con rigor.</p>
+      <p>Nuestro compromiso es trabajar con evidencia, explicar los límites de nuestros análisis y acordar el alcance de cada intervención antes de ejecutarla.</p>
       <div className="home-firm-principles">
         <span>Evidencia antes de prescripción</span>
         <span>Contexto antes de tecnología</span>
-        <span>Intervenciones proporcionales</span>
+        <span>Alcance y entregables acordados</span>
+        <a className="msk-firm-privacy" href="/aviso-de-privacidad/">Consultar nuestro aviso de privacidad ↗</a>
       </div>
     </div>
     <div className="home-firm-leader">
@@ -508,7 +516,19 @@ export default function Home() {
   <div className="container home-contact-content">
     <span className="eyebrow">El siguiente paso</span>
     <h2>Hablemos de lo que tu negocio necesita comprender.</h2>
-    <p>Hay dos maneras de comenzar: explorar gratuitamente la situación de tu restaurante o conversar directamente con Mindstack sobre un reto empresarial.</p>
+    <p>Puedes comenzar con una evaluación orientativa de tu restaurante o conversar directamente con nosotros sobre un reto empresarial.</p>
+    <div className="msk-collaboration" aria-label="Cómo comenzar un proyecto">
+      <h3>Así comienza una colaboración.</h3>
+      <ol>
+        {[
+          ["Conversación", "Conocemos tu situación y tus objetivos."],
+          ["Exploración", "Revisamos necesidades y posibilidades."],
+          ["Propuesta", "Acordamos alcance, entregables, plazos e inversión."],
+          ["Inicio", "Trabajamos tras aceptar la propuesta."],
+        ].map(([title, desc], i) => <li key={title}><span>0{i + 1}</span><strong>{title}</strong><p>{desc}</p></li>)}
+      </ol>
+      <a href="/preguntas-frecuentes">Conoce más sobre contratación y servicios ↗</a>
+    </div>
     <div className="home-contact-options">
       <div className="home-contact-option home-contact-option-primary">
         <span>01 / PARA RESTAURANTES</span>
@@ -555,6 +575,7 @@ export default function Home() {
         <a href="#metodologia">Método Mindstack</a>
         <a href="#sectores">Industria foco</a>
         <a href="#nosotros">La firma</a>
+        <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
         <a href="/aviso-de-privacidad/">Aviso de privacidad</a>
       </div>
 
