@@ -1,5 +1,8 @@
 import type { Answers } from "./motor";
 
+export class RegistrationError extends Error {
+  constructor(public readonly code: string) { super("No se pudo registrar la evaluación."); }
+}
 export type ContactoEvaluacion = {
   name: string;
   email: string;
@@ -55,7 +58,8 @@ export async function compartirEvaluacion(
   const data: unknown = await response.json();
   if (!response.ok || !data || typeof data !== "object" ||
       (data as Record<string, unknown>).ok !== true) {
-    throw new Error("No se pudo registrar la evaluación.");
+    const code = data && typeof data === "object" ? (data as Record<string, unknown>).code : null;
+    throw new RegistrationError(typeof code === "string" && /^(TS0[1-5]|DB01)$/.test(code) ? code : "HTTP-" + response.status);
   }
   const reference = (data as Record<string, unknown>).evaluationId;
   if (typeof reference !== "string" || !reference) {
