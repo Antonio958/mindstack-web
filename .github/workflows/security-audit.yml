@@ -1,0 +1,32 @@
+name: Mindstack - seguridad de dependencias
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 14 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: ['.', 'worker']
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Auditar dependencias de producción
+        run: npm audit --omit=dev --audit-level=low
+      - name: Auditar dependencias de desarrollo
+        if: always()
+        run: npm audit --audit-level=low

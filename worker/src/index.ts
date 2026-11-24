@@ -1,3 +1,4 @@
+import { readBoundedJson, PayloadTooLarge } from "./security";
 import { neon } from "@neondatabase/serverless";
 import { QUESTIONS, VERSION, complete, evaluate, type Answers } from "../../lib/evaluacion/motor";
 import { PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, MIGRATION_ORIGINS } from "../../lib/evaluacion/config";
@@ -14,6 +15,9 @@ const headers = {
   "Content-Type": "application/json; charset=utf-8",
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "no-referrer",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'",
 };
 function response(body: object, status=200, origin?: string) {
   return new Response(JSON.stringify(body), {
@@ -42,7 +46,7 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null,
   form.append("response", token);
   if (ip) form.append("remoteip", ip);
   const answer = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method:"POST",body:form
+    method:"POST",body:form,signal:AbortSignal.timeout(10000)
   });
   if (!answer.ok) return false;
   const data: unknown = await answer.json();
@@ -57,7 +61,7 @@ export default {
       env.ALLOWED_ORIGIN && !env.ALLOWED_ORIGIN.includes("replace-with")
     );
     if (url.pathname === "/health" && request.method === "GET") {
-      return response({status: configured ? "ready" : "not_configured", version: VERSION, subdomainMigration: "grupomindstack-v1"},
+      return response({status: configured ? "ready" : "not_configured", version: VERSION, subdomainMigration: "grupomindstack-v1", securityRevision: "1"},
         configured ? 200 : 503);
     }
 
@@ -88,7 +92,7 @@ export default {
     if (!configured) return response({error:"Servicio no configurado"},503,origin);
     if (request.method === "OPTIONS")
       return new Response(null,{status:204,headers:{
-        "Access-Control-Allow-Origin":origin,
+        ...headers, "Access-Control-Allow-Origin":origin,
         "Access-Control-Allow-Methods":"POST, OPTIONS",
         "Access-Control-Allow-Headers":"Content-Type",
         "Access-Control-Max-Age":"3600",Vary:"Origin"
@@ -100,14 +104,14 @@ export default {
     if (!submitLimit.success) return response({error:"Demasiadas solicitudes"},429,origin);
     if (!(request.headers.get("Content-Type") || "").startsWith("application/json"))
       return response({error:"Tipo de contenido incorrecto"},415,origin);
-    if (Number(request.headers.get("Content-Length") || 0) > 16000)
-      return response({error:"Solicitud demasiado grande"},413,origin);
     let payload: unknown;
     try {
-      const raw=await request.text();
-      if(raw.length>16000) return response({error:"Solicitud demasiado grande"},413,origin);
-      payload=JSON.parse(raw);
-    } catch {return response({error:"JSON incorrecto"},400,origin);}
+      payload=await readBoundedJson(request);
+    } catch(error) {
+      return error instanceof PayloadTooLarge
+        ? response({error:"Solicitud demasiado grande"},413,origin)
+        : response({error:"JSON incorrecto"},400,origin);
+    }
     if(!isRecord(payload)) return response({error:"Solicitud incorrecta"},400,origin);
     const a=checkedAnswers(payload.answers);
     const person=payload.contact;
@@ -121,8 +125,13 @@ export default {
     const phone=asText(person.phone,32) || null;
     if(name.length<2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !token)
       return response({error:"Datos de contacto incorrectos"},400,origin);
-    const verified=await verifyTurnstile(token,env.TURNSTILE_SECRET,
-      request.headers.get("CF-Connecting-IP"),new URL(origin).hostname);
+    let verified: boolean;
+    try {
+      verified=await verifyTurnstile(token,env.TURNSTILE_SECRET,
+        request.headers.get("CF-Connecting-IP"),new URL(origin).hostname);
+    } catch {
+      return response({error:"Verificación temporalmente no disponible"},503,origin);
+    }
     if(!verified) return response({error:"Verificación antiabuso fallida"},403,origin);
     const result=evaluate(a);
     if(result.status==="outside_scope") return response({error:"Sector fuera de alcance"},400,origin);

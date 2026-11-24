@@ -237,7 +237,7 @@ const commercialStyles = "\n.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24p
 
 export default function Home() {
   return (
-    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-08">
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-09">
       <style>{commercialStyles + ".mindstack-editorial .story-service-row{scroll-margin-top:100px}"}</style>
       <SiteHeader />
 
@@ -250,7 +250,6 @@ export default function Home() {
       decoding="auto"
       fetchPriority="high"
     />
-    <span className="hero-photo-disclaimer">Imagen ilustrativa · Unsplash</span>
   </div>
   <div className="container hero-grid hero-refreshed-grid">
     <div className="hero-copy-block">
@@ -338,7 +337,6 @@ export default function Home() {
         loading="eager"
         decoding="auto"
       />
-      <figcaption>Imagen ilustrativa · Operación restaurantera</figcaption>
     </figure>
     <div className="story-sector-copy">
       <span className="eyebrow">Industria prioritaria / Restaurantes</span>
@@ -517,7 +515,6 @@ export default function Home() {
         <a href={WA} target="_blank" rel="noopener noreferrer" className="home-contact-secondary">Hablar con Mindstack <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <small className="home-contact-photo-note">Fotografía ilustrativa de Ciudad de México</small>
   </div>
 </section>
 

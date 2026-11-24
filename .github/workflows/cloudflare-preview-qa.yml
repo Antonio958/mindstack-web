@@ -19,7 +19,7 @@ jobs:
           "$RUNNER_TEMP/mindstack-qa/node_modules/.bin/playwright" install --with-deps chromium
       - name: Validar sitio desplegado sin enviar datos
         env:
-          QA_BASE: https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev
+          QA_BASE: https://feature-ciberseguridad-mindstack-web.grupomindstack.workers.dev
           QA_NODE: ${{ runner.temp }}/mindstack-qa/node_modules
         run: |
           cat > "$RUNNER_TEMP/mindstack-qa/check.cjs" <<'JS'
@@ -37,15 +37,24 @@ jobs:
             const page = await desktop.newPage();
             // Guard against accidental contact submission: no POST to Mindstack API.
             await desktop.route('**/api/evaluaciones', route => route.abort());
+            // This preview is deliberately not authorized to submit to the live API.
+            // Stub readiness only for UI tests, with all submission requests blocked.
+            await desktop.route('**/api/estado', route=>route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':base,'Content-Type':'application/json'},body:JSON.stringify({status:'ready',privacyVersion:'2026-11-23-v2'})}));
             let errors=[];
             let waHref, bookingHref;
             page.on('pageerror', e=>errors.push(e.message));
-            await check('Portada HTTP y revisión 08', async()=>{
+            await check('Portada HTTP y revisión 09', async()=>{
               const response=await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:45000});
               assert.equal(response.status(),200);
-              await page.locator('[data-revision="home-08"]').waitFor();
+              await page.locator('[data-revision="home-09"]').waitFor();
               assert.match(await page.title(),/Mindstack/i);
               assert.equal(await page.locator('h1').count(),1);
+              const headers=response.headers();
+              assert.equal(headers['x-frame-options'],'DENY');
+              assert.equal(headers['x-content-type-options'],'nosniff');
+              assert.match(headers['content-security-policy'],/frame-ancestors 'none'/);
+              assert.match(headers['content-security-policy'],/challenges\.cloudflare\.com/);
+              assert.equal(await page.locator('.hero-photo-disclaimer,.home-contact-photo-note,figcaption').filter({hasText:/imagen ilustrativa|fotografía ilustrativa/i}).count(),0);
             });
             await check('Fotografías y logo realmente cargados',async()=>{
               await page.locator('img').last().scrollIntoViewIfNeeded();

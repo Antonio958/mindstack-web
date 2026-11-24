@@ -16,7 +16,7 @@
   ],
   "vars": {
     "PRIVACY_VERSION": "2026-11-23-v2",
-    "ALLOWED_ORIGIN": "https://mindstack-web.luispalmhdz06.workers.dev",
-    "ALLOWED_PREVIEW_ORIGIN": "https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev"
+    "ALLOWED_ORIGIN": "https://mindstack-web.grupomindstack.workers.dev",
+    "ALLOWED_PREVIEW_ORIGIN": "https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.grupomindstack.workers.dev"
   }
 }
