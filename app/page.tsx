@@ -19,31 +19,31 @@ const services = [
   {
     num: "01",
     title: "Diagnóstico",
-    desc: "Comprendemos la situación actual de la organización, investigamos señales, problemas y posibles causas, y construimos una lectura estructurada antes de recomendar una intervención.",
+    desc: "Investigamos problemas operativos y comerciales, contrastamos evidencia y delimitamos qué conviene intervenir. Por ejemplo, diferencias de inventario o variaciones entre sucursales.",
     tag: "Comprender",
   },
   {
     num: "02",
     title: "Inteligencia de Negocio",
-    desc: "Convertimos datos e información empresarial en indicadores, análisis y sistemas de lectura que permitan comprender el desempeño y tomar mejores decisiones.",
+    desc: "Integramos información dispersa para analizar ventas, costos, rentabilidad y desempeño operativo mediante indicadores y herramientas de seguimiento.",
     tag: "Explicar",
   },
   {
     num: "03",
     title: "Automatización",
-    desc: "Diseñamos flujos y sistemas que reducen trabajo manual, errores y fricción operativa cuando la automatización representa una mejora real para el proceso.",
+    desc: "Diseñamos flujos para reducir tareas repetitivas, errores de captura y consolidación manual de información, cuando existe una mejora operativa justificable.",
     tag: "Transformar",
   },
   {
     num: "04",
     title: "Inteligencia Artificial",
-    desc: "Aplicamos inteligencia artificial cuando aporta capacidad analítica, operativa o de decisión, evitando introducirla donde no resuelve un problema relevante.",
+    desc: "Exploramos aplicaciones como clasificación de información, análisis de comentarios y apoyo a tareas analíticas, cuando la evidencia justifica su uso.",
     tag: "Potenciar",
   },
   {
     num: "05",
     title: "Soluciones a medida",
-    desc: "Diseñamos intervenciones específicas cuando el problema requiere combinar estrategia, procesos, datos, tecnología o desarrollo bajo una arquitectura propia.",
+    desc: "Combinamos análisis, procesos y desarrollo tecnológico para resolver necesidades que no encajan en una herramienta estándar.",
     tag: "Integrar",
   },
 ];
