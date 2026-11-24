@@ -150,7 +150,7 @@ export default function EvaluacionPage() {
   const canContact = CAN_SAVE && serviceReady && result?.status !== "outside_scope";
 
   return (
-    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10">
+    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10" data-subdomain-migration="ready">
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label="Volver al inicio de Mindstack">
           <img src="/logo-mindstack.png" alt="" className={styles.logo} />
