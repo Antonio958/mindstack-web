@@ -89,21 +89,30 @@ jobs:
               await check('Evaluación '+name+' sin registro',async()=>{
                 const response=await page.goto(base+'/evaluacion/');
                 assert.equal(response.status(),200);
+                await page.locator('[data-revision="evaluation-10"]').waitFor({timeout:20000});
                 for(const n of choices){
                   await page.locator('input[type=radio]').nth(n).check();
                   await page.getByRole('button',{name:/Continuar|Ver mis resultados/}).click();
                 }
                 await page.getByRole('heading',{level:1}).filter({hasText:title}).waitFor();
-                if(name==='Otro sector') assert.equal(await page.getByRole('button',{name:'Compartir mi evaluación'}).count(),0);
+                if(name==='Otro sector') assert.equal(await page.getByRole('button',{name:/Solicitar contacto/}).count(),0);
                 if(name==='Señales'){
                   const booking=page.getByRole('link',{name:/Agendar conversación inicial|Conversar con Mindstack/});
                   await booking.waitFor();
                   bookingHref=await booking.getAttribute('href');
                   await page.getByRole('heading',{name:/compartir tus resultados/i}).waitFor({timeout:20000});
-                  const submit=page.getByRole('button',{name:'Compartir mi evaluación'});
+                  await page.getByRole('button',{name:/Solicitar contacto/}).first().click();
+                  await page.getByRole('dialog').waitFor();
+                  const submit=page.getByRole('button',{name:'Compartir resultados y solicitar contacto'});
                   assert.equal(await submit.isDisabled(),true);
                   assert.equal(await page.locator('input[type=checkbox]').isChecked(),false);
                   console.log('TURNSTILE_CONTAINER '+await page.locator('.cf-turnstile').count());
+                  await page.getByRole('button',{name:/Por ahora, solo quiero/}).click();
+                  assert.equal(await page.getByRole('dialog').count(),0);
+                  await page.getByRole('button',{name:/Solicitar contacto/}).last().click();
+                  await page.getByRole('dialog').waitFor();
+                  await page.keyboard.press('Escape');
+                  assert.equal(await page.getByRole('dialog').count(),0);
                 }
               });
             }
