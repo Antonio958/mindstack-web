@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 const links = [
@@ -28,20 +30,21 @@ const headerStyles = `
 .msk-site-menu nav a[aria-current]{color:#e5c46b}
 .msk-site-header a:focus-visible,.msk-site-header summary:focus-visible{outline:2px solid #e6c66b;outline-offset:4px}
 .msk-faq .msk-faq-intro{padding-top:124px}
-@media(max-width:1100px){.msk-site-header .msk-site-nav{display:none}.msk-site-menu{display:block;margin-left:auto}}
+@media(max-width:1180px){.msk-site-header .msk-site-nav{display:none}.msk-site-menu{display:block;margin-left:auto}}
 @media(max-width:640px){.mindstack-editorial .msk-site-header .msk-site-header-inner{width:calc(100% - 32px);min-height:68px;gap:10px}.msk-site-brand{flex-basis:90px;width:90px;height:58px}.msk-site-brand img{width:90px;height:58px}.mindstack-editorial .msk-site-header .msk-site-cta{font-size:10px!important;padding:9px;min-height:40px}.msk-faq .msk-faq-intro{padding-top:105px}}
+@media(max-width:360px){.msk-site-brand{flex-basis:70px;width:70px}.msk-site-brand img{width:70px}.msk-site-menu summary{font-size:12px}.mindstack-editorial .msk-site-header .msk-site-header-inner{gap:6px;width:calc(100% - 24px)}.mindstack-editorial .msk-site-header .msk-site-cta{padding:8px 7px;font-size:9px!important}}
 `;
 
 export function SiteHeader({faq=false}: {faq?: boolean}) {
-  function navigation(): ReactNode {
-    return links.map(([label, href]) => <a key={href} href={href} aria-current={faq && href === "/preguntas-frecuentes" ? "page" : undefined}>{label}</a>);
+  function navigation(mobile = false): ReactNode {
+    return links.map(([label, href]) => <a key={href} href={href} onClick={mobile ? (event) => event.currentTarget.closest("details")?.removeAttribute("open") : undefined} aria-current={faq && href === "/preguntas-frecuentes" ? "page" : undefined}>{label}</a>);
   }
   return <header className="msk-site-header">
     <style>{headerStyles}</style>
     <div className="msk-site-header-inner">
       <a className="msk-site-brand" href="/" aria-label="Mindstack, inicio"><img src="/logo-mindstack.png" alt="Mindstack" width={120} height={68} /></a>
       <nav className="msk-site-nav" aria-label="Navegación principal">{navigation()}</nav>
-      <details className="msk-site-menu"><summary aria-label="Abrir menú de navegación">Menú ☰</summary><nav aria-label="Navegación móvil">{navigation()}</nav></details>
+      <details className="msk-site-menu"><summary aria-label="Abrir menú de navegación">Menú ☰</summary><nav aria-label="Navegación móvil">{navigation(true)}</nav></details>
       <a className="msk-site-cta" href="/evaluacion/">Evaluación gratuita</a>
     </div>
   </header>;
