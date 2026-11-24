@@ -19,7 +19,7 @@ jobs:
           "$RUNNER_TEMP/mindstack-qa/node_modules/.bin/playwright" install --with-deps chromium
       - name: Validar sitio desplegado sin enviar datos
         env:
-          QA_BASE: https://feature-ciberseguridad-mindstack-web.grupomindstack.workers.dev
+          QA_BASE: https://fix-diagnostico-registro-mindstack-web.grupomindstack.workers.dev
           QA_NODE: ${{ runner.temp }}/mindstack-qa/node_modules
         run: |
           cat > "$RUNNER_TEMP/mindstack-qa/check.cjs" <<'JS'
@@ -98,7 +98,7 @@ jobs:
               await check('Evaluación '+name+' sin registro',async()=>{
                 const response=await page.goto(base+'/evaluacion/');
                 assert.equal(response.status(),200);
-                await page.locator('[data-revision="evaluation-10"]').waitFor({timeout:20000});
+                await page.locator('[data-registration-revision="diagnostic-1"]').waitFor({timeout:20000});
                 for(const n of choices){
                   await page.locator('input[type=radio]').nth(n).check();
                   await page.getByRole('button',{name:/Continuar|Ver mis resultados/}).click();

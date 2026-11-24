@@ -1,4 +1,4 @@
-import { readBoundedJson, PayloadTooLarge } from "./security";
+import { readBoundedJson, PayloadTooLarge, classifyTurnstile, type VerificationResult } from "./security";
 import { neon } from "@neondatabase/serverless";
 import { QUESTIONS, VERSION, complete, evaluate, type Answers } from "../../lib/evaluacion/motor";
 import { PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, MIGRATION_ORIGINS } from "../../lib/evaluacion/config";
@@ -48,9 +48,9 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null,
   const answer = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method:"POST",body:form,signal:AbortSignal.timeout(10000)
   });
-  if (!answer.ok) return false;
+  if (!answer.ok) return "TS05" as const;
   const data: unknown = await answer.json();
-  return isRecord(data) && data.success === true && data.hostname === expectedHostname;
+  return classifyTurnstile(data, expectedHostname);
 }
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -61,7 +61,7 @@ export default {
       env.ALLOWED_ORIGIN && !env.ALLOWED_ORIGIN.includes("replace-with")
     );
     if (url.pathname === "/health" && request.method === "GET") {
-      return response({status: configured ? "ready" : "not_configured", version: VERSION, subdomainMigration: "grupomindstack-v1", securityRevision: "1"},
+      return response({status: configured ? "ready" : "not_configured", version: VERSION, subdomainMigration: "grupomindstack-v1", securityRevision: "1", registrationRevision: "diagnostic-1"},
         configured ? 200 : 503);
     }
 
@@ -125,14 +125,18 @@ export default {
     const phone=asText(person.phone,32) || null;
     if(name.length<2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !token)
       return response({error:"Datos de contacto incorrectos"},400,origin);
-    let verified: boolean;
+    let verified: VerificationResult;
     try {
       verified=await verifyTurnstile(token,env.TURNSTILE_SECRET,
         request.headers.get("CF-Connecting-IP"),new URL(origin).hostname);
     } catch {
-      return response({error:"Verificación temporalmente no disponible"},503,origin);
+      console.warn("registration: TS05 provider unavailable");
+      return response({error:"Verificación temporalmente no disponible",code:"TS05"},503,origin);
     }
-    if(!verified) return response({error:"Verificación antiabuso fallida"},403,origin);
+    if(verified !== "ok") {
+      console.warn("registration: " + verified);
+      return response({error:"Verificación antiabuso fallida",code:verified},403,origin);
+    }
     const result=evaluate(a);
     if(result.status==="outside_scope") return response({error:"Sector fuera de alcance"},400,origin);
     const source=asText(payload.source,80) || null;
@@ -160,7 +164,8 @@ export default {
       `;
       return response({ok:true,evaluationId:rows[0]?.evaluacion_id,status:result.status},201,origin);
     } catch {
-      return response({error:"No se pudo guardar la solicitud"},503,origin);
+      console.warn("registration: DB01");
+      return response({error:"No se pudo guardar la solicitud",code:"DB01"},503,origin);
     }
   },
   async scheduled(_controller: unknown, env: Env): Promise<void> {

@@ -7,7 +7,7 @@ import { Manrope, Inter } from "next/font/google";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
 import { EVALUACION_API_URL, evaluationApiForHostname, PRIVACY_PATH, PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, TURNSTILE_SITE_KEY } from "../../lib/evaluacion/config";
-import { comprobarDisponibilidad, compartirEvaluacion } from "../../lib/evaluacion/cliente";
+import { comprobarDisponibilidad, compartirEvaluacion, RegistrationError } from "../../lib/evaluacion/cliente";
 
 const displayFont = Manrope({ subsets: ["latin"], variable: "--assessment-display", display: "swap" });
 const readingFont = Inter({ subsets: ["latin"], variable: "--assessment-reading", display: "swap" });
@@ -35,6 +35,7 @@ export default function EvaluacionPage() {
   const [turnstileToken, setTurnstileToken] = useState("");
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending" | "saved" | "error">("idle");
   const [savedReference, setSavedReference] = useState("");
+  const [registrationError, setRegistrationError] = useState("");
   const [serviceReady, setServiceReady] = useState(false);
   const [apiUrl, setApiUrl] = useState(API_URL);
   useEffect(() => { setApiUrl(evaluationApiForHostname(window.location.hostname, API_URL)); }, []);
@@ -126,6 +127,7 @@ export default function EvaluacionPage() {
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!CAN_SAVE || !serviceReady || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
+    setRegistrationError("");
     setSubmissionStatus("sending");
     try {
       const reference = await compartirEvaluacion(apiUrl, {
@@ -137,7 +139,8 @@ export default function EvaluacionPage() {
       });
       setSavedReference(reference);
       setSubmissionStatus("saved");
-    } catch {
+    } catch (error) {
+      setRegistrationError(error instanceof RegistrationError ? error.code : "NET01");
       setSubmissionStatus("error");
       setTurnstileToken("");
       const browser = window as typeof window & { turnstile?: TurnstileAPI };
@@ -150,7 +153,7 @@ export default function EvaluacionPage() {
   const canContact = CAN_SAVE && serviceReady && result?.status !== "outside_scope";
 
   return (
-    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10" data-subdomain-migration="ready">
+    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10" data-registration-revision="diagnostic-1" data-subdomain-migration="ready">
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label="Volver al inicio de Mindstack">
           <img src="/logo-mindstack.png" alt="" className={styles.logo} />
@@ -307,7 +310,7 @@ export default function EvaluacionPage() {
                   </label>
                   <div ref={widgetRef} className="cf-turnstile" aria-label="Verificación de seguridad" />
                   {challengeError && <p role="alert" className={styles.formError}>No se pudo iniciar la verificación. Cierra y vuelve a abrir la ventana o utiliza WhatsApp.</p>}
-                  {submissionStatus === "error" && <p role="alert" className={styles.formError}>No fue posible guardar la información. Inténtalo de nuevo o utiliza el contacto directo.</p>}
+                  {submissionStatus === "error" && <p role="alert" className={styles.formError}>No fue posible guardar la información. Inténtalo de nuevo o utiliza el contacto directo. {registrationError && <>Referencia: {registrationError}.</>}</p>}
                   <button className={styles.primaryButton} type="submit" disabled={!contactConsent || !turnstileToken || submissionStatus === "sending"}>
                     {submissionStatus === "sending" ? "Guardando..." : "Compartir resultados y solicitar contacto"}
                   </button>
