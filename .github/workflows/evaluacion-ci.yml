@@ -17,12 +17,13 @@ jobs:
       - name: Instalar dependencias reproducibles
         run: npm ci
       - name: Comprobar reglas de interpretación
-        run: node --experimental-strip-types --test tests/evaluacion.test.mjs
+        run: node --experimental-strip-types --test tests/evaluacion.test.mjs tests/security.test.mjs
       - name: Verificar compilacion y exportacion estatica
         run: npm run build
       - name: Verificar contenido exportado
         run: |
           test -f out/index.html
+          test -f out/_headers
           test -f out/404.html
           test -f out/evaluacion.html || test -f out/evaluacion/index.html
           test -f out/aviso-de-privacidad.html || test -f out/aviso-de-privacidad/index.html
@@ -71,12 +72,12 @@ jobs:
         run: cd worker && npx wrangler deploy --dry-run --outdir ../.wrangler-api-check
       - name: Diagnóstico externo de API desplegada (informativo, sin secretos)
         run: |
-          API="https://mindstack-evaluacion-api.luispalmhdz06.workers.dev"
+          API="https://mindstack-evaluacion-api.grupomindstack.workers.dev"
           HTTP_HEALTH=$(curl --max-time 15 --silent --show-error --output /tmp/health.json --write-out '%{http_code}' "$API/health" || true)
           echo "API /health HTTP: $HTTP_HEALTH"
           if test -f /tmp/health.json; then cat /tmp/health.json; fi
           echo ""
-          HTTP_ESTADO=$(curl --max-time 15 --silent --show-error --header 'Origin: https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev' --output /tmp/estado.json --write-out '%{http_code}' "$API/api/estado" || true)
+          HTTP_ESTADO=$(curl --max-time 15 --silent --show-error --header 'Origin: https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.grupomindstack.workers.dev' --output /tmp/estado.json --write-out '%{http_code}' "$API/api/estado" || true)
           echo "API /api/estado HTTP: $HTTP_ESTADO"
           if test -f /tmp/estado.json; then cat /tmp/estado.json; fi
           echo ""
