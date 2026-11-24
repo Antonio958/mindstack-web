@@ -1,0 +1,84 @@
+name: Evaluacion empresarial - validacion
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sitio-estatico:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Instalar dependencias reproducibles
+        run: npm ci
+      - name: Comprobar reglas de interpretación
+        run: node --experimental-strip-types --test tests/evaluacion.test.mjs
+      - name: Verificar compilacion y exportacion estatica
+        run: npm run build
+      - name: Verificar contenido exportado
+        run: |
+          test -f out/index.html
+          test -f out/404.html
+          test -f out/evaluacion.html || test -f out/evaluacion/index.html
+          test -f out/aviso-de-privacidad.html || test -f out/aviso-de-privacidad/index.html
+      - name: Verificar aviso y versión desde fuente central
+        run: |
+          grep -q '2026-11-23-v2' lib/evaluacion/config.ts
+          grep -q '2026-11-23-v2' worker/wrangler.jsonc
+          grep -q 'mindstack.group@gmail.com' app/aviso-de-privacidad/page.tsx
+          grep -q 'MAPIMI No. 8, Col. VALLE GOMEZ, CIUDAD DE MEXICO, C. P. 06240' app/aviso-de-privacidad/page.tsx
+          ! grep -q 'Soria 130' app/aviso-de-privacidad/page.tsx
+          grep -q 'APPROVED_PRIVACY_VERSION' app/evaluacion/page.tsx
+      - name: Verificar protección del envío y conectividad a Neon
+        run: |
+          grep -q '0x4AAAAAAGPUHIprbjhv5LWX' lib/evaluacion/config.ts
+          grep -Fq 'CAN_SAVE && serviceReady && result?.status !== "outside_scope"' app/evaluacion/page.tsx
+          grep -q 'url.pathname === "/api/estado"' worker/src/index.ts
+          grep -q 'estado.privacyVersion === privacyVersion' lib/evaluacion/cliente.ts
+          grep -q 'comprobarDisponibilidad(API_URL, PRIVACY_VERSION' app/evaluacion/page.tsx
+      - name: Verificar retención automática y excepciones legales
+        run: |
+          grep -q '12 months' worker/src/index.ts
+          grep -q 'retener_hasta' worker/src/index.ts
+          grep -Fq '0 8 * * *' worker/wrangler.jsonc
+          test -f infra/neon/002_retencion_evaluaciones.sql
+      - name: Verificar configuracion Worker web para Cloudflare
+        run: |
+          node -e "const fs=require('fs');const cfg=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));if(cfg.name!=='mindstack-web'||cfg.assets?.directory!=='./out'||cfg.preview_urls!==true||typeof cfg.previews!=='object')process.exit(1);"
+      - name: Validar empaquetado Wrangler sin publicar
+        run: npx --yes wrangler@4.164.0 deploy --dry-run --outdir .wrangler-build-check
+
+
+  api-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar dependencias del worker de forma reproducible
+        run: npm ci --prefix worker --no-audit --no-fund
+      - name: Validar TypeScript del worker
+        run: npm run check --prefix worker
+      - name: Reproducir comando de build de Cloudflare API
+        run: npm run build --prefix worker
+      - name: Empaquetar Worker API con Wrangler sin desplegar
+        run: cd worker && npx wrangler deploy --dry-run --outdir ../.wrangler-api-check
+      - name: Diagnóstico externo de API desplegada (informativo, sin secretos)
+        run: |
+          API="https://mindstack-evaluacion-api.luispalmhdz06.workers.dev"
+          HTTP_HEALTH=$(curl --max-time 15 --silent --show-error --output /tmp/health.json --write-out '%{http_code}' "$API/health" || true)
+          echo "API /health HTTP: $HTTP_HEALTH"
+          if test -f /tmp/health.json; then cat /tmp/health.json; fi
+          echo ""
+          HTTP_ESTADO=$(curl --max-time 15 --silent --show-error --header 'Origin: https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev' --output /tmp/estado.json --write-out '%{http_code}' "$API/api/estado" || true)
+          echo "API /api/estado HTTP: $HTTP_ESTADO"
+          if test -f /tmp/estado.json; then cat /tmp/estado.json; fi
+          echo ""
+          echo "Consulta informativa: el build no equivale a una prueba de envío real."
+

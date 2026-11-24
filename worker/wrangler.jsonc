@@ -1,0 +1,22 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "mindstack-evaluacion-api",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-11-19",
+  "workers_dev": true,
+  "preview_urls": true,
+  "previews": {},
+  "triggers": { "crons": ["0 8 * * *"] },
+  "ratelimits": [
+    {
+      "name": "PUBLIC_API_RATE_LIMITER",
+      "namespace_id": "6472001",
+      "simple": { "limit": 25, "period": 60 }
+    }
+  ],
+  "vars": {
+    "PRIVACY_VERSION": "2026-11-23-v2",
+    "ALLOWED_ORIGIN": "https://mindstack-web.luispalmhdz06.workers.dev",
+    "ALLOWED_PREVIEW_ORIGIN": "https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev"
+  }
+}

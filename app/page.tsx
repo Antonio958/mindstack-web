@@ -1,67 +1,46 @@
+import { SiteHeader } from "./site-header";
+import { Manrope, Inter } from "next/font/google";
+
+const displayFont = Manrope({ subsets: ["latin"], variable: "--font-msk-display", display: "swap" });
+const readingFont = Inter({ subsets: ["latin"], variable: "--font-msk-reading", display: "swap" });
+
 const WA =
-  "https://wa.me/5552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
-
-const navItems = [
-  ["Inicio", "#inicio"],
-  ["Inteligencia", "#inteligencia"],
-  ["Capacidades", "#capacidades"],
-  ["Método", "#metodologia"],
-  ["Industrias", "#sectores"],
-  ["Firma", "#nosotros"],
-];
-
-const insights = [
-  {
-    tag: "Crecimiento",
-    title: "Crecimiento estable vs. crecimiento accidental",
-    desc: "Muchos negocios venden sin saber qué genera realmente sus mejores días. Construir crecimiento estable implica entender qué se puede repetir, medir y mejorar.",
-  },
-  {
-    tag: "Rentabilidad",
-    title: "Dónde se escapa el dinero en la operación",
-    desc: "Fugas de margen, procesos débiles, costos poco visibles y decisiones sin datos pueden reducir la rentabilidad sin que el problema sea evidente.",
-  },
-  {
-    tag: "Comercial",
-    title: "Seguimiento débil, baja recompra y ventas inestables",
-    desc: "Cuando no existe un proceso comercial claro, cada venta depende demasiado del momento, del vendedor o de la suerte.",
-  },
-  {
-    tag: "Datos",
-    title: "Información operativa para tomar mejores decisiones",
-    desc: "Los negocios generan datos todos los días. La diferencia está en saber cuáles leer, cómo interpretarlos y qué acciones tomar a partir de ellos.",
-  },
-];
+  "https://wa.me/525552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
 
 const services = [
   {
     num: "01",
-    title: "Diagnóstico",
-    desc: "Comprendemos la situación actual de la organización, investigamos señales, problemas y posibles causas, y construimos una lectura estructurada antes de recomendar una intervención.",
+    title: "Diagnóstico empresarial",
+    output: "Hallazgos documentados y recomendaciones priorizadas.",
+    desc: "Investigamos problemas operativos y comerciales, contrastamos evidencia y delimitamos qué conviene intervenir. Por ejemplo, diferencias de inventario o variaciones entre sucursales.",
     tag: "Comprender",
   },
   {
     num: "02",
-    title: "Inteligencia de Negocio",
-    desc: "Convertimos datos e información empresarial en indicadores, análisis y sistemas de lectura que permitan comprender el desempeño y tomar mejores decisiones.",
+    title: "Inteligencia de negocio",
+    output: "Indicadores, análisis y tableros de seguimiento.",
+    desc: "Integramos información dispersa para analizar ventas, costos, rentabilidad y desempeño operativo mediante indicadores y herramientas de seguimiento.",
     tag: "Explicar",
   },
   {
     num: "03",
     title: "Automatización",
-    desc: "Diseñamos flujos y sistemas que reducen trabajo manual, errores y fricción operativa cuando la automatización representa una mejora real para el proceso.",
+    output: "Flujos automatizados e integraciones.",
+    desc: "Diseñamos flujos para reducir tareas repetitivas, errores de captura y consolidación manual de información, cuando existe una mejora operativa justificable.",
     tag: "Transformar",
   },
   {
     num: "04",
-    title: "Inteligencia Artificial",
-    desc: "Aplicamos inteligencia artificial cuando aporta capacidad analítica, operativa o de decisión, evitando introducirla donde no resuelve un problema relevante.",
+    title: "Inteligencia artificial",
+    output: "Modelos, asistentes o herramientas de análisis.",
+    desc: "Exploramos aplicaciones como clasificación de información, análisis de comentarios y apoyo a tareas analíticas, cuando la evidencia justifica su uso.",
     tag: "Potenciar",
   },
   {
     num: "05",
     title: "Soluciones a medida",
-    desc: "Diseñamos intervenciones específicas cuando el problema requiere combinar estrategia, procesos, datos, tecnología o desarrollo bajo una arquitectura propia.",
+    output: "Aplicaciones o sistemas específicos para el negocio.",
+    desc: "Combinamos análisis, procesos y desarrollo tecnológico para resolver necesidades que no encajan en una herramienta estándar.",
     tag: "Integrar",
   },
 ];
@@ -69,32 +48,32 @@ const services = [
 const restaurantSignals = [
   {
     num: "01",
-    title: "Varias sucursales",
+    title: "Sucursales que operan de forma distinta",
     desc: "La operación empieza a diferir entre unidades y aumenta la dificultad para mantener visibilidad y control.",
   },
   {
     num: "02",
-    title: "Crecimiento con poca visibilidad",
+    title: "Crecimiento difícil de explicar",
     desc: "El negocio vende y crece, pero no siempre puede explicar con claridad qué está impulsando ese crecimiento.",
   },
   {
     num: "03",
-    title: "Márgenes difíciles de leer",
+    title: "Vender más no siempre es ganar más",
     desc: "Costos, merma, tiempos, descuentos y diferencias operativas pueden ocultar dónde se está deteriorando la rentabilidad.",
   },
   {
     num: "04",
-    title: "Procesos dependientes de personas",
+    title: "Dependencia de personas clave",
     desc: "Parte importante de la operación depende del dueño, gerente o conocimiento informal que todavía no está institucionalizado.",
   },
   {
     num: "05",
-    title: "Datos fragmentados",
+    title: "Información dispersa",
     desc: "Ventas, inventario, clientes, reseñas, costos y operación existen en distintos sistemas sin convertirse en una lectura integrada.",
   },
   {
     num: "06",
-    title: "Decisiones bajo incertidumbre",
+    title: "Dudas sobre qué resolver primero",
     desc: "Existen señales de problemas u oportunidades, pero no suficiente evidencia para saber qué intervenir primero.",
   },
 ];
@@ -103,49 +82,31 @@ const steps = [
   {
     num: "01",
     title: "Comprender",
-    desc: "Partimos del contexto real de la organización. Observamos cómo funciona, qué quiere lograr, qué restricciones existen y qué problema necesita realmente ser entendido antes de intervenir.",
+    desc: "Escuchamos el contexto, los objetivos y las restricciones del negocio antes de decidir qué merece atención.",
   },
   {
     num: "02",
     title: "Investigar",
-    desc: "Reunimos y contrastamos evidencia. Analizamos datos, procesos, señales, comportamientos y contexto para separar hechos de inferencias y reducir conclusiones prematuras.",
+    desc: "Contrastamos datos, procesos y señales para distinguir hechos, inferencias y preguntas abiertas.",
   },
   {
     num: "03",
     title: "Explicar",
-    desc: "Construimos una lectura estructurada de lo encontrado: qué está ocurriendo, qué puede estar causándolo, qué incertidumbre permanece y qué merece atención prioritaria.",
+    desc: "Organizamos hallazgos y explicaciones posibles sin confundir hipótesis con certezas.",
   },
   {
     num: "04",
     title: "Transformar",
-    desc: "Diseñamos e implementamos la intervención que tenga mayor sentido para el problema, ya sea operativa, analítica, tecnológica, automatizada o construida a medida.",
+    desc: "Diseñamos una intervención proporcional al problema, sea operativa, analítica o tecnológica.",
   },
   {
     num: "05",
     title: "Aprender",
-    desc: "Medimos lo ocurrido después de intervenir, incorporamos nueva evidencia y convertimos los resultados del proyecto en conocimiento reutilizable para la organización.",
+    desc: "Observamos resultados e incorporamos lo aprendido para mejorar decisiones futuras.",
   },
 ];
 
 
-
-const focus = [
-  {
-    tag: "Comprensión",
-    title: "El problema antes que la herramienta",
-    desc: "No comenzamos recomendando software, automatización o inteligencia artificial. Primero buscamos comprender qué está ocurriendo y qué necesita realmente la organización.",
-  },
-  {
-    tag: "Evidencia",
-    title: "Distinguir hechos de explicaciones",
-    desc: "Separamos señales, hechos, inferencias e hipótesis para evitar convertir una observación inicial en una conclusión prematura.",
-  },
-  {
-    tag: "Intervención",
-    title: "Actuar de forma proporcional",
-    desc: "La solución debe corresponder al problema, su impacto, la evidencia disponible y los recursos de la organización. No toda situación requiere una transformación compleja.",
-  },
-];
 
 function Brand() {
   return (
@@ -167,7 +128,7 @@ function ButtonGold({
   children: React.ReactNode;
 }) {
   return (
-    <a href={href} className="btn btn-gold" target="_blank" rel="noreferrer">
+    <a href={href} className="btn btn-gold" target={href.startsWith("/") || href.startsWith("#") ? undefined : "_blank"} rel={href.startsWith("/") || href.startsWith("#") ? undefined : "noopener noreferrer"}>
       {children}
     </a>
   );
@@ -187,38 +148,19 @@ function ButtonOutline({
   );
 }
 
-function Dashboard() {
+function EvidenceMap() {
   return (
-    <div className="dashboard">
-      <div className="dashboard-top">
-        <span className="dashboard-title">Inteligencia empresarial</span>
-        <span className="live">Mindstack</span>
+    <figure className="evidence-map" aria-label="Datos, procesos y contexto se integran para orientar decisiones">
+      <figcaption>Una visión integrada del negocio</figcaption>
+      <div className="evidence-map-inputs">
+        <span>Datos</span><span>Procesos</span><span>Contexto</span>
       </div>
-
-      <div className="dashboard-grid">
-        <div className="dash-card">
-          <span>Señales</span>
-          <strong>Observadas</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Evidencia</span>
-          <strong>Contrastada</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Hipótesis</span>
-          <strong>Explicadas</strong>
-        </div>
-
-        <div className="dash-card">
-          <span>Decisiones</span>
-          <strong>Priorizadas</strong>
-        </div>
-      </div>
-
-      <div className="chart" />
-    </div>
+      <svg viewBox="0 0 300 56" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M48 0V15Q48 24 60 24H138Q150 24 150 36V56M150 0V36M252 0V15Q252 24 240 24H162Q150 24 150 36" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="150" cy="36" r="3" fill="currentColor" />
+      </svg>
+      <div className="evidence-map-output"><strong>Decisiones con fundamento</strong><span>Una lectura conjunta, no señales aisladas.</span></div>
+    </figure>
   );
 }
 
@@ -259,20 +201,20 @@ function IntelligencePreview() {
         </div>
 
         <div className="report-row">
-          <span>Señal observada</span>
+          <span>Diferencias de inventario registradas</span>
           <span>Hecho</span>
           <span className="pill pill-mid">Validado</span>
         </div>
 
         <div className="report-row">
-          <span>Posible explicación</span>
+          <span>Posibles fallas de registro</span>
           <span>Hipótesis</span>
           <span className="pill pill-mid">Investigar</span>
         </div>
 
         <div className="report-row">
-          <span>Intervención propuesta</span>
-          <span>Decisión</span>
+          <span>Contrastar registros y conteos</span>
+          <span>Acción propuesta</span>
           <span className="pill pill-high">Priorizar</span>
         </div>
       </div>
@@ -290,593 +232,323 @@ function IntelligencePreview() {
   );
 }
 
+// Critical commercial layout is kept with the HTML for consistent static previews.
+const commercialStyles = "\n.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24px);}\n.mindstack-editorial .nav a {white-space:nowrap;}\n.mindstack-editorial .header-inner {gap:20px;}\n.mindstack-editorial .story-service-row .msk-service-output {margin-top:10px;font-size:15px!important;color:#e1d5b5;line-height:1.55!important;}\n.mindstack-editorial .msk-service-output strong {color:#efd28c;font-weight:700;}\n.mindstack-editorial .story-service-row {padding:23px 0;}\n.mindstack-editorial .msk-firm-privacy {display:inline-block;color:#e6c779;font-size:14px;font-weight:650;padding:14px 0;text-decoration:underline;text-underline-offset:4px;}\n.mindstack-editorial .msk-collaboration {margin-top:36px;max-width:1060px;padding:24px 0 26px;border-top:1px solid #595d55;}\n.mindstack-editorial .msk-collaboration h3 {font-size:25px;font-weight:740;margin:0 0 22px;color:#fffdf7;}\n.mindstack-editorial .msk-collaboration ol {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0;}\n.mindstack-editorial .msk-collaboration li {border-top:1px solid #8c7848;padding:13px 0 0;}\n.mindstack-editorial .msk-collaboration li > span {display:block;font-size:13px;letter-spacing:.07em;color:#e4c679;font-weight:700;margin-bottom:8px;}\n.mindstack-editorial .msk-collaboration li > strong {font-size:19px;font-weight:700;color:#f5f2ec;}\n.mindstack-editorial .msk-collaboration li > p {font-size:15px;line-height:1.6;color:#d3d6ce;margin:6px 0 0;}\n.mindstack-editorial .msk-collaboration > a {display:inline-block;font-size:14px;color:#ebce86;text-decoration:underline;text-underline-offset:4px;margin-top:23px;}\n.mindstack-editorial .home-contact-options {margin-top:12px;}\n\n@media(max-width:1100px){.mindstack-editorial .header .nav{display:none}.mindstack-editorial .header .home-mobile-menu{display:block;margin-left:auto}}\n@media(max-width:760px){.mindstack-editorial .msk-collaboration ol{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:420px){.mindstack-editorial .msk-collaboration ol{grid-template-columns:1fr;gap:15px}}\n";
+
 export default function Home() {
   return (
-    <main className="page-shell">
-      <header className="header">
-        <div className="container header-inner">
-          <Brand />
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-08">
+      <style>{commercialStyles + ".mindstack-editorial .story-service-row{scroll-margin-top:100px}"}</style>
+      <SiteHeader />
 
-          <nav className="nav">
-            {navItems.map(([label, href]) => (
-              <a key={href} href={href}>
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
-        </div>
-      </header>
-
-      <section id="inicio" className="hero">
-  <div className="container hero-grid">
-    <div>
-      <span className="eyebrow">Firma de Inteligencia Empresarial</span>
-
+      <section id="inicio" className="hero hero-refreshed">
+  <div className="hero-photo">
+    <img
+      src="https://images.unsplash.com/photo-1758518729908-d4220a678d81?auto=format&fit=crop&w=2000&q=82"
+      alt="Dos profesionales revisan un documento durante una conversación de trabajo"
+      loading="eager"
+      decoding="auto"
+      fetchPriority="high"
+    />
+    <span className="hero-photo-disclaimer">Imagen ilustrativa · Unsplash</span>
+  </div>
+  <div className="container hero-grid hero-refreshed-grid">
+    <div className="hero-copy-block">
+      <span className="eyebrow">Firma de inteligencia empresarial</span>
       <h1>
-        Comprender mejor.{" "}
-        <span className="gold">Decidir mejor.</span>{" "}
-        Transformar con inteligencia.
+        <span className="hero-first-line">Comprender mejor.</span>
+        <span className="gold"> Decidir mejor.</span>
       </h1>
-
       <p className="hero-copy">
-        Mindstack investiga cómo funciona realmente una empresa, conecta
-        operación, procesos, datos y contexto, y convierte esa comprensión
-        en decisiones e intervenciones con sentido.
+        Ayudamos a las organizaciones a identificar problemas, entender su desempeño y mejorar sus operaciones mediante investigación, análisis de datos y tecnología aplicada.
       </p>
-
       <div className="hero-actions">
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
-        <ButtonOutline href="#metodologia">
-          Conocer nuestro método
-        </ButtonOutline>
+        <ButtonGold href="/evaluacion">Comenzar evaluación gratuita</ButtonGold>
+        <ButtonOutline href="#capacidades">Conoce cómo podemos ayudarte</ButtonOutline>
       </div>
-
-      <div className="metrics-row">
-        <div className="metric">
-          <span>Comprensión</span>
-          <strong>Antes de intervenir</strong>
-        </div>
-
-        <div className="metric">
-          <span>Evidencia</span>
-          <strong>Antes de concluir</strong>
-        </div>
-
-        <div className="metric">
-          <span>Decisión</span>
-          <strong>Antes de ejecutar</strong>
-        </div>
-
-        <div className="metric">
-          <span>Tecnología</span>
-          <strong>Cuando tiene sentido</strong>
-        </div>
-      </div>
+      <p className="hero-footnote">
+        Evaluación inicial disponible para restaurantes. Sin registro obligatorio.
+      </p>
     </div>
-
-    <Dashboard />
   </div>
 </section>
 
-
-<section id="inteligencia" className="section intelligence-section">
-  <div className="container">
-    <div className="section-head intelligence-head">
-      <div>
-        <span className="eyebrow">Inteligencia empresarial</span>
-
-        <h2 className="section-title">
-          La información no es inteligencia.{" "}
-          <span className="gold">
-            Entender qué significa y qué hacer con ella, sí.
-          </span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        Una empresa genera señales todos los días. El reto no es acumular más
-        información, sino convertirla en una comprensión suficientemente clara
-        para decidir mejor.
-      </p>
-    </div>
-
-    <div className="intelligence-flow">
-      <article className="intelligence-card">
-        <span className="intelligence-number">01</span>
-        <span className="intelligence-label">Información</span>
-
-        <h3>Observar lo que realmente está ocurriendo</h3>
-
-        <p>
-          Reunimos señales provenientes de operación, ventas, procesos, personas,
-          clientes, sistemas, datos y contexto empresarial.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Datos</span>
-          <span>Procesos</span>
-          <span>Señales</span>
-          <span>Contexto</span>
-        </div>
-      </article>
-
-      <article className="intelligence-card intelligence-card-featured">
-        <span className="intelligence-number">02</span>
-        <span className="intelligence-label">Inteligencia</span>
-
-        <h3>Convertir información dispersa en comprensión</h3>
-
-        <p>
-          Investigamos relaciones, contrastamos evidencia y construimos
-          explicaciones para distinguir hechos, síntomas, hipótesis y posibles
-          causas.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Evidencia</span>
-          <span>Patrones</span>
-          <span>Hipótesis</span>
-          <span>Prioridades</span>
-        </div>
-      </article>
-
-      <article className="intelligence-card">
-        <span className="intelligence-number">03</span>
-        <span className="intelligence-label">Decisión</span>
-
-        <h3>Intervenir donde realmente tiene sentido</h3>
-
-        <p>
-          La comprensión se traduce en decisiones: qué mantener, qué cambiar,
-          qué investigar, qué priorizar y qué intervención tiene mayor sentido.
-        </p>
-
-        <div className="intelligence-items">
-          <span>Decisiones</span>
-          <span>Intervención</span>
-          <span>Ejecución</span>
-          <span>Aprendizaje</span>
-        </div>
-      </article>
-    </div>
-
-    <div className="intelligence-principle">
-      <div>
-        <span>Principio rector</span>
-        <strong>Comprender antes de transformar.</strong>
-      </div>
-
+<section id="evaluacion-gratuita" className="assessment-section assessment-refreshed">
+  <div className="container assessment-grid">
+    <div className="assessment-content">
+      <span className="eyebrow">Una herramienta gratuita de Mindstack</span>
+      <h2>¿Qué tan clara tienes la situación de <span className="gold">tu restaurante?</span></h2>
       <p>
-        Mindstack no parte de una solución predeterminada. Primero construimos
-        una lectura suficientemente rigurosa del problema; después decidimos
-        cómo intervenir.
+        Responde preguntas concretas sobre rentabilidad, operación, información y decisiones.
+        Obtén una lectura inicial de fortalezas, situaciones que merecen atención y aspectos
+        que aún requieren claridad.
+      </p>
+      <div className="assessment-actions">
+        <ButtonGold href="/evaluacion">Comenzar mi evaluación</ButtonGold>
+        <a href="#metodologia" className="assessment-secondary-link">Conocer el método ↗</a>
+      </div>
+      <p className="assessment-disclaimer">
+        Gratis · Sin crear una cuenta · Resultado orientativo · No es un diagnóstico
       </p>
     </div>
-  </div>
-</section>
-
-      <section id="insights" className="section">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Insights</span>
-              <h2 className="section-title">
-                Para negocios que quieren crecer con control y claridad.
-              </h2>
-            </div>
-            <p className="section-desc">
-              Lecturas ejecutivas para entender ventas, fugas, procesos y decisiones
-              operativas antes de invertir más.
-            </p>
+    <div className="assessment-result-preview" aria-label="Vista de ejemplo de los resultados de la evaluación">
+      <div className="assessment-preview-masthead">
+        <span>MSK / EVALUACIÓN EMPRESARIAL</span>
+        <strong>De las señales a una primera lectura.</strong>
+        <div className="assessment-preview-masthead-rule" aria-hidden="true"><i /><i /><i /></div>
+      </div>
+      <div className="assessment-preview-body">
+        <div className="assessment-preview-header">
+          <span>LECTURA INICIAL · RESTAURANTES</span>
+          <strong>EJEMPLO</strong>
+        </div>
+        <h3>Una mirada más clara a tu operación.</h3>
+        <p className="assessment-preview-description">
+          Una primera lectura organizada a partir de tus respuestas.
+        </p>
+        <div className="assessment-preview-items">
+          <div>
+            <span>FORTALEZA DECLARADA</span>
+            <p>Seguimiento regular de indicadores operativos.</p>
           </div>
-
-          <div className="insights-grid">
-            {insights.map((item) => (
-              <article className="card" key={item.title}>
-                <span className="tag">{item.tag}</span>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-                <span className="card-link">Leer más →</span>
-              </article>
-            ))}
+          <div>
+            <span>SITUACIÓN POR COMPRENDER</span>
+            <p>Diferencias recurrentes de inventario reportadas.</p>
+          </div>
+          <div>
+            <span>ASPECTO POR ACLARAR</span>
+            <p>Cómo se conoce la rentabilidad por producto.</p>
           </div>
         </div>
-      </section>
-
-      <section id="capacidades" className="section section-alt capabilities-section">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Capacidades</span>
-
-        <h2 className="section-title">
-          La solución no se elige primero.{" "}
-          <span className="gold">
-            Se determina después de comprender el problema.
-          </span>
-        </h2>
+        <p className="assessment-preview-note">
+          Vista ilustrativa. Tu resultado dependerá exclusivamente de tus respuestas.
+        </p>
       </div>
-
-      <p className="section-desc">
-        Mindstack trabaja con distintas capacidades de intervención. No todas
-        las organizaciones necesitan tecnología, automatización o inteligencia
-        artificial. La intervención depende de lo que la evidencia justifique.
-      </p>
-    </div>
-
-    <div className="capabilities-grid">
-      {services.map((item) => (
-        <article className="capability-card" key={item.title}>
-          <div className="capability-top">
-            <span className="capability-number">{item.num}</span>
-            <span className="capability-tag">{item.tag}</span>
-          </div>
-
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-
-          <div className="capability-footer">
-            <span>Mindstack</span>
-            <span>→</span>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div className="capabilities-statement">
-      <span>No somos una empresa de herramientas</span>
-
-      <strong>
-        Tecnología, datos e IA son medios. La comprensión del negocio determina
-        cuándo utilizarlos.
-      </strong>
     </div>
   </div>
 </section>
 
-      <section id="sectores" className="section restaurant-section">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Industria foco</span>
-
-        <h2 className="section-title">
-          Inteligencia empresarial aplicada al{" "}
-          <span className="gold">sector restaurantero.</span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        La metodología de Mindstack es transversal, pero actualmente
-        concentramos nuestro desarrollo comercial y aprendizaje sectorial en
-        restaurantes, grupos gastronómicos y operaciones con múltiples
-        sucursales.
-      </p>
-    </div>
-
-    <div className="restaurant-intro">
-      <div>
-        <span className="restaurant-kicker">Por qué restaurantes</span>
-
-        <h3>
-          Operaciones donde pequeñas diferencias pueden convertirse en grandes
-          diferencias de margen.
-        </h3>
-      </div>
-
+{/* III. Industria: una historia operativa, no otra cuadrícula oscura. */}
+<section id="sectores" className="home-story-sector">
+  <div className="container story-sector-layout">
+    <figure className="story-sector-photo">
+      <img
+        src="https://images.unsplash.com/photo-1761095596618-081ea3f043a5?auto=format&fit=crop&w=1400&q=80"
+        alt="Equipo de cocina colaborando durante la operación de un restaurante"
+        loading="eager"
+        decoding="auto"
+      />
+      <figcaption>Imagen ilustrativa · Operación restaurantera</figcaption>
+    </figure>
+    <div className="story-sector-copy">
+      <span className="eyebrow">Industria prioritaria / Restaurantes</span>
+      <h2>La inteligencia comienza <span>en la operación.</span></h2>
       <p>
-        Un restaurante combina demanda, inventario, personal, tiempos,
-        experiencia del cliente, costos, procesos y datos en una misma
-        operación. Cuando el negocio crece, comprender cómo interactúan esas
-        variables se vuelve cada vez más importante.
+        Un restaurante reúne ventas, inventario, costos, equipos y experiencia
+        del cliente en un mismo sistema. Entender cómo interactúan es el primer
+        paso para tomar mejores decisiones.
       </p>
+      <p>
+        Nuestro enfoque comercial actual está en restaurantes y grupos gastronómicos. También exploramos proyectos de otros sectores cuando nuestras capacidades pueden aportar valor.
+      </p>
+      <a className="story-text-link" href="/evaluacion">
+        Explorar la evaluación para restaurantes <span aria-hidden="true">↗</span>
+      </a>
     </div>
-
-    <div className="restaurant-signals">
+  </div>
+  <div className="container story-signals-wrap">
+    <div className="story-signals-heading">
+      <span className="eyebrow">Situaciones que merecen claridad</span>
+      <h3>¿Reconoces alguna de estas situaciones?</h3>
+      <p>Señales empresariales habituales que conviene investigar, sin asumir causas de antemano.</p>
+    </div>
+    <div className="story-signals">
       {restaurantSignals.map((signal) => (
-        <article className="restaurant-signal" key={signal.title}>
-          <span>{signal.num}</span>
-
-          <div>
-            <h3>{signal.title}</h3>
-            <p>{signal.desc}</p>
-          </div>
+        <article className="story-signal" key={signal.title}>
+          <span className="story-signal-number">{signal.num}</span>
+          <h4>{signal.title}</h4>
+          <p>{signal.desc}</p>
         </article>
       ))}
     </div>
+    <p className="story-transversal-note">No necesitas conocer la causa del problema para empezar una conversación con nosotros.</p>
+  </div>
+</section>
 
-    <div className="transversal-note">
+{/* IV. Capacidades: servicios en una lista editorial, sin tarjetas falsas. */}
+<section id="capacidades" className="home-services">
+  <div className="container story-services-layout">
+    <div className="story-services-intro">
+      <span className="eyebrow">Lo que hacemos</span>
+      <h2>Soluciones para <span>retos reales.</span></h2>
+      <p>No vendemos una herramienta predeterminada. Elegimos los recursos según el problema, los objetivos y las condiciones de tu organización.</p>
+      <a href="#metodologia" className="story-services-link">Conocer cómo trabajamos <span aria-hidden="true">↗</span></a>
+      <EvidenceMap />
+      <div className="story-services-aside">
+        <span>PRINCIPIO DE TRABAJO</span>
+        <p>Los entregables se acuerdan en la propuesta de cada proyecto.</p>
+      </div>
+    </div>
+    <div className="story-services-list">
+      {services.map((item) => (
+        <article className="story-service-row" id={`capacidad-${item.num}`} key={item.num}>
+          <span className="story-service-number">{item.num}</span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+            <p className="msk-service-output"><strong>Posibles entregables:</strong> {item.output}</p>
+          </div>
+          <span className="story-service-tag">{item.tag}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* V. Método: una secuencia que se puede recorrer con la vista. */}
+<section id="metodologia" className="home-method">
+  <span id="inteligencia" className="home-anchor" aria-hidden="true" />
+  <div className="container">
+    <div className="home-method-heading">
       <div>
-        <span>Capacidad transversal</span>
-        <strong>El método no depende de una sola industria.</strong>
+        <span className="eyebrow">Método Mindstack</span>
+        <h2>Comprender antes de transformar.</h2>
       </div>
-
-      <p>
-        Mindstack puede estudiar organizaciones de otros sectores cuando el
-        problema requiere comprender sistemas empresariales, procesos, datos y
-        decisiones. El foco restaurantero representa nuestra especialización
-        comercial actual, no un límite metodológico.
-      </p>
+      <p>Las soluciones no deberían elegirse por tendencia. Partimos del contexto, contrastamos evidencia y diseñamos una intervención proporcional a lo que encontramos.</p>
     </div>
-  </div>
-</section>
-
-<section
-  id="metodologia"
-  className="section section-alt method-section"
->
-  <div className="container method-grid">
-    <div>
-      <span className="eyebrow">Método Mindstack</span>
-
-      <h2 className="section-title">
-        Comprender antes de transformar.
-      </h2>
-
-      <p className="section-desc">
-        Nuestro método evita comenzar por una herramienta, una tecnología o una
-        respuesta predeterminada. Primero construimos comprensión; después
-        investigamos, explicamos y decidimos cómo transformar.
-      </p>
-
-      <div className="method-principle">
-        <span>Principio rector</span>
-
-        <p>
-          Una intervención sólo tiene sentido cuando existe suficiente
-          comprensión del problema que pretende resolver.
-        </p>
-      </div>
-    </div>
-
-    <div className="steps">
+    <div className="home-method-rail" aria-label="Cinco etapas del método Mindstack">
       {steps.map((step) => (
-        <article className="step" key={step.title}>
-          <span className="step-num">{step.num}</span>
-
-          <div>
-            <h3>{step.title}</h3>
-            <p>{step.desc}</p>
-          </div>
+        <article className="home-method-step" key={step.num}>
+          <span className="home-method-number">{step.num}</span>
+          <h3>{step.title}</h3>
+          <p>{step.desc}</p>
         </article>
       ))}
     </div>
+    <p className="home-method-note"><span aria-hidden="true">✦</span> Una señal es el inicio de una investigación, no una conclusión.</p>
   </div>
 </section>
-            <section id="entregable" className="section section-alt">
+
+{/* VI. Entregable: visualización ilustrativa de una lectura de consultoría. */}
+<section id="entregable" className="home-deliverable">
   <div className="container deliverable-grid">
-    <div>
-      <span className="eyebrow">Inteligencia accionable</span>
-
-      <h2 className="section-title">
-        No entregamos información para archivar.{" "}
-        <span className="gold">
-          Construimos comprensión para decidir.
-        </span>
-      </h2>
-
-      <p className="section-desc deliverable-copy">
-        El trabajo de Mindstack transforma información dispersa en una lectura
-        estructurada del negocio. El objetivo no es producir más documentos,
-        sino reducir incertidumbre y mejorar la calidad de las decisiones.
-      </p>
-
-      <div className="deliverable-points">
-        <div>
-          <strong>01</strong>
-          <span>Hechos y señales relevantes</span>
-        </div>
-
-        <div>
-          <strong>02</strong>
-          <span>Hallazgos y relaciones identificadas</span>
-        </div>
-
-        <div>
-          <strong>03</strong>
-          <span>Hipótesis y explicaciones contrastadas</span>
-        </div>
-
-        <div>
-          <strong>04</strong>
-          <span>Prioridades y decisiones posibles</span>
-        </div>
+    <div className="home-deliverable-copy">
+      <span className="eyebrow">Resultados y entregables</span>
+      <h2>De la evidencia a <span>acciones concretas.</span></h2>
+      <p>Según el proyecto, entregamos análisis, recomendaciones o soluciones implementadas. Este ejemplo muestra cómo distinguimos un hecho de una hipótesis y de una acción propuesta.</p>
+      <div className="home-deliverable-facts">
+        <div><strong>01</strong><span>Hechos y señales relevantes</span></div>
+        <div><strong>02</strong><span>Relaciones y hallazgos identificados</span></div>
+        <div><strong>03</strong><span>Hipótesis que requieren contraste</span></div>
+        <div><strong>04</strong><span>Prioridades para decidir con criterio</span></div>
       </div>
+      <p className="home-deliverable-legal">Ejemplo ilustrativo con una situación hipotética; no corresponde a un cliente ni al resultado de la evaluación gratuita. Los entregables reales se definen en la propuesta de cada proyecto.</p>
     </div>
-
     <IntelligencePreview />
   </div>
 </section>
-            <section id="nosotros" className="section">
-  <div className="container about-grid">
-    <div className="about-content">
+
+{/* VII. La firma: presencia humana, sin declaraciones de experiencia no documentadas. */}
+<section id="nosotros" className="home-firm">
+  <div className="container home-firm-grid">
+    <div className="home-firm-copy">
       <span className="eyebrow">La firma</span>
-
-      <h2 className="section-title">
-        Mindstack es una{" "}
-        <span className="gold">Firma de Inteligencia Empresarial.</span>
-      </h2>
-
-      <p className="about-lead">
-        Ayudamos a organizaciones a comprender mejor cómo funcionan antes de
-        decidir qué transformar. Integramos investigación, análisis empresarial,
-        datos, procesos y tecnología para convertir información dispersa en
-        comprensión, decisiones e intervenciones con sentido.
-      </p>
-
-      <p className="about-lead">
-        Nuestro trabajo no comienza con una herramienta ni con una solución
-        predeterminada. Comienza construyendo una lectura suficientemente
-        rigurosa del problema, contrastando evidencia y distinguiendo hechos,
-        inferencias e hipótesis antes de actuar.
-      </p>
-
-      <div className="about-principles">
-        <div>
-          <strong>01</strong>
-          <span>Comprender antes de transformar</span>
-        </div>
-
-        <div>
-          <strong>02</strong>
-          <span>Evidencia antes de prescripción</span>
-        </div>
-
-        <div>
-          <strong>03</strong>
-          <span>Tecnología al servicio del problema</span>
-        </div>
+      <h2>El criterio humano detrás de <span>cada decisión.</span></h2>
+      <p>Mindstack es una firma de inteligencia empresarial que combina investigación, análisis de procesos, datos y tecnología para comprender situaciones antes de proponer intervenciones.</p>
+      <p>Nuestro compromiso es trabajar con evidencia, explicar los límites de nuestros análisis y acordar el alcance de cada intervención antes de ejecutarla.</p>
+      <div className="home-firm-principles">
+        <span>Evidencia antes de prescripción</span>
+        <span>Contexto antes de tecnología</span>
+        <span>Alcance y entregables acordados</span>
+        <span>Información y accesos definidos según el proyecto</span>
+        <a className="msk-firm-privacy" href="/aviso-de-privacidad/">Aviso de privacidad de la evaluación ↗</a>
       </div>
     </div>
-
-    <div className="leadership-card">
-      <div className="leadership-photo">
-        <img src="/foto-luis-palma.jpg" alt="Dirección General de Mindstack" />
+    <div className="home-firm-leader">
+      <div className="home-firm-portrait">
+        <img src="/foto-luis-palma.jpg" alt="Retrato institucional de la dirección de Mindstack" loading="eager" decoding="auto" />
       </div>
-
-      <div className="leadership-info">
-        <span className="leadership-kicker">Dirección General</span>
-
+      <div className="home-firm-profile">
+        <span>DIRECCIÓN GENERAL · MINDSTACK</span>
         <h3>Antonio Hernández</h3>
-
-        <p>
-          Lidera la dirección estratégica de Mindstack y el desarrollo de su
-          sistema de inteligencia empresarial. Su trabajo se concentra en
-          comprender problemas de negocio, estructurar investigación y traducir
-          evidencia, datos y contexto en decisiones e intervenciones
-          empresariales.
-        </p>
-
-        <div className="leadership-tags">
-          <span>Inteligencia empresarial</span>
-          <span>Estrategia</span>
-          <span>Datos</span>
-          <span>Procesos</span>
-          <span>IA aplicada</span>
-        </div>
+        <p>Responsable de la dirección estratégica y del desarrollo del enfoque de inteligencia empresarial de Mindstack.</p>
       </div>
     </div>
   </div>
 </section>
 
-      <section id="contacto" className="section">
-  <div className="container">
-    <div className="diagnostic-box">
-      <div className="diagnostic-main">
-        <span className="eyebrow">Cómo empezar</span>
-
-        <h2>
-          Antes de definir una solución,{" "}
-          <span className="gold">entendamos el problema.</span>
-        </h2>
-
-        <p>
-          Si existe una situación que necesita mayor claridad, compártenos el
-          contexto. La primera conversación sirve para comprender qué está
-          ocurriendo, qué necesita investigarse y si Mindstack puede aportar
-          valor antes de proponer cualquier intervención.
-        </p>
-
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+{/* VIII. Un único cierre comercial, con dos rutas según el visitante. */}
+<section id="contacto" className="home-contact">
+  <div className="home-contact-photo" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1628516315527-110eb03991ac?auto=format&fit=crop&w=1700&q=78"
+      alt=""
+      loading="eager"
+      decoding="auto"
+    />
+  </div>
+  <div className="container home-contact-content">
+    <span className="eyebrow">El siguiente paso</span>
+    <h2>Hablemos de lo que tu negocio necesita comprender.</h2>
+    <p>Puedes comenzar con una evaluación orientativa de tu restaurante o conversar directamente con nosotros sobre un reto empresarial.</p>
+    <div className="msk-collaboration" aria-label="Cómo comenzar un proyecto">
+      <h3>Así comienza una colaboración.</h3>
+      <ol>
+        {[
+          ["Conversación", "Conocemos tu situación y tus objetivos."],
+          ["Exploración", "Revisamos necesidades y posibilidades."],
+          ["Propuesta", "Acordamos alcance, entregables, plazos e inversión."],
+          ["Inicio", "Trabajamos tras aceptar la propuesta."],
+        ].map(([title, desc], i) => <li key={title}><span>0{i + 1}</span><strong>{title}</strong><p>{desc}</p></li>)}
+      </ol>
+      <a href="/preguntas-frecuentes">Conoce más sobre contratación y servicios ↗</a>
+    </div>
+    <div className="home-contact-options">
+      <div className="home-contact-option home-contact-option-primary">
+        <span>01 / PARA RESTAURANTES</span>
+        <h3>Comienza por explorar tu operación.</h3>
+        <p>Una lectura inicial basada en tus respuestas, sin registro obligatorio.</p>
+        <ButtonGold href="/evaluacion">Iniciar evaluación gratuita</ButtonGold>
       </div>
-
-      <div className="diagnostic-list">
-        <span className="eyebrow">Primera conversación</span>
-
-        <ul>
-          <li>Contexto del negocio y situación actual</li>
-          <li>Qué está ocurriendo y por qué importa</li>
-          <li>Qué evidencia existe y qué falta comprender</li>
-          <li>Si Mindstack puede aportar valor</li>
-          <li>Siguiente paso proporcional al problema</li>
-        </ul>
+      <div className="home-contact-option">
+        <span>02 / CONVERSACIÓN DIRECTA</span>
+        <h3>Cuéntanos qué necesitas comprender.</h3>
+        <p>No necesitas tener definido el problema. Cuéntanos qué ocurre en tu organización y exploraremos si podemos aportar valor.</p>
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="home-contact-secondary">Hablar con Mindstack <span aria-hidden="true">↗</span></a>
       </div>
     </div>
+    <small className="home-contact-photo-note">Fotografía ilustrativa de Ciudad de México</small>
   </div>
 </section>
 
-      <section className="section section-alt">
-  <div className="container">
-    <div className="section-head">
-      <div>
-        <span className="eyebrow">Nuestro enfoque</span>
-
-        <h2 className="section-title">
-          No empezamos por la solución.{" "}
-          <span className="gold">
-            Empezamos por comprender.
-          </span>
-        </h2>
-      </div>
-
-      <p className="section-desc">
-        La calidad de una intervención depende de la calidad de la comprensión
-        que existe antes de ejecutarla. Por eso Mindstack trabaja primero sobre
-        evidencia, contexto y explicación.
-      </p>
-    </div>
-
-    <div className="focus-grid">
-      {focus.map((item) => (
-        <article className="card" key={item.title}>
-          <span className="tag">{item.tag}</span>
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-
-      <section className="cta">
-  <div className="container">
-    <span className="eyebrow">Siguiente paso</span>
-
-    <h2>
-      Cuando el problema no está claro,{" "}
-      <span className="gold">la primera decisión es comprenderlo.</span>
-    </h2>
-
-    <p>
-      Cuéntanos qué está ocurriendo en tu organización. Antes de recomendar una
-      solución, Mindstack busca entender el contexto, la evidencia disponible y
-      qué necesita investigarse.
-    </p>
-
-    <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
-  </div>
-</section>
-
-      <footer className="footer">
+<footer className="footer">
   <div className="container">
     <div className="footer-grid">
       <div>
         <Brand />
 
         <p style={{ marginTop: 20 }}>
-          Firma de Inteligencia Empresarial dedicada a convertir información,
-          evidencia y contexto en comprensión, decisiones e intervenciones con
-          sentido.
+          Firma de inteligencia empresarial. Investigación, análisis de datos y tecnología aplicada a los retos de las organizaciones.
         </p>
       </div>
 
       <div>
         <h4>Capacidades</h4>
-        <a href="#capacidades">Diagnóstico</a>
-        <a href="#capacidades">Inteligencia de Negocio</a>
-        <a href="#capacidades">Automatización</a>
-        <a href="#capacidades">Inteligencia Artificial</a>
-        <a href="#capacidades">Soluciones a medida</a>
+        <a href="#capacidad-01">Diagnóstico</a>
+        <a href="#capacidad-02">Inteligencia de Negocio</a>
+        <a href="#capacidad-03">Automatización</a>
+        <a href="#capacidad-04">Inteligencia Artificial</a>
+        <a href="#capacidad-05">Soluciones a medida</a>
       </div>
 
       <div>
         <h4>Mindstack</h4>
-        <a href="#inteligencia">Inteligencia empresarial</a>
+        <a href="#inicio">Inteligencia empresarial</a>
         <a href="#metodologia">Método Mindstack</a>
         <a href="#sectores">Industria foco</a>
         <a href="#nosotros">La firma</a>
+        <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+        <a href="/aviso-de-privacidad/">Aviso de privacidad</a>
       </div>
 
       <div>
@@ -887,16 +559,17 @@ export default function Home() {
           posible colaboración, escríbenos directamente.
         </p>
 
-        <ButtonGold href={WA}>Hablar con Mindstack</ButtonGold>
+        <a className="footer-direct-contact" href={WA} target="_blank" rel="noopener noreferrer">WhatsApp de Mindstack ↗</a>
+        <a href="mailto:mindstack.group@gmail.com">mindstack.group@gmail.com</a>
       </div>
     </div>
 
     <div className="footer-bottom">
       <span>
-        © 2026 Grupo Mindstack. Firma de Inteligencia Empresarial.
+        © 2026 Grupo Mindstack, S.A. de C.V.
       </span>
 
-      <span>México</span>
+      <span>Ciudad de México, México</span>
     </div>
   </div>
 </footer>
