@@ -38,6 +38,7 @@ jobs:
             // Guard against accidental contact submission: no POST to Mindstack API.
             await desktop.route('**/api/evaluaciones', route => route.abort());
             let errors=[];
+            let waHref, bookingHref;
             page.on('pageerror', e=>errors.push(e.message));
             await check('Portada HTTP y revisión 08', async()=>{
               const response=await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:45000});
@@ -56,7 +57,9 @@ jobs:
             await check('Enlaces internos de portada',async()=>{
               const result=await page.evaluate(()=>Array.from(document.querySelectorAll('a[href^="#"],a[href^="/#"]')).map(a=>a.hash.slice(1)).filter(id=>id&&!document.getElementById(id)));
               assert.deepEqual(result,[]);
-              assert.ok(await page.locator('a[href^="https://wa.me/525552138786"]').count());
+              const wa=page.locator('a[href^="https://wa.me/525552138786"]');
+              assert.ok(await wa.count());
+              waHref=await wa.first().getAttribute('href');
               assert.ok(await page.locator('a[href="mailto:mindstack.group@gmail.com"]').count());
             });
             await check('FAQ HTTP, estilos y 16 desplegables',async()=>{
@@ -93,7 +96,9 @@ jobs:
                 await page.getByRole('heading',{level:1}).filter({hasText:title}).waitFor();
                 if(name==='Otro sector') assert.equal(await page.getByRole('button',{name:'Compartir mi evaluación'}).count(),0);
                 if(name==='Señales'){
-                  await page.getByRole('link',{name:/Agendar conversación inicial|Conversar con Mindstack/}).waitFor();
+                  const booking=page.getByRole('link',{name:/Agendar conversación inicial|Conversar con Mindstack/});
+                  await booking.waitFor();
+                  bookingHref=await booking.getAttribute('href');
                   await page.getByRole('heading',{name:/compartir tus resultados/i}).waitFor({timeout:20000});
                   const submit=page.getByRole('button',{name:'Compartir mi evaluación'});
                   assert.equal(await submit.isDisabled(),true);
@@ -124,6 +129,42 @@ jobs:
             await check('Sin errores JavaScript de página',async()=>assert.deepEqual(errors,[]));
             await page.goto(base+'/',{waitUntil:'load'});
             console.log('TIMING '+JSON.stringify(await page.evaluate(()=>{const n=performance.getEntriesByType('navigation')[0];return {ttfbMs:Math.round(n.responseStart),domContentLoadedMs:Math.round(n.domContentLoadedEventEnd),loadMs:Math.round(n.loadEventEnd)}})));
+            await check('WhatsApp: destino externo, sin enviar mensaje',async()=>{
+              const u=new URL(waHref);
+              assert.equal(u.hostname,'wa.me');
+              assert.equal(u.pathname,'/525552138786');
+              const p=await desktop.newPage();
+              try {
+                const response=await p.goto(waHref,{waitUntil:'domcontentloaded',timeout:30000});
+                const final=new URL(p.url());
+                const body=(await p.locator('body').innerText()).slice(0,15000);
+                const invalid=/phone number shared via url is invalid|phone number is not on whatsapp|número de teléfono.*no es válido|número.*no está en whatsapp/i.test(body);
+                const destinationOK=final.hostname==='wa.me'||final.hostname==='whatsapp.com'||final.hostname.endsWith('.whatsapp.com');
+                const numberMatch=final.searchParams.get('phone')==='525552138786'||final.pathname.includes('525552138786')||body.replace(/[^0-9]/g,'').includes('525552138786');
+                const landing=/continue to chat|continuar al chat|continuar a chatear|chat on whatsapp|chatear en whatsapp|open whatsapp|abrir whatsapp/i.test(body);
+                console.log('WA_DESTINATION '+JSON.stringify({http:response?.status(),host:final.hostname,numberMatch,landing,invalid}));
+                assert.ok(response?.ok()&&destinationOK&&!invalid&&(numberMatch||landing),'No se pudo confirmar página de contacto válida');
+              } finally {await p.close();}
+            });
+            await check('Agenda: destino Google Calendar y página de reserva, sin reservar',async()=>{
+              const u=new URL(bookingHref);
+              assert.equal(u.hostname,'calendar.app.google');
+              assert.equal(u.pathname,'/t7YPiSH7QzDKR7JC6');
+              const p=await desktop.newPage();
+              try {
+                const response=await p.goto(bookingHref,{waitUntil:'domcontentloaded',timeout:30000});
+                await p.locator('body').waitFor();
+                await p.waitForFunction(()=>/book|appointment|schedule|reserv|cita|horario|disponib/i.test(document.body.innerText),{},{timeout:12000}).catch(()=>{});
+                const final=new URL(p.url());
+                const body=(await p.locator('body').innerText()).slice(0,20000);
+                const bookingPage=/appointment|book a|booking|reserv|cita|schedule|horario|disponib/i.test(body);
+                const invalid=/page not found|booking page not found|no longer available|página no encontrada|no está disponible|404 not found/i.test(body);
+                const googleCalendar=final.hostname==='calendar.google.com'||final.hostname==='calendar.app.google';
+                const identityVisible=/mindstack/i.test(body);
+                console.log('BOOKING_DESTINATION '+JSON.stringify({http:response?.status(),host:final.hostname,bookingPage,identityVisible,invalid}));
+                assert.ok(response?.ok()&&googleCalendar&&bookingPage&&!invalid,'No se pudo confirmar página de reservas');
+              } finally {await p.close();}
+            });
             await browser.close();
             console.log('QA failures: '+failures.length);
             if(failures.length)process.exitCode=1;
