@@ -1,0 +1,132 @@
+name: Mindstack - QA navegador Cloudflare
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar navegador de pruebas aislado
+        run: |
+          npm install --prefix "$RUNNER_TEMP/mindstack-qa" --no-save playwright
+          "$RUNNER_TEMP/mindstack-qa/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Validar sitio desplegado sin enviar datos
+        env:
+          QA_BASE: https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.luispalmhdz06.workers.dev
+          QA_NODE: ${{ runner.temp }}/mindstack-qa/node_modules
+        run: |
+          cat > "$RUNNER_TEMP/mindstack-qa/check.cjs" <<'JS'
+          const { chromium } = require(process.env.QA_NODE + '/playwright');
+          const assert = require('node:assert/strict');
+          const base = process.env.QA_BASE;
+          (async () => {
+            const browser = await chromium.launch({headless:true});
+            const failures = [];
+            const check = async (name, fn) => {
+              try { await fn(); console.log('PASS: '+name); }
+              catch(e) { failures.push(name); console.error('FAIL: '+name+' — '+e.message); }
+            };
+            const desktop = await browser.newContext({viewport:{width:1440,height:900}});
+            const page = await desktop.newPage();
+            // Guard against accidental contact submission: no POST to Mindstack API.
+            await desktop.route('**/api/evaluaciones', route => route.abort());
+            let errors=[];
+            page.on('pageerror', e=>errors.push(e.message));
+            await check('Portada HTTP y revisión 08', async()=>{
+              const response=await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:45000});
+              assert.equal(response.status(),200);
+              await page.locator('[data-revision="home-08"]').waitFor();
+              assert.match(await page.title(),/Mindstack/i);
+              assert.equal(await page.locator('h1').count(),1);
+            });
+            await check('Fotografías y logo realmente cargados',async()=>{
+              await page.locator('img').last().scrollIntoViewIfNeeded();
+              await page.waitForFunction(()=>Array.from(document.images).every(i=>i.complete),{},{timeout:20000});
+              const imgs=await page.locator('img').evaluateAll(list=>list.map(i=>({src:i.getAttribute('src'),ok:i.naturalWidth>0})));
+              console.log('IMAGES '+JSON.stringify(imgs));
+              assert.ok(imgs.length>=5 && imgs.every(i=>i.ok));
+            });
+            await check('Enlaces internos de portada',async()=>{
+              const result=await page.evaluate(()=>Array.from(document.querySelectorAll('a[href^="#"],a[href^="/#"]')).map(a=>a.hash.slice(1)).filter(id=>id&&!document.getElementById(id)));
+              assert.deepEqual(result,[]);
+              assert.ok(await page.locator('a[href^="https://wa.me/525552138786"]').count());
+              assert.ok(await page.locator('a[href="mailto:mindstack.group@gmail.com"]').count());
+            });
+            await check('FAQ HTTP, estilos y 16 desplegables',async()=>{
+              const response=await page.goto(base+'/preguntas-frecuentes/',{waitUntil:'domcontentloaded'});
+              assert.equal(response.status(),200);
+              const faq=page.locator('.msk-faq-group details');
+              assert.equal(await faq.count(),16);
+              assert.equal(await faq.first().evaluate(e=>e.open),false);
+              await faq.first().locator('summary').click();
+              assert.equal(await faq.first().evaluate(e=>e.open),true);
+              await faq.first().locator('summary').click();
+              assert.equal(await faq.first().evaluate(e=>e.open),false);
+              assert.equal(await page.locator('.msk-faq-group').first().evaluate(e=>getComputedStyle(e).display),'grid');
+            });
+            await check('Aviso de privacidad disponible',async()=>{
+              const response=await page.goto(base+'/aviso-de-privacidad/');
+              assert.equal(response.status(),200);
+              assert.ok((await page.locator('body').innerText()).includes('2026-11-23-v2'));
+            });
+            const profiles=[
+              ['Favorable',[0,0,0,0,0,0,0,0,0,0,4],/favorables/i],
+              ['Señales',[0,0,1,2,0,2,0,0,0,0,0],/situaciones/i],
+              ['Incertidumbre',[0,0,3,4,3,3,3,3,3,3,4],/aspectos por aclarar/i],
+              ['Otro sector',[2],/diseñada para restaurantes/i],
+            ];
+            for(const [name,choices,title] of profiles){
+              await check('Evaluación '+name+' sin registro',async()=>{
+                const response=await page.goto(base+'/evaluacion/');
+                assert.equal(response.status(),200);
+                for(const n of choices){
+                  await page.locator('input[type=radio]').nth(n).check();
+                  await page.getByRole('button',{name:/Continuar|Ver mis resultados/}).click();
+                }
+                await page.getByRole('heading',{level:1}).filter({hasText:title}).waitFor();
+                if(name==='Otro sector') assert.equal(await page.getByRole('button',{name:'Compartir mi evaluación'}).count(),0);
+                if(name==='Señales'){
+                  await page.getByRole('link',{name:/Agendar conversación inicial|Conversar con Mindstack/}).waitFor();
+                  await page.getByRole('heading',{name:/compartir tus resultados/i}).waitFor({timeout:20000});
+                  const submit=page.getByRole('button',{name:'Compartir mi evaluación'});
+                  assert.equal(await submit.isDisabled(),true);
+                  assert.equal(await page.locator('input[type=checkbox]').isChecked(),false);
+                  console.log('TURNSTILE_CONTAINER '+await page.locator('.cf-turnstile').count());
+                }
+              });
+            }
+            await check('Móvil 390px y 320px: sin desbordamiento horizontal',async()=>{
+              for(const width of [390,320]){
+                const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true});
+                const p=await context.newPage();
+                await context.route('**/api/evaluaciones',r=>r.abort());
+                for(const path of ['/','/preguntas-frecuentes/','/evaluacion/','/aviso-de-privacidad/']){
+                  await p.goto(base+path,{waitUntil:'domcontentloaded'});
+                  const sizes=await p.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
+                  console.log('MOBILE '+width+' '+path+' '+JSON.stringify(sizes));
+                  assert.ok(sizes.scroll<=sizes.width+2, path+' overflow '+JSON.stringify(sizes));
+                }
+                await p.goto(base+'/');
+                await p.locator('.msk-site-menu summary').click();
+                assert.ok(await p.locator('.msk-site-menu').evaluate(e=>e.open));
+                await p.locator('.msk-site-menu').getByRole('link',{name:'Capacidades'}).click();
+                assert.equal(await p.locator('.msk-site-menu').evaluate(e=>e.open),false);
+                await context.close();
+              }
+            });
+            await check('Sin errores JavaScript de página',async()=>assert.deepEqual(errors,[]));
+            await page.goto(base+'/',{waitUntil:'load'});
+            console.log('TIMING '+JSON.stringify(await page.evaluate(()=>{const n=performance.getEntriesByType('navigation')[0];return {ttfbMs:Math.round(n.responseStart),domContentLoadedMs:Math.round(n.domContentLoadedEventEnd),loadMs:Math.round(n.loadEventEnd)}})));
+            await browser.close();
+            console.log('QA failures: '+failures.length);
+            if(failures.length)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+          node "$RUNNER_TEMP/mindstack-qa/check.cjs"
