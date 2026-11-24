@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { MAX_REQUEST_BYTES, PayloadTooLarge, readBoundedJson } from "../worker/src/security.ts";
+import { MAX_REQUEST_BYTES, PayloadTooLarge, readBoundedJson, classifyTurnstile } from "../worker/src/security.ts";
 import { EVALUACION_API_URL, MIGRATION_ORIGINS, evaluationApiForHostname } from "../lib/evaluacion/config.ts";
 
 const request = (body, headers = {}) => new Request("https://example.test", {method:"POST",body,headers});
@@ -39,4 +39,19 @@ test("dominios nuevos exactos, sin referencias a la cuenta anterior", () => {
   assert.ok(MIGRATION_ORIGINS.every(o=>o.endsWith(".grupomindstack.workers.dev")));
   assert.equal(evaluationApiForHostname("mindstack-web.grupomindstack.workers.dev"),EVALUACION_API_URL);
   assert.equal(evaluationApiForHostname("mindstack-web.grupomindstack.workers.dev.example.test","fallback"),"fallback");
+});
+
+test("Turnstile exige éxito y hostname exacto", () => {
+  const host = "mindstack-web.grupomindstack.workers.dev";
+  assert.equal(classifyTurnstile({success:true,hostname:host},host),"ok");
+  assert.equal(classifyTurnstile({success:true,hostname:host+".example.test"},host),"TS03");
+  assert.equal(classifyTurnstile({success:true},host),"TS03");
+  assert.equal(classifyTurnstile({success:false,hostname:host},host),"TS05");
+});
+test("Turnstile clasifica rechazos sin devolver campos arbitrarios", () => {
+  const host="mindstack-web.grupomindstack.workers.dev";
+  for (const [error,code] of [["invalid-input-secret","TS01"],["missing-input-secret","TS01"],["timeout-or-duplicate","TS02"],["invalid-input-response","TS04"],["missing-input-response","TS04"],["internal-error","TS05"],["unknown","TS05"]]) {
+    assert.equal(classifyTurnstile({success:false,"error-codes":[error]},host),code);
+  }
+  assert.equal(classifyTurnstile(null,host),"TS05");
 });
