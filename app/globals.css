@@ -4765,3 +4765,65 @@ body {
  .mindstack-editorial .report-head {display:none;}
  .mindstack-editorial .header .header-inner > .btn {font-size:10px!important;min-height:40px;}
 }
+
+/* Editorial v5 — commercial clarity without a long additional chapter. */
+.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24px);}
+.mindstack-editorial .nav a {white-space:nowrap;}
+.mindstack-editorial .header-inner {gap:20px;}
+.mindstack-editorial .story-service-row .msk-service-output {margin-top:10px;font-size:15px!important;color:#e1d5b5;line-height:1.55!important;}
+.mindstack-editorial .msk-service-output strong {color:#efd28c;font-weight:700;}
+.mindstack-editorial .story-service-row {padding:23px 0;}
+.mindstack-editorial .msk-firm-privacy {display:inline-block;color:#e6c779;font-size:14px;font-weight:650;padding:14px 0;text-decoration:underline;text-underline-offset:4px;}
+.mindstack-editorial .msk-collaboration {margin-top:36px;max-width:1060px;padding:24px 0 26px;border-top:1px solid #595d55;}
+.mindstack-editorial .msk-collaboration h3 {font-size:25px;font-weight:740;margin:0 0 22px;color:#fffdf7;}
+.mindstack-editorial .msk-collaboration ol {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0;}
+.mindstack-editorial .msk-collaboration li {border-top:1px solid #8c7848;padding:13px 0 0;}
+.mindstack-editorial .msk-collaboration li > span {display:block;font-size:13px;letter-spacing:.07em;color:#e4c679;font-weight:700;margin-bottom:8px;}
+.mindstack-editorial .msk-collaboration li > strong {font-size:19px;font-weight:700;color:#f5f2ec;}
+.mindstack-editorial .msk-collaboration li > p {font-size:15px;line-height:1.6;color:#d3d6ce;margin:6px 0 0;}
+.mindstack-editorial .msk-collaboration > a {display:inline-block;font-size:14px;color:#ebce86;text-decoration:underline;text-underline-offset:4px;margin-top:23px;}
+.mindstack-editorial .home-contact-options {margin-top:12px;}
+.msk-faq {background:#f5f2ec;color:#171918;min-height:100vh;}
+.msk-faq-header {background:#111313;color:#f5f2ec;border-bottom:1px solid #383a33;}
+.msk-faq-header > .container {min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:22px;}
+.msk-faq-header img {width:108px;height:64px;object-fit:contain;}
+.msk-faq-header nav {display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:center;}
+.msk-faq-header nav a {font-size:13px;font-weight:650;color:#d5d6cf;}
+.msk-faq-header nav a[aria-current] {color:#e6c675;border-bottom:1px solid #b69b55;}
+.msk-faq-header nav a:hover {color:#fff;}
+.msk-faq-intro {background:linear-gradient(180deg,#171918 0%,#171918 76%,#f5f2ec 100%);color:#faf8f1;padding:65px 0 112px;}
+.msk-faq-intro .eyebrow {display:flex;width:fit-content;color:#e2bd60;}
+.msk-faq-back {display:block;width:fit-content;color:#e7e5db;font-size:15px;margin:0 0 34px;}
+.msk-faq-intro h1 {font-size:clamp(40px,5.4vw,72px);font-weight:780;line-height:1.1;letter-spacing:-.05em;margin:0 0 18px;}
+.msk-faq-intro h1 span {color:#d6b253;}
+.msk-faq-intro p {font-size:19px;line-height:1.65;max-width:650px;margin:0;color:#dedfd8;}
+.msk-faq-content {padding:34px 0 70px;}
+.msk-faq-group {display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:45px;margin-bottom:42px;}
+.msk-faq-group h2 {font-size:clamp(24px,2.4vw,34px);line-height:1.2;font-weight:750;margin:16px 0;color:#1d211b;}
+.msk-faq-group details {border-bottom:1px solid #c7c3b8;}
+.msk-faq-group details:first-child {border-top:1px solid #c7c3b8;}
+.msk-faq-group summary {list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 0;font-size:18px;font-weight:650;line-height:1.45;}
+.msk-faq-group summary::-webkit-details-marker {display:none;}
+.msk-faq-group summary > span {width:24px;flex-shrink:0;text-align:center;color:#86661b;font-size:24px;line-height:1;}
+.msk-faq-group summary > span::before {content:"+";}
+.msk-faq-group details[open] summary > span::before {content:"−";}
+.msk-faq-group details[open] summary {color:#765915;}
+.msk-faq-group details p {margin:0 35px 20px 0;color:#464c44;font-size:17px;line-height:1.75;}
+.msk-faq-group details p a {color:#765915;text-decoration:underline;}
+.msk-faq-contact {background:#171918;color:#f5f2ec;padding:50px 0;}
+.msk-faq-contact > .container {display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap;}
+.msk-faq-contact h2 {font-size:clamp(26px,3vw,40px);font-weight:750;margin:0 0 8px;}
+.msk-faq-contact p {font-size:17px;color:#d1d3ca;margin:0;}
+.msk-faq-footer {background:#101211;color:#c5c7be;padding:25px 0;font-size:14px;}
+.msk-faq-footer > .container {display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.msk-faq a:focus-visible,.msk-faq summary:focus-visible {outline:2px solid #b48b30;outline-offset:5px;}
+@media(max-width:1100px){.mindstack-editorial .header .nav {display:none;}.mindstack-editorial .header .home-mobile-menu {display:block;margin-left:auto;}}
+@media(max-width:760px){
+ .mindstack-editorial .msk-collaboration ol {grid-template-columns:repeat(2,minmax(0,1fr));}
+ .msk-faq-header > .container {flex-wrap:wrap;padding:10px 0;gap:10px;}
+ .msk-faq-header nav {order:3;width:100%;justify-content:flex-start;padding:8px 0;}
+ .msk-faq-group {grid-template-columns:1fr;gap:10px;margin-bottom:30px;}
+ .msk-faq-intro {padding:44px 0 85px;}
+ .msk-faq-content {padding-top:10px;}
+}
+@media(max-width:420px){.mindstack-editorial .msk-collaboration ol {grid-template-columns:1fr;gap:15px;}.msk-faq-header .btn {font-size:11px!important;padding:10px;}}
