@@ -1,3 +1,4 @@
+import { SiteHeader } from "./site-header";
 import { Manrope, Inter } from "next/font/google";
 
 const displayFont = Manrope({ subsets: ["latin"], variable: "--font-msk-display", display: "swap" });
@@ -5,16 +6,6 @@ const readingFont = Inter({ subsets: ["latin"], variable: "--font-msk-reading", 
 
 const WA =
   "https://wa.me/525552138786?text=Hola%20Mindstack%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20pueden%20ayudarnos";
-
-const navItems = [
-  ["Inicio", "#inicio"],
-  ["Capacidades", "#capacidades"],
-  ["Método", "#metodologia"],
-  ["Industrias", "#sectores"],
-  ["Firma", "#nosotros"],
-  ["Preguntas frecuentes", "/preguntas-frecuentes"],
-  ["Contacto", "#contacto"],
-];
 
 const services = [
   {
@@ -246,31 +237,9 @@ const commercialStyles = "\n.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24p
 
 export default function Home() {
   return (
-    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-06">
-      <style>{commercialStyles}</style>
-      <header className="header">
-        <div className="container header-inner">
-          <Brand />
-
-          <nav className="nav">
-            {navItems.map(([label, href]) => (
-              <a key={href} href={href}>
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          <details className="home-mobile-menu">
-            <summary aria-label="Abrir menú de navegación">Menú</summary>
-            <nav aria-label="Navegación móvil">
-              {navItems.map(([label, href]) => (
-                <a key={href} href={href}>{label}</a>
-              ))}
-            </nav>
-          </details>
-          <ButtonGold href="/evaluacion">Evaluación gratuita</ButtonGold>
-        </div>
-      </header>
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-07">
+      <style>{commercialStyles + ".mindstack-editorial .story-service-row{scroll-margin-top:100px}"}</style>
+      <SiteHeader />
 
       <section id="inicio" className="hero hero-refreshed">
   <div className="hero-photo">
@@ -422,7 +391,7 @@ export default function Home() {
     </div>
     <div className="story-services-list">
       {services.map((item) => (
-        <article className="story-service-row" key={item.num}>
+        <article className="story-service-row" id={`capacidad-${item.num}`} key={item.num}>
           <span className="story-service-number">{item.num}</span>
           <div>
             <h3>{item.title}</h3>
@@ -473,7 +442,7 @@ export default function Home() {
         <div><strong>03</strong><span>Hipótesis que requieren contraste</span></div>
         <div><strong>04</strong><span>Prioridades para decidir con criterio</span></div>
       </div>
-      <p className="home-deliverable-legal">La visualización es conceptual y no representa un informe emitido a un cliente ni el resultado de la evaluación gratuita.</p>
+      <p className="home-deliverable-legal">Ejemplo ilustrativo con una situación hipotética; no corresponde a un cliente ni al resultado de la evaluación gratuita. Los entregables reales se definen en la propuesta de cada proyecto.</p>
     </div>
     <IntelligencePreview />
   </div>
@@ -491,7 +460,8 @@ export default function Home() {
         <span>Evidencia antes de prescripción</span>
         <span>Contexto antes de tecnología</span>
         <span>Alcance y entregables acordados</span>
-        <a className="msk-firm-privacy" href="/aviso-de-privacidad/">Consultar nuestro aviso de privacidad ↗</a>
+        <span>Información y accesos definidos según el proyecto</span>
+        <a className="msk-firm-privacy" href="/aviso-de-privacidad/">Aviso de privacidad de la evaluación ↗</a>
       </div>
     </div>
     <div className="home-firm-leader">
@@ -543,7 +513,7 @@ export default function Home() {
       <div className="home-contact-option">
         <span>02 / CONVERSACIÓN DIRECTA</span>
         <h3>Cuéntanos qué necesitas comprender.</h3>
-        <p>Cuéntanos el reto de tu organización, sea o no un restaurante. Exploraremos si podemos aportar valor.</p>
+        <p>No necesitas tener definido el problema. Cuéntanos qué ocurre en tu organización y exploraremos si podemos aportar valor.</p>
         <a href={WA} target="_blank" rel="noopener noreferrer" className="home-contact-secondary">Hablar con Mindstack <span aria-hidden="true">↗</span></a>
       </div>
     </div>
@@ -558,24 +528,22 @@ export default function Home() {
         <Brand />
 
         <p style={{ marginTop: 20 }}>
-          Firma de Inteligencia Empresarial dedicada a convertir información,
-          evidencia y contexto en comprensión, decisiones e intervenciones con
-          sentido.
+          Firma de inteligencia empresarial. Investigación, análisis de datos y tecnología aplicada a los retos de las organizaciones.
         </p>
       </div>
 
       <div>
         <h4>Capacidades</h4>
-        <a href="#capacidades">Diagnóstico</a>
-        <a href="#capacidades">Inteligencia de Negocio</a>
-        <a href="#capacidades">Automatización</a>
-        <a href="#capacidades">Inteligencia Artificial</a>
-        <a href="#capacidades">Soluciones a medida</a>
+        <a href="#capacidad-01">Diagnóstico</a>
+        <a href="#capacidad-02">Inteligencia de Negocio</a>
+        <a href="#capacidad-03">Automatización</a>
+        <a href="#capacidad-04">Inteligencia Artificial</a>
+        <a href="#capacidad-05">Soluciones a medida</a>
       </div>
 
       <div>
         <h4>Mindstack</h4>
-        <a href="#inteligencia">Inteligencia empresarial</a>
+        <a href="#inicio">Inteligencia empresarial</a>
         <a href="#metodologia">Método Mindstack</a>
         <a href="#sectores">Industria foco</a>
         <a href="#nosotros">La firma</a>
@@ -598,10 +566,10 @@ export default function Home() {
 
     <div className="footer-bottom">
       <span>
-        © 2026 Grupo Mindstack. Firma de Inteligencia Empresarial.
+        © 2026 Grupo Mindstack, S.A. de C.V.
       </span>
 
-      <span>México</span>
+      <span>Ciudad de México, México</span>
     </div>
   </div>
 </footer>
