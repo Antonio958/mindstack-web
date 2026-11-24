@@ -145,7 +145,13 @@ export default function EvaluacionPage() {
                     name={question.id}
                     value={choice.value}
                     checked={answers[question.id] === choice.value}
-                    onChange={() => setAnswers(prev => ({ ...prev, [question.id]: choice.value }))}
+                    onChange={() => setAnswers(prev => {
+                      // Changing sector invalidates answers to questions that may no longer apply.
+                      if (question.id === "sector" && prev.sector !== choice.value) {
+                        return { sector: choice.value };
+                      }
+                      return { ...prev, [question.id]: choice.value };
+                    })}
                   />
                   <span className={styles.choiceText}>{choice.label}</span>
                   <span aria-hidden="true" className={styles.choiceMark}>✓</span>
