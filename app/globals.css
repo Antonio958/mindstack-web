@@ -4712,3 +4712,56 @@ body {
  .mindstack-editorial .home-method-step h3,.mindstack-editorial .home-method-step p {grid-column:2;}
  .mindstack-editorial .report-row span {overflow-wrap:anywhere;}
 }
+
+/* Editorial v4 — readable information at every breakpoint. */
+.mindstack-editorial {font-size:17px;}
+.mindstack-editorial .container {width:min(1280px,calc(100% - 64px));}
+.mindstack-editorial .hero-refreshed .hero-copy-block {width:min(820px,72%);}
+.mindstack-editorial .hero-refreshed .hero-copy-block h1 {font-size:clamp(44px,4.6vw,76px)!important;}
+.mindstack-editorial .hero-refreshed .hero-copy-block .hero-first-line {white-space:nowrap;}
+.mindstack-editorial .hero-refreshed .hero-copy {font-size:19px!important;line-height:1.7!important;}
+.mindstack-editorial :is(.story-signal p,.home-method-step p,.story-service-row p,.home-contact-option p,.home-firm-profile p) {font-size:17px!important;line-height:1.65!important;}
+.mindstack-editorial :is(.story-sector-copy p,.story-services-intro > p,.home-method-heading p,.home-firm-copy p,.home-deliverable-copy > p:not(.home-deliverable-legal),.assessment-content > p:not(.assessment-disclaimer)) {font-size:19px!important;line-height:1.7!important;}
+.mindstack-editorial .story-signals-heading p {font-size:18px!important;}
+.mindstack-editorial .story-sector-photo {height:clamp(390px,38vw,540px);}
+.mindstack-editorial .story-sector-photo figcaption {font-size:12px!important;letter-spacing:.02em;}
+.mindstack-editorial .story-signals-wrap {margin-top:78px;}
+.mindstack-editorial .story-signals {gap:0 34px;}
+.mindstack-editorial .story-signal {padding:30px 0;min-height:0;}
+.mindstack-editorial .story-signal h4 {font-size:24px!important;}
+.mindstack-editorial .story-service-tag {font-size:12px!important;letter-spacing:.03em;}
+.mindstack-editorial .story-service-number {font-size:14px!important;}
+.mindstack-editorial .assessment-preview-body {padding:clamp(23px,3vw,38px);}
+.mindstack-editorial .assessment-preview-items p,.mindstack-editorial .assessment-preview-description {font-size:16px!important;line-height:1.6;}
+.mindstack-editorial :is(.assessment-preview-items span,.assessment-preview-header,.assessment-preview-masthead > span,.report-kicker,.home-firm-profile > span,.home-contact-option > span,.story-services-aside > span) {font-size:12px!important;}
+.mindstack-editorial :is(.assessment-preview-note,.assessment-disclaimer,.hero-footnote,.home-deliverable-copy .home-deliverable-legal,.story-transversal-note,.home-contact-photo-note,.home-method-note) {font-size:14px!important;line-height:1.6;}
+.mindstack-editorial .report-row span {font-size:15px!important;}
+.mindstack-editorial .report-head span,.mindstack-editorial .report-row .pill {font-size:12px!important;letter-spacing:.025em;}
+.mindstack-editorial .report-row {grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,.75fr);gap:10px;padding:15px 12px;}
+.mindstack-editorial .report-note p {font-size:15px!important;}
+.mindstack-editorial .home-firm-portrait {background:transparent;}
+.mindstack-editorial .home-firm-portrait img {max-height:none;width:auto;max-width:100%;margin:0 auto;}
+.mindstack-editorial .home-firm-principles span {font-size:16px!important;}
+.mindstack-editorial .home-contact-content > p {font-size:19px!important;}
+.mindstack-editorial .footer :is(p,a) {font-size:16px!important;line-height:1.65!important;}
+.mindstack-editorial .footer h4 {font-size:14px!important;}
+.mindstack-editorial .footer .brand-symbol {width:180px!important;height:105px!important;}
+.mindstack-editorial .footer-bottom {font-size:13px!important;}
+.mindstack-editorial .btn {font-size:13px!important;min-height:48px;}
+.mindstack-editorial :is(.story-text-link,.story-services-link,.assessment-secondary-link,.home-contact-secondary) {font-size:15px!important;}
+@media(max-width:980px){
+ .mindstack-editorial .container {width:calc(100% - 48px);}
+ .mindstack-editorial .hero-refreshed .hero-copy-block {width:90%;}
+}
+@media(max-width:640px){
+ .mindstack-editorial .container {width:calc(100% - 36px);}
+ .mindstack-editorial .hero-refreshed .hero-copy-block {width:100%;}
+ .mindstack-editorial .hero-refreshed .hero-copy-block h1 {font-size:clamp(35px,9vw,48px)!important;}
+ .mindstack-editorial .hero-refreshed .hero-copy-block .hero-first-line {white-space:normal;}
+ .mindstack-editorial .hero-refreshed .hero-copy {font-size:17px!important;}
+ .mindstack-editorial :is(.story-sector-copy p,.story-services-intro > p,.home-method-heading p,.home-firm-copy p,.home-deliverable-copy > p:not(.home-deliverable-legal),.assessment-content > p:not(.assessment-disclaimer)) {font-size:17px!important;}
+ .mindstack-editorial .story-sector-photo {height:300px;}
+ .mindstack-editorial .report-row {grid-template-columns:1fr;}
+ .mindstack-editorial .report-head {display:none;}
+ .mindstack-editorial .header .header-inner > .btn {font-size:10px!important;min-height:40px;}
+}
