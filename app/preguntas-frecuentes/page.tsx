@@ -1,3 +1,4 @@
+import { SiteHeader } from "../site-header";
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 
@@ -13,19 +14,23 @@ const groups = [
   { title: "Sobre Mindstack", items: [
     ["¿Qué hace Mindstack?", "Somos una firma de inteligencia empresarial. Combinamos investigación, análisis de datos, procesos y tecnología para comprender problemas de negocio y diseñar intervenciones acordes con la evidencia."],
     ["¿Trabajan exclusivamente con restaurantes?", "No. Los restaurantes y grupos gastronómicos son nuestro enfoque comercial prioritario actual. Podemos explorar proyectos de otros sectores según sus necesidades y el alcance de nuestras capacidades."],
+    ["¿Pueden ayudarme si todavía no sé cuál es el problema?", "Sí. Puedes comenzar describiendo los síntomas, inquietudes u objetivos de tu organización. La exploración inicial permite valorar qué conviene investigar y si podemos ayudarte."],
     ["¿En qué se diferencian de un proveedor de software?", "No partimos de una herramienta predeterminada. Primero estudiamos el problema y después valoramos si conviene realizar un análisis, modificar un proceso, automatizar una tarea o desarrollar una solución tecnológica."],
   ] },
   { title: "Servicios e información", items: [
     ["¿Qué puedo recibir al contratar un proyecto?", "Según el alcance acordado, los entregables pueden incluir informes de diagnóstico, indicadores, tableros, recomendaciones, automatizaciones o soluciones a medida. La propuesta especifica qué se entregará."],
+    ["¿Puedo contratar únicamente un diagnóstico empresarial?", "Es posible plantear un diagnóstico con alcance propio, sin asumir una intervención posterior. Su viabilidad, entregables e inversión se especifican en la propuesta."],
+    ["¿Qué información necesitan para comenzar?", "Inicialmente basta con explicar la actividad de tu organización, la situación que te preocupa y tus objetivos. Los documentos, datos y accesos adicionales se acuerdan según el proyecto."],
     ["¿Necesito tener mis datos organizados?", "No necesariamente. La disponibilidad y calidad de la información se consideran al definir el alcance. Si faltan datos, evaluamos qué es posible investigar y qué limitaciones existen."],
     ["¿Debo cambiar los sistemas que ya utilizo?", "No necesariamente. Revisamos los procesos y herramientas existentes antes de recomendar cambios o integraciones."],
-    ["¿Cómo se trata mi información?", "En la definición del proyecto se deben acordar la información necesaria, sus accesos y las condiciones de tratamiento. Puedes consultar nuestro aviso de privacidad para conocer el tratamiento de datos personales."],
+    ["¿Cómo se trata mi información?", "En la definición del proyecto se deben acordar la información necesaria, sus accesos y las condiciones de tratamiento. El aviso disponible en este sitio describe específicamente el tratamiento de datos personales de la evaluación gratuita."],
     ["¿Garantizan resultados económicos?", "No prometemos incrementos de ingresos o ahorros sin evidencia. Definimos objetivos, supuestos y criterios de evaluación acordes con cada proyecto."],
   ] },
   { title: "Evaluación gratuita y contratación", items: [
     ["¿La evaluación gratuita es un diagnóstico?", "No. Es una lectura orientativa basada exclusivamente en tus respuestas. Un diagnóstico profesional requiere investigación, información y contraste de evidencia."],
     ["¿Tengo que crear una cuenta para realizar la evaluación?", "No. La evaluación inicial para restaurantes es gratuita y no requiere registro obligatorio."],
     ["¿Qué sucede después de contactarlos?", "Primero conversamos sobre tu situación. Si existe una oportunidad de colaboración, exploramos el contexto y definimos una propuesta con alcance, entregables, plazos e inversión. El proyecto comienza tras aceptar la propuesta."],
+    ["¿Qué sucede después de finalizar un proyecto?", "La entrega, validación, documentación y posibles actividades de seguimiento se establecen en el alcance acordado. Si se necesita soporte o una intervención adicional, se define por separado."],
     ["¿Cuánto cuesta y cuánto dura un proyecto?", "Depende del problema, la información disponible, la complejidad y los entregables. La inversión y los plazos se definen en la propuesta correspondiente, antes de iniciar el proyecto."],
   ] },
 ];
@@ -34,20 +39,9 @@ const faqStyles = "\n.msk-faq{--faq-ink:#171918;--faq-paper:#f5f2ec;--faq-gold:#
 
 export default function FrequentlyAskedQuestions() {
   return (
-    <main className={`mindstack-editorial msk-faq ${display.variable} ${reading.variable}`} data-revision="faq-06">
-      <style>{faqStyles}</style>
-      <header className="msk-faq-header">
-        <div className="container">
-          <a className="msk-faq-brand" href="/" aria-label="Inicio de Mindstack"><img src="/logo-mindstack.png" alt="Mindstack" width={112} height={60} style={{width:112,height:60,objectFit:"contain"}} /></a>
-          <nav className="msk-faq-desktop" aria-label="Navegación principal">
-            <a href="/">Inicio</a><a href="/#capacidades">Capacidades</a><a href="/#metodologia">Método</a><a href="/#sectores">Industrias</a><a href="/#nosotros">Firma</a><a href="/preguntas-frecuentes" aria-current="page">Preguntas frecuentes</a><a href="/#contacto">Contacto</a>
-          </nav>
-          <details className="msk-faq-menu"><summary>Menú ☰</summary><nav aria-label="Navegación móvil">
-            <a href="/">Inicio</a><a href="/#capacidades">Capacidades</a><a href="/#metodologia">Método</a><a href="/#sectores">Industrias</a><a href="/#nosotros">Firma</a><a href="/preguntas-frecuentes" aria-current="page">Preguntas frecuentes</a><a href="/#contacto">Contacto</a>
-          </nav></details>
-          <a className="btn btn-gold" href="/evaluacion">Evaluación gratuita</a>
-        </div>
-      </header>
+    <main className={`mindstack-editorial msk-faq ${display.variable} ${reading.variable}`} data-revision="faq-07">
+      <style>{faqStyles + ".msk-faq .msk-faq-intro{padding-top:124px}@media(max-width:640px){.msk-faq .msk-faq-intro{padding-top:105px}}"}</style>
+      <SiteHeader faq />
       <section className="msk-faq-intro">
         <div className="container">
           <a className="msk-faq-back" href="/">← Volver al inicio</a>
@@ -64,7 +58,7 @@ export default function FrequentlyAskedQuestions() {
             <div>{group.items.map(([question, answer]) => (
               <details key={question}>
                 <summary>{question}<span aria-hidden="true" /></summary>
-                <p>{answer}{question === "¿Cómo se trata mi información?" && <> <a href="/aviso-de-privacidad/">Consultar aviso de privacidad.</a></>}</p>
+                <p>{answer}{question === "¿Cómo se trata mi información?" && <> <a href="/aviso-de-privacidad/">Consultar aviso de privacidad de la evaluación.</a></>}</p>
               </details>
             ))}</div>
           </div>
@@ -76,7 +70,7 @@ export default function FrequentlyAskedQuestions() {
           <a className="btn btn-gold" href="/#contacto">Contactar a Mindstack</a>
         </div>
       </section>
-      <footer className="msk-faq-footer"><div className="container"><span>© 2026 Grupo Mindstack · México</span><a href="/aviso-de-privacidad/">Aviso de privacidad</a></div></footer>
+      <footer className="msk-faq-footer"><div className="container"><span>© 2026 Grupo Mindstack, S.A. de C.V. · Ciudad de México</span><a href="/aviso-de-privacidad/">Aviso de privacidad de la evaluación</a></div></footer>
     </main>
   );
 }
