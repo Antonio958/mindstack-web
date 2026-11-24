@@ -17,20 +17,17 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import assert from 'node:assert/strict';
-          const oldSuffix='luispalmhdz06.workers.dev';
-          const newSuffix='grupomindstack.workers.dev';
-          let suffix=oldSuffix;
-          const newBase='https://mindstack-web.'+newSuffix;
-          try { const probe=await fetch(newBase+'/',{signal:AbortSignal.timeout(8000)}); if(probe.ok && (await probe.text()).includes('data-revision="home-08"')) suffix=newSuffix; } catch {}
+          const suffix='grupomindstack.workers.dev';
           const base='https://mindstack-web.'+suffix;
-          const expected=[['/','data-revision="home-08"'],['/preguntas-frecuentes/','data-revision="faq-07"'],['/evaluacion/','data-subdomain-migration="ready"'],['/aviso-de-privacidad/','2026-11-23-v2']];
+          const newBase=base;
+          const expected=[['/','data-revision="home-09"'],['/preguntas-frecuentes/','data-revision="faq-07"'],['/evaluacion/','data-subdomain-migration="ready"'],['/aviso-de-privacidad/','2026-11-23-v2']];
           let ok=false;
           for(let attempt=1;attempt<=12;attempt++){
             const results=await Promise.all(expected.map(async ([path,marker])=>{
               try {
                 const r=await fetch(base+path+'?release='+process.env.GITHUB_SHA+'&attempt='+attempt,{cache:'no-store',signal:AbortSignal.timeout(15000)});
                 const html=await r.text();
-                return {path,http:r.status,approved:r.ok&&html.includes(marker),revision:html.match(/data-revision="[^"]+"/)?.[0]||null};
+                return {path,http:r.status,approved:r.ok&&html.includes(marker)&&r.headers.get('x-content-type-options')==='nosniff'&&r.headers.get('x-frame-options')==='DENY'&&Boolean(r.headers.get('content-security-policy')),revision:html.match(/data-revision="[^"]+"/)?.[0]||null};
               }catch(e){return {path,approved:false,error:String(e)}}
             }));
             console.log('PRODUCTION '+JSON.stringify({attempt,results}));
