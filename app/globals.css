@@ -4660,3 +4660,55 @@ body {
  .mindstack-editorial .report-preview .report-summary strong {font-size:21px;}
  .mindstack-editorial .home-firm-portrait img {max-height:480px;}
 }
+
+/* Editorial v3: typography carries the story, graphics explain relationships. */
+.mindstack-editorial .hero-refreshed .hero-copy-block {width:min(800px,72%);}
+.mindstack-editorial .hero-refreshed .hero-copy-block h1 {max-width:none;font-size:clamp(45px,4.8vw,76px)!important;font-weight:770!important;text-wrap:initial;}
+.mindstack-editorial .hero-first-line {display:block;}
+.mindstack-editorial .hero-refreshed .hero-photo::after {background:linear-gradient(90deg,#111213 0%,rgba(17,18,19,.97) 19%,rgba(17,18,19,.83) 43%,rgba(17,18,19,.16) 85%),linear-gradient(0deg,#111213,transparent 33%);}
+.mindstack-editorial :is(.assessment-content,.story-sector-copy,.story-services-intro,.home-method-heading,.home-deliverable-copy,.home-firm-copy) h2 {font-size:clamp(36px,3.7vw,58px);font-weight:780;letter-spacing:-.045em;line-height:1.12;text-wrap:pretty;}
+.mindstack-editorial .story-signals-heading h3 {font-size:clamp(34px,3.3vw,48px);font-weight:770;letter-spacing:-.04em;}
+.mindstack-editorial :is(.story-signal h4,.home-method-step h3) {font-size:23px;line-height:1.25;font-weight:780;}
+.mindstack-editorial .story-service-row h3 {font-size:clamp(24px,2.3vw,30px);font-weight:760;}
+.mindstack-editorial :is(.story-signal p,.home-method-step p,.story-service-row p,.home-contact-option p,.home-firm-profile p) {font-size:16px;line-height:1.65;font-weight:430;}
+.mindstack-editorial :is(.story-sector-copy p,.story-services-intro > p,.home-method-heading p,.home-firm-copy p,.home-deliverable-copy > p:not(.home-deliverable-legal),.assessment-content > p:not(.assessment-disclaimer)) {font-size:18px;line-height:1.7;}
+.mindstack-editorial .eyebrow {font-size:13px!important;letter-spacing:.13em!important;font-weight:750!important;}
+.mindstack-editorial .story-signals-heading p {font-size:17px;color:#454a43;}
+.mindstack-editorial .story-signal p,.mindstack-editorial .home-method-step p {color:#424842;}
+.mindstack-editorial .story-signal-number {font-size:15px;letter-spacing:.06em;}
+.mindstack-editorial .story-signal {min-height:195px;}
+.mindstack-editorial .story-services-layout {gap:clamp(40px,6vw,90px);}
+.mindstack-editorial .evidence-map {margin:42px 0 28px;max-width:420px;padding:22px 0;border-top:1px solid #53554c;border-bottom:1px solid #53554c;color:#d9bc72;}
+.mindstack-editorial .evidence-map figcaption {font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:24px;}
+.mindstack-editorial .evidence-map-inputs {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:center;}
+.mindstack-editorial .evidence-map-inputs span {color:#f2eee4;font-size:15px;font-weight:600;border-bottom:1px solid #a88c4d;padding:0 0 12px;}
+.mindstack-editorial .evidence-map svg {display:block;width:100%;height:56px;}
+.mindstack-editorial .evidence-map-output {text-align:center;padding:15px 6px;background:linear-gradient(90deg,transparent,#282921,transparent);}
+.mindstack-editorial .evidence-map-output strong {display:block;font-family:var(--display);font-size:20px;color:#f0db9f;}
+.mindstack-editorial .evidence-map-output span {display:block;font-size:13px;color:#d0d2c8;margin-top:6px;}
+.mindstack-editorial .home-method-heading {margin-bottom:54px;}
+.mindstack-editorial .home-method-number {font-family:var(--display);font-size:32px;font-weight:650;letter-spacing:-.04em;line-height:1;color:#886b28;margin-bottom:20px;}
+.mindstack-editorial .home-method-step {padding-top:28px;}
+.mindstack-editorial .home-method-rail {gap:22px;}
+.mindstack-editorial .home-method-step::before {width:12px;height:12px;background:#b39242;border-color:#f5f2ec;box-shadow:0 0 0 1px #a38847;}
+.mindstack-editorial .home-deliverable-facts span {font-size:16px;}
+.mindstack-editorial .assessment-preview-items span,.mindstack-editorial .report-kicker {font-size:11px;letter-spacing:.08em;}
+.mindstack-editorial .assessment-result-preview h3 {font-size:30px;}
+.mindstack-editorial .report-row span {font-size:14px;}
+.mindstack-editorial .report-head span {font-size:11px;}
+.mindstack-editorial .home-firm-profile h3 {font-size:30px;font-weight:750;}
+.mindstack-editorial .home-firm-principles span {font-size:15px;}
+.mindstack-editorial .home-contact h2 {font-weight:780;line-height:1.12;text-wrap:pretty;}
+.mindstack-editorial .footer h4 {font-size:12px;font-weight:700;letter-spacing:.1em;}
+.mindstack-editorial .footer :is(p,a) {font-size:14px;}
+@media(max-width:980px){.mindstack-editorial .hero-refreshed .hero-copy-block {width:min(680px,90%);}}
+@media(max-width:640px){
+ .mindstack-editorial .hero-refreshed .hero-copy-block {width:100%;}
+ .mindstack-editorial .hero-refreshed .hero-copy-block h1 {font-size:clamp(38px,9.5vw,50px)!important;}
+ .mindstack-editorial :is(.assessment-content,.story-sector-copy,.story-services-intro,.home-method-heading,.home-deliverable-copy,.home-firm-copy) h2 {font-size:clamp(32px,8vw,42px);}
+ .mindstack-editorial .story-signal {min-height:0;}
+ .mindstack-editorial .home-method-step {display:grid;grid-template-columns:48px minmax(0,1fr);gap:4px 14px;}
+ .mindstack-editorial .home-method-number {grid-row:1/3;margin:0;font-size:28px;}
+ .mindstack-editorial .home-method-step h3,.mindstack-editorial .home-method-step p {grid-column:2;}
+ .mindstack-editorial .report-row span {overflow-wrap:anywhere;}
+}
