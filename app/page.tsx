@@ -151,40 +151,19 @@ function ButtonOutline({
   );
 }
 
-function EditorialGraphic({ variant = "layers" }: { variant?: "layers" | "method" }) {
+function EvidenceMap() {
   return (
-    <svg className={`editorial-graphic editorial-graphic--${variant}`} viewBox="0 0 440 220" fill="none" aria-hidden="true">
-      <defs>
-        <linearGradient id={`surface-${variant}`} x1="0" y1="0" x2="1" y2="1">
-          <stop stopColor="#d9c58c" stopOpacity=".65" />
-          <stop offset="1" stopColor="#786745" stopOpacity=".12" />
-        </linearGradient>
-      </defs>
-      {variant === "layers" ? (
-        <g strokeLinejoin="round">
-          {[0, 1, 2, 3].map((i) => (
-            <g key={i} transform={`translate(0 ${i * 27})`}>
-              <path d="M65 60 220 8 375 60 220 112Z" fill={`url(#surface-${variant})`} stroke="#c3a663" strokeOpacity=".8" />
-              <path d="M65 60v9l155 52 155-52v-9L220 112Z" fill="#77643b" fillOpacity=".55" stroke="#c3a663" strokeOpacity=".55" />
-              <path d="m115 60 105-35 105 35-105 35Z" stroke="#e0cc98" strokeOpacity=".35" />
-              <path d="m166 60 54-18 54 18-54 18Z" stroke="#e0cc98" strokeOpacity=".55" />
-            </g>
-          ))}
-          <path d="M220 12v194M65 60v90M375 60v90" stroke="#e2c77e" strokeDasharray="3 7" strokeOpacity=".55" />
-        </g>
-      ) : (
-        <g stroke="#997b32" strokeWidth="1.3">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <g key={i} transform={`translate(${42 + i * 76} 100)`}>
-              <path d="M0-33 32-16 32 19 0 36-32 19-32-16Z" fill={`url(#surface-${variant})`} />
-              <path d="M-32-16 0 1 32-16M0 1v35" />
-              <circle cx="0" cy="-33" r="3" fill="#997b32" />
-            </g>
-          ))}
-          <path d="M42 165H346" strokeDasharray="3 5" />
-        </g>
-      )}
-    </svg>
+    <figure className="evidence-map" aria-label="Datos, procesos y contexto se integran para orientar decisiones">
+      <figcaption>Una visión integrada del negocio</figcaption>
+      <div className="evidence-map-inputs">
+        <span>Datos</span><span>Procesos</span><span>Contexto</span>
+      </div>
+      <svg viewBox="0 0 300 56" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M48 0V15Q48 24 60 24H138Q150 24 150 36V56M150 0V36M252 0V15Q252 24 240 24H162Q150 24 150 36" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="150" cy="36" r="3" fill="currentColor" />
+      </svg>
+      <div className="evidence-map-output"><strong>Decisiones con fundamento</strong><span>Una lectura conjunta, no señales aisladas.</span></div>
+    </figure>
   );
 }
 
@@ -298,7 +277,7 @@ export default function Home() {
     <div className="hero-copy-block">
       <span className="eyebrow">Firma de inteligencia empresarial</span>
       <h1>
-        Comprender mejor.
+        <span className="hero-first-line">Comprender mejor.</span>
         <span className="gold"> Decidir mejor.</span>
       </h1>
       <p className="hero-copy">
@@ -425,7 +404,7 @@ export default function Home() {
       <h2>Distintos recursos. <span>Un mismo criterio.</span></h2>
       <p>La solución no se escoge antes de comprender el problema. Combinamos investigación, datos y tecnología según la situación de cada organización.</p>
       <a href="#metodologia" className="story-services-link">Conocer cómo trabajamos <span aria-hidden="true">↗</span></a>
-      <EditorialGraphic />
+      <EvidenceMap />
       <div className="story-services-aside">
         <span>PRINCIPIO DE TRABAJO</span>
         <p>Primero comprender. Después, intervenir donde exista una razón para hacerlo.</p>
@@ -457,7 +436,6 @@ export default function Home() {
       </div>
       <p>Las soluciones no deberían elegirse por tendencia. Partimos del contexto, contrastamos evidencia y diseñamos una intervención proporcional a lo que encontramos.</p>
     </div>
-    <EditorialGraphic variant="method" />
     <div className="home-method-rail" aria-label="Cinco etapas del método Mindstack">
       {steps.map((step) => (
         <article className="home-method-step" key={step.num}>
