@@ -57,12 +57,12 @@ export default {
       env.ALLOWED_ORIGIN && !env.ALLOWED_ORIGIN.includes("replace-with")
     );
     if (url.pathname === "/health" && request.method === "GET") {
-      return response({status: configured ? "ready" : "not_configured", version: VERSION},
+      return response({status: configured ? "ready" : "not_configured", version: VERSION, subdomainMigration: "grupomindstack-v1"},
         configured ? 200 : 503);
     }
 
     const origin = request.headers.get("Origin");
-    // Los dos orígenes de web autorizados no habilitan acceso público de lectura de datos.
+    // Orígenes exactos de web autorizados durante la transición; no habilitan lectura pública de datos.
     const allowed = [env.ALLOWED_ORIGIN, env.ALLOWED_PREVIEW_ORIGIN, ...MIGRATION_ORIGINS].filter(Boolean);
     if (url.pathname === "/api/estado" && request.method === "GET") {
       if (!origin || !allowed.includes(origin))
