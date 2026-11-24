@@ -241,9 +241,13 @@ function IntelligencePreview() {
   );
 }
 
+// Critical commercial layout is kept with the HTML for consistent static previews.
+const commercialStyles = "\n.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24px);}\n.mindstack-editorial .nav a {white-space:nowrap;}\n.mindstack-editorial .header-inner {gap:20px;}\n.mindstack-editorial .story-service-row .msk-service-output {margin-top:10px;font-size:15px!important;color:#e1d5b5;line-height:1.55!important;}\n.mindstack-editorial .msk-service-output strong {color:#efd28c;font-weight:700;}\n.mindstack-editorial .story-service-row {padding:23px 0;}\n.mindstack-editorial .msk-firm-privacy {display:inline-block;color:#e6c779;font-size:14px;font-weight:650;padding:14px 0;text-decoration:underline;text-underline-offset:4px;}\n.mindstack-editorial .msk-collaboration {margin-top:36px;max-width:1060px;padding:24px 0 26px;border-top:1px solid #595d55;}\n.mindstack-editorial .msk-collaboration h3 {font-size:25px;font-weight:740;margin:0 0 22px;color:#fffdf7;}\n.mindstack-editorial .msk-collaboration ol {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0;}\n.mindstack-editorial .msk-collaboration li {border-top:1px solid #8c7848;padding:13px 0 0;}\n.mindstack-editorial .msk-collaboration li > span {display:block;font-size:13px;letter-spacing:.07em;color:#e4c679;font-weight:700;margin-bottom:8px;}\n.mindstack-editorial .msk-collaboration li > strong {font-size:19px;font-weight:700;color:#f5f2ec;}\n.mindstack-editorial .msk-collaboration li > p {font-size:15px;line-height:1.6;color:#d3d6ce;margin:6px 0 0;}\n.mindstack-editorial .msk-collaboration > a {display:inline-block;font-size:14px;color:#ebce86;text-decoration:underline;text-underline-offset:4px;margin-top:23px;}\n.mindstack-editorial .home-contact-options {margin-top:12px;}\n\n@media(max-width:1100px){.mindstack-editorial .header .nav{display:none}.mindstack-editorial .header .home-mobile-menu{display:block;margin-left:auto}}\n@media(max-width:760px){.mindstack-editorial .msk-collaboration ol{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:420px){.mindstack-editorial .msk-collaboration ol{grid-template-columns:1fr;gap:15px}}\n";
+
 export default function Home() {
   return (
-    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`}>
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-06">
+      <style>{commercialStyles}</style>
       <header className="header">
         <div className="container header-inner">
           <Brand />
