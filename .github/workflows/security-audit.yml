@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '22'
       - name: Auditar dependencias de producción
-        run: npm audit --omit=dev --audit-level=high
+        run: npm audit --omit=dev --audit-level=low
       - name: Auditar dependencias de desarrollo
         if: always()
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=low
