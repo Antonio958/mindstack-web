@@ -17,8 +17,13 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import assert from 'node:assert/strict';
-          const base='https://mindstack-web.luispalmhdz06.workers.dev';
-          const expected=[['/','data-revision="home-08"'],['/preguntas-frecuentes/','data-revision="faq-07"'],['/evaluacion/','data-revision="evaluation-10"'],['/aviso-de-privacidad/','2026-11-23-v2']];
+          const oldSuffix='luispalmhdz06.workers.dev';
+          const newSuffix='grupomindstack.workers.dev';
+          let suffix=oldSuffix;
+          const newBase='https://mindstack-web.'+newSuffix;
+          try { const probe=await fetch(newBase+'/',{signal:AbortSignal.timeout(8000)}); if(probe.ok && (await probe.text()).includes('data-revision="home-08"')) suffix=newSuffix; } catch {}
+          const base='https://mindstack-web.'+suffix;
+          const expected=[['/','data-revision="home-08"'],['/preguntas-frecuentes/','data-revision="faq-07"'],['/evaluacion/','data-subdomain-migration="ready"'],['/aviso-de-privacidad/','2026-11-23-v2']];
           let ok=false;
           for(let attempt=1;attempt<=12;attempt++){
             const results=await Promise.all(expected.map(async ([path,marker])=>{
@@ -33,11 +38,20 @@ jobs:
             if(attempt<12) await new Promise(r=>setTimeout(r,15000));
           }
           assert.ok(ok,'Cloudflare no sirve todas las revisiones aprobadas');
-          const r=await fetch('https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/api/estado',{headers:{Origin:base},signal:AbortSignal.timeout(15000)});
-          const body=await r.json();
-          console.log('PRODUCTION_API '+JSON.stringify({http:r.status,origin:r.headers.get('access-control-allow-origin'),status:body.status,privacyVersion:body.privacyVersion}));
-          assert.equal(r.status,200);
-          assert.equal(r.headers.get('access-control-allow-origin'),base);
-          assert.equal(body.status,'ready');
-          assert.equal(body.privacyVersion,'2026-11-23-v2');
+          const api='https://mindstack-evaluacion-api.'+suffix+'/api/estado';
+          const origins=[base,newBase,'https://feature-evaluacion-empresarial-mvp-20261123-mindstack-web.'+newSuffix];
+          let apiReady=false;
+          for(let attempt=1;attempt<=8;attempt++){
+            const results=await Promise.all([...new Set(origins)].map(async origin=>{
+              try {
+                const r=await fetch(api,{headers:{Origin:origin},signal:AbortSignal.timeout(10000)});
+                const body=await r.json();
+                return {origin,http:r.status,cors:r.headers.get('access-control-allow-origin'),status:body.status,privacyVersion:body.privacyVersion,ready:r.status===200&&r.headers.get('access-control-allow-origin')===origin&&body.status==='ready'&&body.privacyVersion==='2026-11-23-v2'};
+              } catch(e){return {origin,ready:false,error:String(e)}}
+            }));
+            console.log('MIGRATION_API '+JSON.stringify({attempt,results}));
+            if(results.every(r=>r.ready)){apiReady=true;break}
+            if(attempt<8) await new Promise(r=>setTimeout(r,15000));
+          }
+          assert.ok(apiReady,'API no acepta todos los origenes de migracion');
           JS

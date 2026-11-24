@@ -6,7 +6,7 @@ import Script from "next/script";
 import { Manrope, Inter } from "next/font/google";
 import { Answers, evaluate, visibleQuestions, VERSION } from "../../lib/evaluacion/motor";
 import styles from "./evaluacion.module.css";
-import { EVALUACION_API_URL, PRIVACY_PATH, PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, TURNSTILE_SITE_KEY } from "../../lib/evaluacion/config";
+import { EVALUACION_API_URL, evaluationApiForHostname, PRIVACY_PATH, PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, TURNSTILE_SITE_KEY } from "../../lib/evaluacion/config";
 import { comprobarDisponibilidad, compartirEvaluacion } from "../../lib/evaluacion/cliente";
 
 const displayFont = Manrope({ subsets: ["latin"], variable: "--assessment-display", display: "swap" });
@@ -36,6 +36,8 @@ export default function EvaluacionPage() {
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending" | "saved" | "error">("idle");
   const [savedReference, setSavedReference] = useState("");
   const [serviceReady, setServiceReady] = useState(false);
+  const [apiUrl, setApiUrl] = useState(API_URL);
+  useEffect(() => { setApiUrl(evaluationApiForHostname(window.location.hostname, API_URL)); }, []);
   const [contactOpen, setContactOpen] = useState(false);
   const [challengeReady, setChallengeReady] = useState(false);
   const [challengeError, setChallengeError] = useState(false);
@@ -90,12 +92,12 @@ export default function EvaluacionPage() {
     if (!finished || !CAN_SAVE) return;
     const controller = new AbortController();
     setServiceReady(false);
-    comprobarDisponibilidad(API_URL, PRIVACY_VERSION, controller.signal)
+    comprobarDisponibilidad(apiUrl, PRIVACY_VERSION, controller.signal)
       .then((ready) => {
         if (!controller.signal.aborted) setServiceReady(ready);
       });
     return () => controller.abort();
-  }, [finished]);
+  }, [finished, apiUrl]);
 
   function next() {
     if (!isSelected) return;
@@ -126,7 +128,7 @@ export default function EvaluacionPage() {
     if (!CAN_SAVE || !serviceReady || !contactConsent || !turnstileToken || !finished || submissionStatus === "sending") return;
     setSubmissionStatus("sending");
     try {
-      const reference = await compartirEvaluacion(API_URL, {
+      const reference = await compartirEvaluacion(apiUrl, {
         answers,
         contact: { name: contactName, email: contactEmail, phone: contactPhone },
         privacyVersion: PRIVACY_VERSION,
@@ -148,7 +150,7 @@ export default function EvaluacionPage() {
   const canContact = CAN_SAVE && serviceReady && result?.status !== "outside_scope";
 
   return (
-    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10">
+    <main className={`${styles.shell} ${displayFont.variable} ${readingFont.variable}`} data-revision="evaluation-10" data-subdomain-migration="ready">
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label="Volver al inicio de Mindstack">
           <img src="/logo-mindstack.png" alt="" className={styles.logo} />
