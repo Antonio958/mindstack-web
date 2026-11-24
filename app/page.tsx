@@ -237,7 +237,7 @@ const commercialStyles = "\n.mindstack-editorial .nav {gap:clamp(12px,1.45vw,24p
 
 export default function Home() {
   return (
-    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-07">
+    <main className={`page-shell mindstack-editorial ${displayFont.variable} ${readingFont.variable}`} data-revision="home-08">
       <style>{commercialStyles + ".mindstack-editorial .story-service-row{scroll-margin-top:100px}"}</style>
       <SiteHeader />
 
@@ -247,7 +247,7 @@ export default function Home() {
       src="https://images.unsplash.com/photo-1758518729908-d4220a678d81?auto=format&fit=crop&w=2000&q=82"
       alt="Dos profesionales revisan un documento durante una conversación de trabajo"
       loading="eager"
-      decoding="async"
+      decoding="auto"
       fetchPriority="high"
     />
     <span className="hero-photo-disclaimer">Imagen ilustrativa · Unsplash</span>
@@ -335,8 +335,8 @@ export default function Home() {
       <img
         src="https://images.unsplash.com/photo-1761095596618-081ea3f043a5?auto=format&fit=crop&w=1400&q=80"
         alt="Equipo de cocina colaborando durante la operación de un restaurante"
-        loading="lazy"
-        decoding="async"
+        loading="eager"
+        decoding="auto"
       />
       <figcaption>Imagen ilustrativa · Operación restaurantera</figcaption>
     </figure>
@@ -466,7 +466,7 @@ export default function Home() {
     </div>
     <div className="home-firm-leader">
       <div className="home-firm-portrait">
-        <img src="/foto-luis-palma.jpg" alt="Retrato institucional de la dirección de Mindstack" loading="lazy" decoding="async" />
+        <img src="/foto-luis-palma.jpg" alt="Retrato institucional de la dirección de Mindstack" loading="eager" decoding="auto" />
       </div>
       <div className="home-firm-profile">
         <span>DIRECCIÓN GENERAL · MINDSTACK</span>
@@ -483,8 +483,8 @@ export default function Home() {
     <img
       src="https://images.unsplash.com/photo-1628516315527-110eb03991ac?auto=format&fit=crop&w=1700&q=78"
       alt=""
-      loading="lazy"
-      decoding="async"
+      loading="eager"
+      decoding="auto"
     />
   </div>
   <div className="container home-contact-content">
