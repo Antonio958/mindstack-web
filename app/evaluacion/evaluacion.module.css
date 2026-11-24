@@ -125,3 +125,84 @@
 @media (max-width: 680px) {
   .contactForm > button { width: 100%; }
 }
+
+/* Institutional assessment — revision 10 */
+.shell {font-family:var(--assessment-reading),Inter,system-ui,sans-serif;--gold-deep:#795c14;--muted:#51554e;--paper:#f5f2ec;--line:#d9d5ca;font-size:17px}
+.shell h1,.shell h2,.shell h3 {font-family:var(--assessment-display),system-ui,sans-serif}
+.shell .header {height:76px;background:#171918}
+.shell .brand {gap:14px;font-size:13px;letter-spacing:.12em}
+.shell .logo {width:116px;height:66px;object-fit:cover}
+.brandText {display:none}
+.shell .backLink {font-size:14px;min-height:44px;display:flex;align-items:center}
+.shell .main {width:min(880px,calc(100% - 48px));padding:42px 0 72px}
+.shell .topline {font-size:12px;letter-spacing:.12em;gap:16px}
+.shell .progressMeta {font-size:15px;margin-top:26px}
+.shell .track {height:7px}
+.shell .questionArea {margin:46px 0 30px}
+.shell .eyebrow {font-size:13px;letter-spacing:.12em;margin:0 0 14px}
+.shell .questionTitle {font-size:clamp(32px,4.4vw,50px);line-height:1.12;max-width:850px;font-weight:780}
+.shell .help {font-size:17px}
+.shell .options {margin-top:26px;gap:12px}
+.shell .option {min-height:66px;border-radius:7px;padding:16px 20px}
+.shell .choiceText {font-size:17px;font-weight:550}
+.shell .selected {background:#f8edce;border-color:#9d791e;box-shadow:0 0 0 1px #9d791e inset}
+.shell .primaryButton,.shell .secondaryButton {border-radius:6px;font-size:14px;line-height:1.4;min-height:48px;padding:13px 22px}
+.shell .disclosure {color:#555a52;font-size:14px;margin-top:24px}
+.shell .results {width:min(1050px,calc(100% - 48px));padding:40px 0 80px}
+.shell .resultHero {border-radius:8px;padding:clamp(24px,5vw,54px);margin:22px 0 32px;background:#171918;border-top:3px solid #c9a227}
+.shell .resultHero h1 {font-size:clamp(32px,4.7vw,54px);max-width:850px}
+.shell .resultHero > p:not(.eyebrow) {font-size:18px;line-height:1.65;color:#dfdfd6;max-width:800px}
+.summaryGrid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:30px}
+.summaryGrid > div {display:flex;flex-direction:column;gap:8px;padding:18px 16px;background:#252823;border-top:1px solid #8e7842}
+.summaryGrid strong {font-family:var(--assessment-display),system-ui,sans-serif;font-size:38px;line-height:1;color:#e5c66f}
+.summaryGrid span {font-size:15px;color:#f1eee5;line-height:1.4}
+.summaryGrid > p {grid-column:1/-1;color:#c7c9be;font-size:13px;margin:5px 0 0}
+.invitation {display:flex;align-items:center;justify-content:space-between;gap:24px;background:#eee8d8;border:1px solid #d7c9a5;border-left:3px solid #ac8930;padding:25px;margin:0 0 44px}
+.invitation h2,.invitation h3 {font-size:clamp(22px,2.6vw,30px);font-weight:750;line-height:1.2;margin:0 0 8px}
+.invitation p:not(.eyebrow) {font-size:16px;line-height:1.65;color:#484c43;margin:0;max-width:680px}
+.invitation button {flex-shrink:0}
+.shell .sectionHeading h2 {font-size:clamp(24px,3vw,32px)}
+.shell .resultSection {margin-bottom:48px}
+.shell .finding {padding:28px 0 32px}
+.shell .finding h3 {font-size:clamp(24px,3vw,33px);line-height:1.2}
+.shell .findingIndex {font-size:13px}
+.shell .reading strong,.shell .capability strong {font-size:16px;font-weight:700}
+.shell .reading p,.shell .capability p,.shell .observationList li {font-size:17px;line-height:1.65;color:#454941}
+.shell .capability {padding:20px 24px}
+.shell .limitSection {font-size:16px;margin:15px 0 35px;border-radius:6px}
+.shell .limitSection p {font-size:15px}
+.shell .contactSection {margin:0 0 36px;padding:0}
+.shell .contactSection > .invitation {margin:18px 0 0}
+.contactDialog {width:min(640px,calc(100% - 24px));max-height:calc(100dvh - 32px);margin:auto;padding:clamp(22px,4vw,36px);border:1px solid #c4ae79;border-top:4px solid #c9a227;border-radius:9px;background:#f5f2ec;color:#171918;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 20px 80px #0005}
+.contactDialog::backdrop {background:#101211bd;backdrop-filter:blur(3px)}
+.dialogHeader {display:flex;align-items:center;justify-content:space-between;margin:0 0 16px}
+.dialogHeader span {font-size:13px;letter-spacing:.13em;font-weight:800;color:#795c14}
+.dialogHeader button {min-width:44px;min-height:44px;font-size:30px;line-height:1;color:#454941;background:transparent;border:0;cursor:pointer}
+.contactDialog h2 {font-size:clamp(26px,4vw,36px);font-weight:780;line-height:1.14;margin:0}
+.shell .contactDialog .contactIntro {font-size:15px;margin:14px 0 20px;line-height:1.6;color:#494d45}
+.shell .contactForm {gap:14px;max-width:none}
+.shell .contactForm > label:not(.consent) {font-size:15px}
+.shell .contactForm input:not([type="checkbox"]) {font-size:16px;border-radius:5px}
+.shell .consent {font-size:14px;line-height:1.55}
+.contactDialog :global(.cf-turnstile) {min-height:65px;max-width:100%}
+.dismissContact {display:block;margin:16px auto 0;min-height:44px;padding:8px;text-align:center;font-size:14px;text-decoration:underline;text-underline-offset:4px;color:#514c41;background:none;border:0;cursor:pointer}
+.dialogNote {font-size:13px;line-height:1.5;color:#575b51;text-align:center;margin:5px 0 0}
+.shell .closing {border-radius:8px;background:#171918}
+.shell .closing h2 {font-weight:750}
+.shell .closing > p:not(.eyebrow) {font-size:17px;color:#d6d7ce}
+.shell .footer {font-size:13px;color:#555950}
+.shell :is(button,a,input):focus-visible {outline:2px solid #9a7520;outline-offset:4px}
+.shell h1:focus {outline:none}
+@media(max-width:680px){
+ .shell .header{height:68px;padding:0 18px}.shell .logo{width:96px;height:58px}.shell .backLink{font-size:12px}
+ .shell .main,.shell .results{width:calc(100% - 36px);padding-top:26px}
+ .shell .topline{font-size:10px;letter-spacing:.06em}
+ .shell .questionArea{margin:34px 0 24px}.shell .choiceText{font-size:16px}
+ .shell .primaryButton,.shell .secondaryButton{font-size:13px;padding:12px 15px}
+ .summaryGrid{gap:5px}.summaryGrid>div{padding:12px 8px}.summaryGrid strong{font-size:28px}.summaryGrid span{font-size:12px}
+ .invitation{flex-direction:column;align-items:stretch;padding:20px;gap:15px}
+ .shell .reading p,.shell .capability p,.shell .observationList li{font-size:16px}
+ .shell .contactDialog .contactIntro{font-size:14px}
+ .shell .footer{font-size:12px}
+}
+@media(max-width:360px){.summaryGrid{grid-template-columns:1fr}.summaryGrid>div{flex-direction:row;align-items:center}.shell .contactDialog{padding:17px}.shell .topline{gap:6px}}
