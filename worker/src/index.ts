@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { QUESTIONS, VERSION, complete, evaluate, type Answers } from "../../lib/evaluacion/motor";
-import { PRIVACY_VERSION as APPROVED_PRIVACY_VERSION } from "../../lib/evaluacion/config";
+import { PRIVACY_VERSION as APPROVED_PRIVACY_VERSION, MIGRATION_ORIGINS } from "../../lib/evaluacion/config";
 
 type Env = {
   DATABASE_URL: string;
@@ -63,7 +63,7 @@ export default {
 
     const origin = request.headers.get("Origin");
     // Los dos orígenes de web autorizados no habilitan acceso público de lectura de datos.
-    const allowed = [env.ALLOWED_ORIGIN, env.ALLOWED_PREVIEW_ORIGIN].filter(Boolean);
+    const allowed = [env.ALLOWED_ORIGIN, env.ALLOWED_PREVIEW_ORIGIN, ...MIGRATION_ORIGINS].filter(Boolean);
     if (url.pathname === "/api/estado" && request.method === "GET") {
       if (!origin || !allowed.includes(origin))
         return response({error:"Origen no autorizado"},403);
