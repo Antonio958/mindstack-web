@@ -1,0 +1,43 @@
+name: Mindstack - verificar publicacion Cloudflare
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  production-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verificar version publica y API sin enviar datos
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          const base='https://mindstack-web.luispalmhdz06.workers.dev';
+          const expected=[['/','data-revision="home-08"'],['/preguntas-frecuentes/','data-revision="faq-07"'],['/evaluacion/','data-revision="evaluation-10"'],['/aviso-de-privacidad/','2026-11-23-v2']];
+          let ok=false;
+          for(let attempt=1;attempt<=12;attempt++){
+            const results=await Promise.all(expected.map(async ([path,marker])=>{
+              try {
+                const r=await fetch(base+path+'?release='+process.env.GITHUB_SHA+'&attempt='+attempt,{cache:'no-store',signal:AbortSignal.timeout(15000)});
+                const html=await r.text();
+                return {path,http:r.status,approved:r.ok&&html.includes(marker),revision:html.match(/data-revision="[^"]+"/)?.[0]||null};
+              }catch(e){return {path,approved:false,error:String(e)}}
+            }));
+            console.log('PRODUCTION '+JSON.stringify({attempt,results}));
+            if(results.every(r=>r.approved)){ok=true;break}
+            if(attempt<12) await new Promise(r=>setTimeout(r,15000));
+          }
+          assert.ok(ok,'Cloudflare no sirve todas las revisiones aprobadas');
+          const r=await fetch('https://mindstack-evaluacion-api.luispalmhdz06.workers.dev/api/estado',{headers:{Origin:base},signal:AbortSignal.timeout(15000)});
+          const body=await r.json();
+          console.log('PRODUCTION_API '+JSON.stringify({http:r.status,origin:r.headers.get('access-control-allow-origin'),status:body.status,privacyVersion:body.privacyVersion}));
+          assert.equal(r.status,200);
+          assert.equal(r.headers.get('access-control-allow-origin'),base);
+          assert.equal(body.status,'ready');
+          assert.equal(body.privacyVersion,'2026-11-23-v2');
+          JS
